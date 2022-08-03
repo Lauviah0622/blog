@@ -1,0 +1,28 @@
+---
+import HomePage from '@layouts/HomePage.astro';
+import metadata from '@metadata'
+// import Base from '@layouts/Base.astro'
+
+let allPosts = await Astro.glob('/src/pages/post/*.md');
+
+const pageSize= metadata.pageSize.posts;
+const lastPage = Math.ceil(allPosts.length / pageSize)
+
+const page = {
+  data: allPosts.slice(0, pageSize),
+  start: 0,
+  end: allPosts.length - 1,
+  size: pageSize,
+  total: allPosts.length,
+  currentPage: 1,
+  lastPage,
+  url: {
+    current: '/posts/',
+    next: lastPage > 1 ? '/posts/2/' : undefined
+  }
+}
+
+const baseUrl = "/posts/"
+---
+
+<HomePage page={ page } baseUrl={baseUrl} />

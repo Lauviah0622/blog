@@ -1,0 +1,27 @@
+---
+import Base from './Base.astro';
+
+import Pagination from '@components/Pagination/Pagination.astro';
+import ArchiveItem from '@components/ArchiveItem.astro';
+
+const { page, baseUrl } = Astro.props;
+
+---
+
+<style>
+  .postlist {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+</style>
+
+<Base>
+<h1>Archive</h1>
+<ul class="postlist">
+  {page.data.map((post) =>
+  <ArchiveItem post={post} />)}
+</ul>
+<Pagination page={page} baseUrl={baseUrl}/>
+</Base>

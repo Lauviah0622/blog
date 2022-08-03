@@ -1,0 +1,71 @@
+---
+import Base from '@layouts/Base.astro';
+import ArchiveItem from '@components/ArchiveItem.astro';
+
+const { tags, baseUrl } = Astro.props;
+---
+
+<style>
+  h1 {
+    text-transform: capitalize;
+  }
+
+  .tagList {
+    display: flex;
+    gap: .2rem;
+
+    & a:hover {
+      text-decoration: none;
+    }
+
+    & li {
+      background-color: var(--color-text-secondary);
+      margin: 0.3ch;
+      padding: 0.3em 0.4em;
+      border-radius: 0.3ch;
+      font-size: .9em;
+      color: var(--color-bg);
+
+      &:hover {
+        background-color: var(--color-text-secondary)
+      }
+    }
+  }
+
+  div.postlist {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    & > ul:not(:last-of-type)::after {
+      content: '';
+      display: block;
+      margin: 1.5rem auto 0;
+      background-color: var(--color-primary);
+      border-radius: 5px;
+      border: 1px solid var(--color-primary);
+      width: 95%;
+    }
+  }
+
+  
+</style>
+
+<Base>
+<h1>Tags</h1>
+<ul class="tagList">
+  {Object.keys(tags).map((tag) => <a href={`${baseUrl}${tag}`}>
+    <li class="tag">{tag}</li>
+  </a>)}
+</ul>
+<div class="postlist">
+  {Object.entries(tags).map(([tag, posts]) => {
+  return (
+  <ul>
+    <h3><a href={`${baseUrl}${tag}`} class="tag tag-link">{tag}</a></h3>
+    {posts.map((post) =>
+    <ArchiveItem post={post} showTags={false} />)}
+  </ul>
+  )})}
+</div>
+</Base>

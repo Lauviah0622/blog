@@ -1,0 +1,32 @@
+---
+import Base from './Base.astro';
+
+// import PostItem from '@components/PostItem.astro'
+
+import Pagination from '@components/Pagination/Pagination.astro';
+import TipItem from '@components/TipItem/TipItem.astro';
+
+const { page, baseUrl } = Astro.props;
+
+---
+
+<Base className="wider">
+<h1>Tips</h1>
+<ul class="tipsList postlist">
+  {page.data.map((post) =>
+  <TipItem post={post} />)}
+</ul>
+<Pagination page={page} baseUrl={baseUrl} />
+</Base>
+
+<style>
+  .tipsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(23ch, auto));
+    gap: 1em;
+  }
+
+  :global(.center.wider) {
+    grid-template-columns: 1fr min(70ch, calc(100% - 64px)) 1fr;
+  }
+</style>

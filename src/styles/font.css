@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
+@font-face {
+  font-family: "Inter UI";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/Inter-Regular.woff2") format("woff2"),
+    url("/fonts/Inter-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter UI";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/Inter-Italic.woff2") format("woff2"),
+    url("/fonts/Inter-Italic.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter UI";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"),
+    url("/fonts/Inter-SemiBold.woff") format("woff");
+}
+@font-face {
+  font-family: "Inter UI";
+  font-style: italic;
+  font-weight: 600;
+  src: url("/fonts/Inter-SemiBoldItalic.woff2") format("woff2"),
+    url("/fonts/Inter-SemiBoldItalic.woff") format("woff");
+}
+@font-face {
+  font-family: "Lora";
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/Lora-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Lora";
+  font-display: swap;
+  font-style: italic;
+  src: url("/fonts/Lora-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Lora";
+  font-display: swap;
+  font-weight: 600;
+  font-style: italic;
+  src: url("/fonts/Lora-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Lora";
+  font-display: swap;
+  font-weight: 600;
+  font-style: italic;
+  src: url("/fonts/Lora-SemiBoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DM mono";
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/DMMono-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DM mono";
+  font-display: swap;
+  font-style: italic;
+  src: url("/fonts/DMMono-Regular.ttf") format("truetype");
+}
+/* @font-face {
+  font-family: "Kosugi Maru";
+  font-display: swap;
+  src: url("https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap");
+} */
+
+@font-face {
+  font-family: "Inter UI var";
+  font-weight: 100 900;
+  font-style: oblique 0deg 10deg;
+  src: url("/fonts/Inter.var.woff2") format("woff2");
+}
+
+/* --------------------------------------------------------------------------
+Single variable font.
+
+Note that you may want to do something like this to make sure you're serving
+constant fonts to older browsers:
+html {
+  font-family: 'Inter UI', sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter UI var', sans-serif;
+  }
+}
+
+BUGS:
+- Safari 12.0 will default to italic instead of regular when font-weight
+  is provided in a @font-face declaration.
+  Workaround: Use "Inter UI var alt" for Safari, or explicitly set
+  `font-variation-settings:"slnt" DEGREE`.
+*/
+
+@font-face {
+  font-family: "Inter UI var alt";
+  font-weight: 100 900;
+  font-style: normal;
+  font-named-instance: "Regular";
+  src: url("/fonts/Inter-roman.var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter UI var alt";
+  font-weight: 100 900;
+  font-style: italic;
+  font-named-instance: "Italic";
+  src: url("/fonts/Inter-italic.var.woff2") format("woff2");
+}

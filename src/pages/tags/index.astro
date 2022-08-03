@@ -1,0 +1,22 @@
+---
+import Tags from '@layouts/Tags.astro'
+import metadata from '@metadata'
+
+let allPosts = await Astro.glob('/src/pages/post/*.md');
+
+const allTagPosts = allPosts.reduce((allTags, post) => {
+  const tags = post.frontmatter.tags
+  tags.forEach(tag => {
+    if (allTags?.[tag]) {
+      allTags[tag].push(post)
+    } else {
+      allTags[tag] = [post]
+    }
+  });
+  return allTags
+}, {})
+
+
+---
+
+<Tags tags={allTagPosts} baseUrl={Astro.canonicalURL.pathname} />

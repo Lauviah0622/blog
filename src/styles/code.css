@@ -1,0 +1,66 @@
+
+.token {
+  &.block-comment,
+  &.cdata,
+  &.comment,
+  &.doctype,
+  &.prolog {
+    color: #999;
+  }
+  &.punctuation {
+    color: #ccc;
+  }
+  &.attr-name,
+  &.deleted,
+  &.namespace,
+  &.tag {
+    color: #e2777a;
+  }
+  &.function-name {
+    color: #6196cc;
+  }
+  &.boolean,
+  &.function,
+  &.number {
+    color: #f08d49;
+  }
+  &.class-name,
+  &.constant,
+  &.property,
+  &.symbol {
+    color: #f8c555;
+  }
+  &.atrule,
+  &.builtin,
+  &.important,
+  &.keyword,
+  &.selector {
+    color: #cc99cd;
+  }
+  &.attr-value,
+  &.char,
+  &.regex,
+  &.string,
+  &.variable {
+    color: #7ec699;
+  }
+  &.entity,
+  &.operator,
+  &.url {
+    color: #67cdcc;
+  }
+  &.bold,
+  &.important {
+    font-weight: var(--normal);
+  }
+  &.italic {
+    font-style: italic;
+  }
+  &.entity {
+    cursor: help;
+  }
+  &.inserted {
+    color: green;
+  }
+}
+

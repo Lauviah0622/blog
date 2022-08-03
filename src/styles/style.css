@@ -1,0 +1,273 @@
+/* ================== normalize  ================== */
+/* autoprefixer: ignore next */
+@import './normalize.css';
+@import './var.css';
+@import './code.css';
+@import './dark-code.css';
+@import './font.css';
+@import './article.css';
+
+/* ================== functional global setting ================== */
+
+/*
+  Make image rasterization lazy. This means that e.g. the cost of the
+  blurry placeholder is never paid if images load before entering
+  the viewport.
+  Context
+  - https://web.dev/content-visibility/#skipping-rendering-work-with-content-visibility
+ */
+main img {
+  content-visibility: auto;
+}
+
+/* Avoid the header hiding the content on anchor scroll. */
+article * {
+  scroll-margin-top: 50px;
+}
+
+/* "Content-visibility: auto" move the images over the other elements
+   Set z-index to keep the nav over the rasterized images */
+header nav {
+  z-index: 1;
+}
+
+/* ================== element  ================== */
+html {
+  font-size: var(--font-base-size);
+  width: 100vw;
+  letter-spacing: 0.04ch;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+* {
+  transition: background-color 0.1s, color 0.1s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  text-decoration: none;
+  font-weight: var(--font-weight-normal);
+  margin: 0;
+}
+
+.dark-theme {
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-weight: 400;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+li {
+  list-style-type: none;
+}
+
+li,
+blockquote {
+  font-weight: var(--font-weight-normal);
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 3rem 0 1.6rem 0;
+}
+h2 {
+  font-size: 1.6rem;
+  padding: 2rem 0 0.8rem 0;
+}
+h3 {
+  font-size: 1.4rem;
+  padding: 1.6rem 0 0.8rem 0;
+}
+h4 {
+  font-size: 1.2rem;
+  padding: 1.2rem 0 0.8rem 0;
+}
+h5 {
+  font-size: 1rem;
+  padding: 1.2rem 0 0.8rem 0;
+}
+h6 {
+  font-size: 0.9rem;
+  padding: 1.2rem 0 0.8rem 0;
+  font-weight: bold;
+}
+/* 
+.icon,
+.icon path {
+  fill: var(--color-primary);
+} */
+
+a {
+  text-decoration: none;
+  /* color: var(--color-text-secondary); */
+  color: inherit;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:hover::before {
+  text-decoration: underline;
+}
+
+main {
+  margin: 50px 0 70px 0;
+  min-height: 75vh;
+}
+
+strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+}
+
+s {
+  text-decoration-color: var(--color-text-secondary);
+}
+
+dialog {
+  position: fixed;
+  bottom: 0;
+  z-index: 9999;
+  color: var(--color-secondary);
+  width: 100vw;
+  border-width: 0;
+  text-align: center;
+  background-color: var(--color-bg-reverse);
+  height: min-content;
+}
+
+/* ================== class  ================== */
+
+[data-theme='dark'] img {
+  filter: brightness(0.9);
+}
+
+img {
+  max-width: 100%;
+  max-height: 50vh;
+  display: block;
+  margin: 0 auto;
+}
+
+body {
+  &:not(.dark-theme) #light {
+    display: none;
+  }
+
+  &.dark-theme {
+    & .post__content {
+      & h1,
+      & h2,
+      & h3,
+      & h5,
+      & h4,
+      & h6 {
+        & a[href^='#'] {
+          color: var(--color-secondary);
+        }
+      }
+    }
+  }
+}
+
+.center {
+  --max-width: 60ch;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr min(var(--max-width), calc(100% - 64px)) 1fr;
+  grid-template-rows: min-content;
+  /* min-height: 100vh; */
+
+  & > * {
+    grid-column: 2;
+  }
+}
+
+.center--wide {
+  --max-width: 1040px;
+}
+/* 
+.only-mobile {
+  display: none;
+} */
+
+.only-desktop {
+  display: unset;
+}
+
+.only-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 55em) {
+  .only-desktop {
+    display: none !important;
+  }
+
+  .only-mobile {
+    display: inherit;
+  }
+}
+
+/*  global */
+
+.time {
+  font-size: 0.9em;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  text-transform: capitalize;
+  &::before {
+    content: '#';
+  }
+}
+/* Specific */
+
+article {
+  padding: 0;
+}
+
+.postlist {
+  padding: 1em 0;
+}
+
+.postlist li {
+  position: relative;
+  list-style-type: none;
+  box-sizing: border-box;
+}
+
+hr {
+  margin: 3rem auto;
+  width: 95%;
+}

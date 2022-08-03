@@ -1,0 +1,84 @@
+---
+import TagsList from '@components/TagsList.astro'
+import Date from '@components/Date.astro'
+
+const { post } = Astro.props
+
+const {
+  title,
+  pubDate,
+  tags,
+  summary = ''
+} = post.frontmatter
+
+---
+
+<div class="tip" data-link={post.url}>
+  <h4>
+    <a href={post.url}>{title}</a>
+  </h4>
+  <p>{summary}</p>
+  <TagsList tags={tags} align="right" />
+
+  <Date date={pubDate} />
+</div>
+
+<style>
+  .tip {
+    padding: 1.5em 2ch 1em;
+    background-color: var(--color-bg-secondary);
+    outline: 2px solid transparent;
+    cursor: pointer;
+    transition: outline .2s;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 14em;
+    font-size: .9em;
+
+    &:hover {
+      outline: 2px solid var(--color-secondary);
+
+    }
+  }
+
+  h4 {
+    padding-top: 0;
+  }
+
+  p {
+    padding-bottom: 1.5em;
+    height: auto;
+    flex: 1 0 auto;
+    /* color: var(--color-text-secondary); */
+    font-size: 0.9em;
+  }
+
+  :global(.tags) {
+    justify-content: flex-end;
+
+    /* justify-self: flex-end */
+
+  }
+
+  :global(.time) {
+    text-align: right;
+    margin-top: .3em;
+    /* color: var(-) */
+    /* justify-self: flex-end */
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.tip').forEach((el) => {
+    el.addEventListener('click', (event) => {
+      const selection = window.getSelection();
+      if (selection.type === 'Range') return
+      const to = el.getAttribute('data-link');
+      window.location.href = to;
+      // if (event.target === el) {
+      // }
+
+    })
+  })
+</script>

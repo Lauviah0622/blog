@@ -1,0 +1,72 @@
+---
+import TagsList from '@components/TagsList.astro'
+import Date from '@components/Date.astro'
+
+const { post, showTags = true } = Astro.props;
+
+const {
+  title,
+  pubDate,
+  tags,
+  url
+} = post.frontmatter
+
+
+---
+
+<style>
+  li>article {
+    display: grid;
+    grid-template-columns: 11ch auto;
+    row-gap: 1rem;
+    margin-top: 0;
+
+    grid-template-areas:
+      "time title"
+      ". tags"
+      ". summary";
+  }
+
+  @media screen and (max-width: 80rem) {
+    li>article {
+      grid-template-areas:
+        "time time "
+        "title title"
+        "tags tags"
+        "summary summary";
+    }
+  }
+
+  h4 {
+    grid-area: title;
+    /* font-size: 1.2rem; */
+    padding: 0;
+    color: var(--color-text);
+
+
+  }
+
+  :global(.tags) {
+    grid-area: tags;
+  }
+
+  :global(.time) {
+    grid-area: time;
+    margin: 0;
+    padding: 0 1ch 0 0;
+    color: var(--color-text-secondary);
+
+  }
+</style>
+
+<li>
+  <article>
+    <h4>
+      <a href={post.url}>{title}</a>
+    </h4>
+    {showTags &&
+    <TagsList tags={tags} />}
+    <Date date={pubDate} />
+  </article>
+
+</li>

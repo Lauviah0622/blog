@@ -1,0 +1,28 @@
+---
+const { isCurrent, url } = Astro.props;
+
+---
+
+<style>
+  li {
+    padding: 0 .7ch .2em;
+  }
+
+  .isCurrent {
+    border-bottom: 2px solid var(--color-secondary);
+  }
+</style>
+
+<script>
+  
+</script>
+  
+<li class={isCurrent ? 'isCurrent' : '' }>
+  {Array.isArray(url) ?
+  <div onclick={}>
+    <slot />
+  </div>
+  :
+  <a href={url}><slot /></a>
+  }
+</li>

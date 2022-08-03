@@ -1,0 +1,67 @@
+---
+import Logo from "@components/Logo.astro";
+import GithubIcon from "@components/icons/Github.astro";
+import RssIcon from "@components/icons/Rss.astro";
+---
+
+<footer class="center">
+  <div class="container">
+    <div class="info">
+      <Logo />
+      <div class="icons">
+        <a href="https://github.com/Lauviah0622" target="_blank">
+          <GithubIcon />
+        </a>
+        <a href="/rss.xml">
+          <RssIcon />
+        </a>
+      </div>
+    </div>
+    <p class="copyright">
+      © 2022-present Lavi. All Rights Reserved.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .container {
+    margin: 20px 0 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info {
+    display: flex;
+    align-items: baseline;
+  }
+
+  
+  .icons {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    --size: 1.2rem;
+    gap: 1rem;
+
+    & :global(svg) {
+      fill: var(--color-text);
+      inline-size: var(--size);
+      block-size: var(--size);
+    }
+
+    & :global(.github-icon) {
+      --size: 1.1rem;
+    }
+  }
+
+  footer :global(.logo) {
+    --logo-size: calc(min(3.5vw, 1rem) * 0.8)
+    /* transform: scale(0.8); */
+  }
+
+  .copyright {
+    font-size: .6em;
+    color: var(--color-text-secondary);
+    margin-top: 5em;
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header/Header.astro';
+import Footer from '@components/Footer/Footer.astro';
+import Hamburger from '@components/Hamburger/Hamburger.astro';
+import css from '@utils/css'
+
+
+const { className = '' } = Astro.props;
+
+let title = 'Example Blog';
+let description = 'The perfect starter for your perfect blog.';
+let permalink = 'https://example.com/';
+
+
+// const alignClassName = align === 'left' ? 'align-left' : '';
+const mainClassName = css([className])
+
+---
+
+<html lang="en">
+
+
+<head>
+  <BaseHead {title} {description} {permalink} />
+</head>
+
+<body>
+  <Hamburger />
+  <Header />
+  <main class={css('center', mainClassName )}>
+    <slot />
+  </main>
+  <Footer />
+</body>
+
+
+</html>

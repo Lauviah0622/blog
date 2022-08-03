@@ -1,0 +1,87 @@
+---
+import Base from './Base.astro';
+import DateTimeCount from '@components/DateTimeCount.astro';
+
+
+import TagsList from '@components/TagsList.astro';
+import Toc from '@components/Toc'
+import '@components/Toc/Toc.css'
+
+
+
+const { content } = Astro.props;
+
+const headers = content.astro?.headers
+
+---
+
+<Base className="align-left">
+<aside>
+  {headers &&
+  <Toc client:media="(max-width: 1000px)" headers={headers} />}
+</aside>
+<div class="heading">
+  <TagsList tags={content.tags} />
+  <h1 class="title">{content.title}</h1>
+  <DateTimeCount date={content.pubDate} content={content.astro.source} />
+</div>
+{content.image && <img src={content.image} class="cover" />}
+<!-- <Content> -->
+<div class="article">
+  <slot />
+</div>
+<!-- </Content> -->
+</Base>
+
+
+<style>
+  /* TOC */
+  :global(aside) {
+    position: fixed;
+    right: 0;
+  }
+
+
+
+
+  :global(html) {
+    scroll-padding-top: 70px;
+    scroll-behavior: smooth;
+  }
+
+  :global(main.center.align-left) {
+    grid-template-columns: 4fr min(var(--max-width), calc(100% - 64px)) 5fr;
+  }
+
+  .title {
+    padding: .2em 0;
+  }
+
+  .cover {
+    margin-bottom: 2em;
+    /* width: calc(100% + 10ch); */
+    height: 70vh;
+    aspect-ratio: 16/9;
+    /* width: 75%; */
+    max-height: unset;
+    /* -o-object-fit: cover; */
+    object-fit: contain;
+    grid-column: 1/4;
+    justify-self: center;
+    max-width: min(1000px, 100vw);
+  }
+
+  .heading {
+    margin-bottom: 2em;
+  }
+
+  @media screen and (max-width: 80rem) {
+    :global(aside) {
+      display: none;
+    }
+
+    :global(main.center.align-left) {
+      grid-template-columns: 1fr min(var(--max-width), calc(100% - 64px)) 1fr;
+    }
+  }
+</style>

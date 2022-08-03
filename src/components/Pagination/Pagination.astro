@@ -1,0 +1,136 @@
+---
+import Item from './Item.astro';
+import Goto from './GoTo';
+
+const { page, baseUrl } = Astro.props;
+
+
+
+const {
+  url: {
+    next,
+    prev,
+    current
+  },
+  currentPage,
+  start,  //目前頁面的第幾個開始
+  end, //目前頁面從第幾個結束
+  total, //總共有幾個東西
+  size, //一頁有幾個東西
+  lastPage
+} = page;
+
+const getCloseNumber = (current, lastPage, amount) => {
+  const side = Math.floor(amount / 2);
+  let from = current - side
+  let to = current + side
+
+  if (from < 1) {
+    to += 1 - from
+    from = 1 + 1
+  } else if (to > lastPage) {
+    from -= to - lastPage
+    to = lastPage - 1
+  }
+  return [from, to]
+}
+
+const [from, to] = getCloseNumber(currentPage, lastPage, 4);
+
+// TODO: test
+const pages = ((from: number, to: number, lastPage: number) => {
+  const res = []
+  let temp = []
+  for (let i = 1; i <= lastPage; i++) {
+    if (i === 1 || i === lastPage) {
+      if (temp.length > 0) {
+        res.push([...temp])
+        temp = []
+      }
+      res.push(i)
+    } else {
+      if (i >= from && i <= to) {
+        if (temp.length > 0) {
+          res.push([...temp])
+          temp = []
+        }
+        res.push(i)
+      } else {
+        temp.push(i)
+      }
+    }
+
+  }
+
+  return res
+})(from, to, lastPage)
+
+
+const items = pages.map((page) => {
+  if (Array.isArray(page)) {
+    return {
+      url: page.map(p => current.replace(currentPage, p)),
+      text: '...',
+      isCurrent: false
+    }
+  } else if (page === 1) {
+    return {
+      url: baseUrl,
+      text: page,
+      isCurrent: page === currentPage,
+    }
+  } else {
+    return {
+      url: `${baseUrl}${page}/`,
+      text: page,
+      isCurrent: page === currentPage,
+    }
+  }
+
+})
+
+
+---
+
+<style>
+  * {
+    font-family: var(--font-family-serif);
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    height: min-content;
+    align-self: end;
+    padding-top: 5rem;
+  }
+
+  ul {
+    display: flex;
+    gap: 1ch;
+    padding: 0;
+    justify-content: center;
+  }
+
+  ul :global(li)> :global(a):empty {
+    display: inline-block;
+    width: 4ch;
+  }
+
+  :global(main) {
+    min-height: calc(100vh - 250px);
+  }
+</style>
+<div class="wrapper">
+  <ul>
+    {prev ? <Item url={prev}>prev</Item> :
+    <Item></Item>}
+  </ul>
+  <ul>
+    {items.map(({url, text, isCurrent}) =>
+    <Item isCurrent={isCurrent} url={url}>{text}</Item>)}
+  </ul>
+  <ul>
+    {next ? <Item url={next}>next</Item> : <Item></Item>}
+  </ul>
+</div>

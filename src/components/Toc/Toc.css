@@ -1,0 +1,39 @@
+.toc {
+  position: absolute;
+  right: 0;
+  width: 20ch;
+  font-size: 0.8em;
+  margin-right: 1ch;
+  max-height: 70vh;
+  overflow-y: scroll;
+
+  & li {
+    --size-base: 1.5ch;
+    --size-padding: 1ch;
+    padding: 2px 0;
+    padding-left: var(--size-base);
+    border-left: 2px solid var(--color-primary);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--color-text-transparent);
+
+    
+    &[data-depth='3'] {
+      padding-left: calc(var(--size-base) + 1 * var(--size-padding));
+    }
+    &[data-depth='4'] {
+      padding-left: calc(var(--size-base) + 2 * var(--size-padding));
+    }
+
+    &:hover {
+      /* border-left: 2px solid var(--color-secondary); */
+      color: var(--color-text);
+    }
+
+    &.current {
+      border-left: 2px solid var(--color-secondary);
+      color: var(--color-text);
+    }
+  }
+}

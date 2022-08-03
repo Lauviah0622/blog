@@ -1,0 +1,26 @@
+---
+import Base from '@layouts/Base.astro';
+import PostItem from '@components/PostItem.astro';
+
+const { content } = Astro.props;
+
+---
+
+<style>
+  h1 {
+    text-transform: capitalize;
+  }
+
+  ul {
+    
+  }
+</style>
+
+<Base>
+<h1>Collection</h1>
+
+
+<div class="article">
+  <slot />
+</div>
+</Base>

@@ -1,0 +1,111 @@
+/* ================== Property ================== */
+
+:root {
+  --primary-hue: 200;
+  --primary-saturation: 20%;
+  --primary-light: 60%;
+  --secondary-hue: 22;
+  --secondary-saturation: 85%;
+  --secondary-light: 60%;
+  --text-hue: 200;
+  --text-saturation: 10%;
+  --text-light: 10%;
+
+  --light-primary: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    var(--primary-light)
+  );
+  --light-secondary: hsl(
+    var(--secondary-hue),
+    var(--secondary-saturation),
+    60%
+  );
+  --light-text: hsl(var(--text-hue), var(--text-saturation), var(--text-light));
+  --light-text-transparent: hsla(
+    var(--text-hue),
+    var(--text-saturation),
+    var(--text-light),
+    60%
+  );
+  --light-text-secondary: hsl(var(--primary-hue), var(--text-saturation), 45%);
+  --light-text-reverse: hsl(var(--primary-hue), 35%, 90%);
+  --light-bg: 0, 0%, 98%;
+  --light-bg-reverse: hsl(var(--primary-hue), 15%, 20%);
+  --light-bg-grey: hsl(var(--primary-hue), var(--primary-saturation), 90%);
+
+  --dark-primary: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    var(--primary-light)
+  );
+  --dark-secondary: hsl(var(--secondary-hue), var(--secondary-saturation), 60%);
+  --dark-bg: hsl(var(--primary-hue), 5%, 10%);
+  --dark-bg-reverse: hsl(var(--primary-hue), 10%, 85%);
+  --dark-bg-reverse-opacity: hsla(var(--primary-hue), 30%, 95%, 0.05);
+  --dark-bg-opacity: hsla(
+    var(--primary-hue),
+    var(--primary-saturation),
+    15%,
+    95%
+  );
+  --dark-bg-secondary: hsl(var(--primary-hue), var(--primary-saturation), 15%);
+  --dark-text: hsl(var(--text-hue), 30%, 90%);
+  --dark-text-transparent: hsla(var(--text-hue), 30%, 90%, 50%);
+  --dark-text-secondary: hsl(var(--primary-hue), 30%, 65%);
+  --dark-text-reverse: hsl(var(--text-hue), var(--text-saturation), 25%);
+
+  --font-base-size: 18px;
+
+  --breakpoint-s-m: 576.98px;
+  --breakpoint-m-l: 992.98px;
+
+  --font-family-serif: Lora, Georgia, Songti TC, Hiragino Mincho Pro, serif;
+  --font-family-sans-serif: 'Inter', Roboto, Segoe UI, Ubuntu, Helvetica Neue,
+    Helvetica, Arial, 'Noto Sans TC', sans-serif;
+  --font-family-mono: 'DM mono', monospace, 'Kosugi Maru', 'Noto Sans TC',
+    sans-serif;
+
+  --font-weight-bold: 600;
+
+  --block-border-radius: 1ch;
+}
+
+/* ================== Variable  ================== */
+
+body {
+  --color-primary: var(--light-primary);
+  --color-secondary: var(--light-secondary);
+  --color-text: var(--light-text);
+  --color-text-transparent: var(--light-text-transparent);
+  --color-text-reverse: var(--light-text-reverse);
+  --color-text-secondary: var(--light-text-secondary);
+  --color-bg: hsl(var(--light-bg));
+  --color-bg-reverse: var(--light-bg-reverse);
+  --color-bg-opacity: hsla(var(--light-bg), 0.9);
+  --color-bg-secondary: var(--light-bg-grey);
+  --font-weight-normal: 400;
+
+  --color-warning-background: hsla(38deg, 100%, 50%, 0.1);
+  --color-warning: hsl(30deg, 100%, 50%);
+  --color-info: hsl(230deg, 100%, 67%);
+  --color-info-background: hsla(230deg, 100%, 67%, 0.1);
+  --color-success-background: hsla(160deg, 100%, 40%, 0.1);
+  --color-success: hsl(160deg, 50%, 50%);
+  --color-danger-background: hsla(340deg, 95%, 43%, 0.1);
+  --color-danger: hsl(340deg, 95%, 40%);
+}
+
+[data-theme='dark'] body {
+  --color-primary: var(--dark-primary);
+  --color-secondary: var(--dark-secondary);
+  --color-text: var(--dark-text);
+  --color-text-transparent: var(--dark-text-transparent);
+  --color-text-reverse: var(--dark-text-reverse);
+  --color-text-secondary: var(--dark-text-secondary);
+  --color-bg: var(--dark-bg);
+  --color-bg-reverse: var(--dark-bg-reverse);
+  --color-bg-opacity: var(--dark-bg-opacity);
+  --color-bg-secondary: var(--dark-bg-secondary);
+  --font-weight-normal: 300;
+}

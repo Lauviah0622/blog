@@ -1,0 +1,37 @@
+---
+import Icon from '@components/icons/Visual.astro';
+import metadata from "@metadata";
+
+const title = metadata.blogName;
+---
+
+<style>
+  .logo {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: var(--logo-size, min(3.5vw, 1rem));
+
+    & a {
+      margin: 0;
+      color: var(--color-text);
+      font-size: 1.4em;
+      text-decoration: none;
+
+    }
+
+    & :global(svg) {
+      height: 1.5em;
+      position: relative;
+      top: 0.3em;
+      margin-right: 10px;
+    }
+  }
+</style>
+
+<h1 class="logo">
+  <a href="/">
+    <Icon />
+    {title}
+  </a>
+</h1>

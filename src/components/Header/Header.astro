@@ -1,0 +1,116 @@
+---
+import RssIcon from "@components/icons/Rss.astro";
+import Logo from "../Logo.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import metadata from "@metadata";
+import css from "@utils/css";
+
+const currentUrl = Astro.canonicalURL.pathname;
+
+const navLink = {
+  archive: '/archive',
+  tips: '/tips',
+  tags: '/tags',
+  collection: '/collection',
+  about: '/about',
+};
+
+const title = metadata.blogName;
+
+
+---
+
+<style>
+  header {
+    top: 0;
+    position: sticky;
+    margin-top: 50px;
+    padding: 8px 0 15px 0;
+    /* background-color: var(--color-bg); */
+    z-index: 1;
+
+    & p {
+      margin-top: 0;
+    }
+
+    &>div {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    @media only screen and (max-width: 1140px) {
+      position: relative;
+      margin-top: 20px;
+    }
+
+  }
+
+  :global(.header__items) {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(10px, 2vw, 2ch);
+
+    
+
+    --size: min(5vw, 1.5rem);
+
+    & :global(.rss) {
+      inline-size: var(--size);
+      block-size: var(--size);
+      fill: var(--color-primary)
+    }
+  }
+
+  /* nav */
+
+  header nav {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4px;
+
+
+
+    &>a {
+      font-size: 1rem;
+      font-weight: normal;
+      color: var(--color-text-secondary);
+      text-transform: capitalize;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      transition: text-decoration-color .2s;
+      text-decoration-color: transparent;
+
+      @nest &.current,
+      &:hover,
+      &.currnent:hover {
+        text-decoration-color: var(--color-secondary);
+        text-decoration-skip-ink: none;
+        text-decoration-thickness: 3px;
+      }
+    }
+  }
+</style>
+
+<>
+
+  <header class="center center--wide">
+    <div>
+      <nav class="nav">
+        <Logo />
+        {Object.entries(navLink).map(([text, link]) =>
+        <a href={link} class={css('only-desktop', currentUrl.includes(link) ? 'current' : '' )}>{text}</a>)}
+      </nav>
+
+      <div class="header__items">
+        <ThemeToggle />
+        <a href="/rss.xml">
+          <RssIcon />
+        </a>
+      </div>
+    </div>
+
+  </header>
+</>

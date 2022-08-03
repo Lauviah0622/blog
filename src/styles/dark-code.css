@@ -1,0 +1,219 @@
+[data-theme='dark'] {
+    & .token {
+        &.comment,
+        &.prolog,
+        &.doctype,
+        &.cdata {
+            color: #3c526d;
+        }
+
+        &.punctuation {
+            color: #111b27;
+        }
+
+        &.delimiter.important,
+        &.selector .parent,
+        &.tag,
+        &.tag &.punctuation {
+            color: #006d6d;
+        }
+
+        &.attr-name,
+        &.boolean,
+        &.boolean.important,
+        &.number,
+        &.constant,
+        &.selector &.attribute {
+            color: #755f00;
+        }
+
+        &.class-name,
+        &.key,
+        &.parameter,
+        &.property,
+        &.property-access,
+        &.variable {
+            color: #005a8e;
+        }
+
+        &.attr-value,
+        &.inserted,
+        &.color,
+        &.selector &.value,
+        &.string,
+        &.string &.url-link {
+            color: #116b00;
+        }
+
+        &.builtin,
+        &.keyword-array,
+        &.package,
+        &.regex {
+            color: #af00af;
+        }
+
+        &.function,
+        &.selector &.class,
+        &.selector &.id {
+            color: #7c00aa;
+        }
+
+        &.atrule &.rule,
+        &.combinator,
+        &.keyword,
+        &.operator,
+        &.pseudo-class,
+        &.pseudo-element,
+        &.selector,
+        &.unit {
+            color: #a04900;
+        }
+
+        &.deleted,
+        &.important {
+            color: #c22f2e;
+        }
+
+        &.keyword-this,
+        &.this {
+            color: #005a8e;
+        }
+
+        &.important,
+        &.keyword-this,
+        &.this,
+        &.bold {
+            font-weight: bold;
+        }
+
+        &.delimiter.important {
+            font-weight: inherit;
+        }
+
+        &.italic {
+            font-style: italic;
+        }
+
+        &.entity {
+            cursor: help;
+        }
+    }
+
+    & .language-markdown .token {
+        &.title,
+        &.title &.punctuation {
+            color: #005a8e;
+            font-weight: bold;
+        }
+
+        &.blockquote.punctuation {
+            color: #af00af;
+        }
+
+        &.code {
+            color: #006d6d;
+        }
+
+        &.hr.punctuation {
+            color: #005a8e;
+        }
+
+        &.url > &.content {
+            color: #116b00;
+        }
+
+        &.url-link {
+            color: #755f00;
+        }
+
+        &.list.punctuation {
+            color: #af00af;
+        }
+
+        &.table-header {
+            color: #111b27;
+        }
+    }
+
+    & .language-json .token {
+        &.operator {
+            color: #111b27;
+        }
+    }
+
+    /* overrides color-values for the Line Highlight plugin
+   * http://prismjs.com/plugins/line-highlight/
+   */
+    & .line-highlight.line-highlight {
+        background: #8da1b92f;
+        background: linear-gradient(to right, #8da1b92f 70%, #8da1b925);
+
+        &:before,
+        &[data-end]:after {
+            background-color: #3c526d;
+            color: #e3eaf2;
+            box-shadow: 0 1px #8da1b9;
+        }
+    }
+
+    &
+        pre[id].linkable-line-numbers.linkable-line-numbers
+        span.line-numbers-rows
+        > span:hover:before {
+        background-color: #3c526d1f;
+    }
+
+    /* overrides color-values for the Line Numbers plugin
+   * http://prismjs.com/plugins/line-numbers/
+   */
+    & .line-numbers.line-numbers .line-numbers-rows {
+        border-right: 1px solid #8da1b97a;
+        background: #d0dae77a;
+    }
+
+    & .line-numbers .line-numbers-rows > span:before {
+        color: #3c526dda;
+    }
+
+    /* overrides color-values for the Match Braces plugin
+     * https://prismjs.com/plugins/match-braces/
+     */
+
+    & .rainbow-braces .token.token.punctuation {
+        @nest :is(&.brace-level-1, &.brace-level-5, &.brace-level-9) {
+            color: #755f00;
+        }
+        @nest :is(&.brace-level-2, &.brace-level-6, &.brace-level-10) {
+            color: #af00af;
+        }
+        @nest :is(&.brace-level-3, &.brace-level-7, &.brace-level-11) {
+            color: #005a8e;
+        }
+        @nest :is(&.brace-level-4, &.brace-level-8, &.brace-level-12) {
+            color: #7c00aa;
+        }
+    }
+
+    /* overrides color-values for the Diff Highlight plugin
+     * https://prismjs.com/plugins/diff-highlight/
+     */
+    & pre.diff-highlight > code .token.token.deleted:not(.prefix),
+    & pre > code.diff-highlight .token.token.deleted:not(.prefix) {
+        background-color: #c22f2e1f;
+    }
+
+    & pre.diff-highlight > code .token.token.inserted:not(.prefix),
+    & pre > code.diff-highlight .token.token.inserted:not(.prefix) {
+        background-color: #116b001f;
+    }
+
+    /* overrides color-values for the Command Line plugin
+     * https://prismjs.com/plugins/command-line/
+     */
+    & .command-line .command-line-prompt {
+        border-right: 1px solid #8da1b97a;
+        & > span:before {
+            color: #3c526dda;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+---
+import Hamburger from './Hamburger'
+import './Hamburger.css'
+
+const navLink = {
+  landing: '/',
+  archive: '/archive',
+  tips: '/tips',
+  tags: '/tags',
+  collection: '/collection',
+  about: '/about',
+};
+---
+
+<div class="hamburger__container only-mobile">
+  <Hamburger client:only="react" links={navLink} />
+</div>
+
+<style>
+  .hamburger__container {
+    --size: 1.2cm;
+    /* fit to finger size */
+    z-index: 1;
+    bottom: 17vh;
+    right: 10vw;
+    position: fixed;
+    inline-size: var(--size);
+    block-size: var(--size);
+  }
+</style>

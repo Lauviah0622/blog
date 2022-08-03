@@ -1,0 +1,25 @@
+---
+import dayjs from 'dayjs';
+const { date, naked = false } = Astro.props;
+const formatTextDate = (date) => dayjs(date).format('MMM,DD YYYY');
+const formatHTMLAttrDate = (date) => dayjs(date).format('YYYY-MM-DD');
+
+const text = formatTextDate(date);
+const datetime = formatHTMLAttrDate(date)
+---
+
+<style>
+  .time {
+    font-family: var(--font-family-serif);
+  }
+</style>
+
+
+{naked ? 
+<time datetime={datetime}>
+  {text}
+</time> : <div class="time">
+  <time datetime={datetime}>
+    {text}
+  </time>
+</div>}
