@@ -1,44 +1,44 @@
 ---
 title: 1 個 div 和 4 行 CSS 就能更了解瀏覽器渲染引擎
-pubDate: 2021-09-26
-tags: ['css', 'browser']
+pubDate: 2020-09-26T00:00:00.000Z
+tags:
+  - css
+  - browser
+summary: 相同 CSS 但各瀏覽器不同渲染的結果，讓你知道渲染引擎如何運作
 layout: /src/layouts/Post.astro
-summary : 行 CSS，這個 div 就能在瀏覽器上渲染出不同的圖形如下 div 就能在瀏覽器上渲染出不同的圖形如下。
+
 ---
-
-<!-- 相同 CSS 但各瀏覽器不同渲染的結果，讓你知道渲染引擎如何運作 -->
-
 有一天看著阮一峰的 [科技愛好者周刊](http://www.ruanyifeng.com/blog/2018/07/weekly-issue-14.html)，突然看到 [這個東西](https://codepen.io/MartijnCuppens/pen/MXojmw) 。
 
-[@Martijn_Cuppens](https://twitter.com/Martijn_Cuppens/status/1015169981368225793) 寫了一個空的 div 還有幾行 CSS，這個 div 就能在瀏覽器上渲染出不同的圖形如下。
+[@Martijn\_Cuppens](https://twitter.com/Martijn_Cuppens/status/1015169981368225793) 寫了一個空的 div 還有幾行 CSS，這個 div 就能在瀏覽器上渲染出不同的圖形如下。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_1.jpg)
 
 驚！勾起小弟一點好奇心，CSS 也可以做 browser，雖然使用 window 沒辦法使用 safari，來測試，而且 codepen 也不支持 IE，但還是利用手邊的瀏覽器還有一些服務像是 [browserling](https://www.browserling.com/), [lambdatest](https://www.lambdatest.com/) 來測試。
 
-- Edge 的結果，這裡是使用 Microsoft Edge 44.18362.449.0 版本的 edge ，所以還沒有換到最新的基於 chromium 的版本。
+*   Edge 的結果，這裡是使用 Microsoft Edge 44.18362.449.0 版本的 edge ，所以還沒有換到最新的基於 chromium 的版本。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_2.jpg)
 
-- Firefox 的結果，版本是 76
+*   Firefox 的結果，版本是 76
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_3.jpg)
 
-- 用 browserling ，firefox ver.68 在 window 7 上測試的結果是
+*   用 browserling ，firefox ver.68 在 window 7 上測試的結果是
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_4.jpg)
 
-- chrome 的結果，版本是 84.0.4147.105
+*   chrome 的結果，版本是 84.0.4147.105
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_5.jpg)
 
-- 用 lambdatest 在 safari 10.1 上面測試的結果。 codepen 就是傲嬌，嫌不支援又 render 出來
+*   用 lambdatest 在 safari 10.1 上面測試的結果。 codepen 就是傲嬌，嫌不支援又 render 出來
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_6.jpg)
 
-- 用 lambdatest 在 opera 68 上面測試的結果
+*   用 lambdatest 在 opera 68 上面測試的結果
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_7.jpg)
 
 結果大概是這樣。會有這些結果其實不意外，每個瀏覽器都有自已的渲染引擎，一個 HTML 跟 CSS 卻各自表態，所以實現出來的東西當然也是不一樣。不過厲害的是這個簡單的 CSS 竟然剛好可以在這些主流(?)瀏覽器上可以顯示不一樣的結果。
 
@@ -52,14 +52,14 @@ summary : 行 CSS，這個 div 就能在瀏覽器上渲染出不同的圖形如�
 
 在不同版本更換渲染引擎這點，對前端開發最著名 也是最可喜可賀的案例就是 Edge 吧。從 2020.1.15 開始，Edge 開始基於 [Chromium](https://zh.wikipedia.org/wiki/Chromium) 開發，理所當然地也沿用了 Chromium 的渲染引擎。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_8.jpg)
+![](/assets/images/post/20220807_1-div-4-css_9.jpg)
 
 雖然沒有測試新版的 edge ，不過可想而知應該會得到相同的結果。
 
 那既然提到了渲染引擎，那麼目前各瀏覽器的渲染引擎又是那些呢？其實可以從上面的結果大概知道有哪幾種引擎，我們先複習一下剛剛那張圖。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_10.jpg)
 
 可以看到有 Firefox, Edge, Chrome, Safari, IE 這五種瀏覽器各呈現不同的方塊。也各代表不同的渲染引擎：
 
@@ -89,42 +89,42 @@ summary : 行 CSS，這個 div 就能在瀏覽器上渲染出不同的圖形如�
 
 outline 可以在 border 外面再加上邊框。而 `outline` 這個屬性是 `outline-style`, `outline-width`, `outline-color` 這三個屬性的簡寫。分別設定樣式、寬度還有顏色。 案例中的 `inset` 代表著 [outline 會是嵌入狀的樣式](https://developer.mozilla.org/zh-CN/docs/Web/CSS/outline-style) 。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_11.jpg)
 
 而 `outline-offset` 則是設置 outline 的偏移，剛剛講說 outline 可以在 border 外面再加上邊框， `outline-offset` 的數值可以讓 border 跟 outline 之間新增距離，也就是 border 跟 outline 之間會有間距的意思。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_12.jpg)
 
 > _可以看到 offset 增加了 border 跟 outline 之間的空間。_
 
 那跟呈現剛剛那樣的形狀有甚麼關係？我們先關掉 `outline-offset` 看看結果。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_13.jpg)
 
 可以看到其實蠻正常的，因為沒有 `border`，所以就是在一個空白的 `div` 外面加上粗度 100 的 `outline`，然後用 `inset` 的樣式。
 
 找到兇手了！就是 `outline-offset` ！
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_14.jpg)
 
 我們看看這 `outline-offset` 幹了甚麼好事。
 
-`outline-offset: -125px;` 代表在 border 外面加上 `-125px` 的間距，這到底是甚麼意思？如果說正值是以 border 為準，從 border 向外推 offset 的距離再開始新增 outline，那負值可以說是向內推再開始新增 outline。
+`outline-offset: -125px;` 代表在 border 外面加上 `-125px` 的間距，這到底是甚麼意思？如果說正值是以 border 為準，從border 向外推 offset 的距離再開始新增 outline，那負值可以說是向內推再開始新增 outline。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_15.jpg)
+![](/assets/images/post/20220807_1-div-4-css_16.jpg)
 
 > _因為向內 30px 所以和 border 是同樣的位置，但是 outline 會在 border 之上，所以把 border 遮住了。_
 
 如果我們把數值改成 `outline-offset: -50px;` 那會怎麼樣？
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_17.jpg)
 
 這個結果還算蠻合理的，寬和高都是 100px，所以 `outline-offset: -50px;` 會把整個 div 。那如果數值在繼續降低呢？讓我們繼續看下去。
 
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
-![](/assets/posts/2c43c0f60741dcdc7e86cad4dbc7bd0617c57e3d46171013175d86601dd97bbb.png)
+![](/assets/images/post/20220807_1-div-4-css_18.jpg)
+![](/assets/images/post/20220807_1-div-4-css_19.jpg)
+![](/assets/images/post/20220807_1-div-4-css_20.jpg)
 
 其實降低到比自身的大小還小我已經不知道發生甚麼事情了… 我想這應該可以說是一個 bug 吧（又者是彩蛋？）。不過可以看到其實數值小於 `-100` 就可以看到雛型了，數值特別設為 `-125` 應該只是為了美妙的圖案而已。
 

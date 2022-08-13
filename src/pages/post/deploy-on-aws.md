@@ -1,11 +1,13 @@
 ---
 title: 在 AWS 上面部署 LEMP server, PHPmyadmin, FTP
-pubDate: 2015-10-17
-tags: ["deploy"]
+pubDate: 2021-10-17T00:00:00.000Z
+tags:
+  - deploy
 layout: /src/layouts/Post.astro
----
 
-LEMP 在這邊是指下面幾種技術的簡稱：  
+---
+LEMP 在這邊是指下面幾種技術的簡稱：
+
 - Linux
 - Nginx
 - MySQL
@@ -27,40 +29,36 @@ LEMP 在這邊是指下面幾種技術的簡稱：
 - FTP server 用來上傳檔案
   - 建立帳號
   - 讓該帳號只能上傳東西到特定的資料夾裡面
-  
-這篇會站在巨人們的肩膀上，把蒐集到的資料做個統整，在最後會附上資料的連結。如果覺得我講的很模糊可以直接去看原文，後來覺得這篇文章的定位比較像是導讀的感覺，而且打到後面越來越x懶... 其實好像看參考的原文就好了（？）。
+
+這篇會站在巨人們的肩膀上，把蒐集到的資料做個統整，在最後會附上資料的連結。如果覺得我講的很模糊可以直接去看原文，後來覺得這篇文章的定位比較像是導讀的感覺，而且打到後面越來越 x 懶... 其實好像看參考的原文就好了（？）。
+
 ## AWS
+
 AWS 是啥，Amazon Web Services 可以說是一個統稱，泛指 Amazon 旗下的網路服務，但是範圍非常之廣泛，包含很多不同種類的 VPS, Domain name 等等。可以讓你完全用他們的服務來組成一個完整且能附載高流量的 server。
 
 這次要用的是 EC2 (Elastic Compute Cloud)，本質上他就是一個 VPS ，但優勢是可以自由地控制 VPS 的大小，即使建立之後要改配備的設定（核心數、RAM、硬碟大小）都沒問題，所以才會這麼夯。
 
-### 建立 EC2 instance 
+### 建立 EC2 instance
 
 1. 要先辦 AWS 的帳號，然後選擇 EC2，這個就不帶了。
 2. 到 instance 的視窗，然後點選 Launch instance
-
-
 
 AWS 稱每個 VPS 叫做 instance 。另外，建立 instace 要透過所謂的 AMI（Amazon Machine Image），來安裝 OS 還有一些設定，簡單說就像一個模板，所以等你很強你也可以做自己的模板，但現在先不要。
 
 可以先點 Filter Tier only，就可以看到免費的 template
 
 上面還可以選國家，聽說可以選近一點的連線比較快，自己沒有實驗過。
-在這邊自己是選 `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type` 
+在這邊自己是選 `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type`
 
-選 Ubuntu 是因為感覺比較熟悉，版本選舊而不選 20 的是覺得說資源可能比較多，然後後面那個  SSD Volume Type 的意思沒有很了解，不過看 [docs](https://aws.amazon.com/tw/about-aws/whats-new/2014/06/16/introducing-the-amazon-ebs-general-purpose-ssd-volume-type/#:~:text=Introducing%20the%20Amazon%20EBS%20General%20Purpose%20(SSD)%20volume%20type,-Posted%20On%3A%20Jun&text=Backed%20by%20Solid%2DState%20Drives,baseline%20of%203%20IOPS%2FGB.) 應該是指說 vps 會使用 SSD，讀寫會比較快？但是疑惑的點是會從安裝 os 這邊來選嗎？所以自己也沒有很清楚。大家可以自己看狀況，其實進去之後 OS 操作應該是大同小異。記得選免費的就好
+選 Ubuntu 是因為感覺比較熟悉，版本選舊而不選 20 的是覺得說資源可能比較多，然後後面那個 SSD Volume Type 的意思沒有很了解，不過看 [docs](<https://aws.amazon.com/tw/about-aws/whats-new/2014/06/16/introducing-the-amazon-ebs-general-purpose-ssd-volume-type/#:~:text=Introducing%20the%20Amazon%20EBS%20General%20Purpose%20(SSD)%20volume%20type,-Posted%20On%3A%20Jun&text=Backed%20by%20Solid%2DState%20Drives,baseline%20of%203%20IOPS%2FGB.>) 應該是指說 vps 會使用 SSD，讀寫會比較快？但是疑惑的點是會從安裝 os 這邊來選嗎？所以自己也沒有很清楚。大家可以自己看狀況，其實進去之後 OS 操作應該是大同小異。記得選免費的就好
 
 3. 選規格
-
-
 
 其實我們也只能選免費的。這裡的規格大致上是指說我們會分到幾顆 CPU、記憶體的容量等等。有點像在選電腦的感覺。
 
 除此之外有一些細部規格，不過看不太懂而且用免費的也不用想太多，這邊就先 next。
 
 4. Security Group
- 
-
 
 這個但是事後也可以再設定，之後會再提到。
 
@@ -68,93 +66,96 @@ AWS 稱每個 VPS 叫做 instance 。另外，建立 instace 要透過所謂的 
 
 5. 設定 private key
 
-
-
 因為跟 AWS 連線是使用 SSL 連線，需要 public key 跟 private key，所以他會問你說要建立新的 key，還是用之前設定好的。因為從來沒用過，所以當然是選擇 new key，就照上面的要求打上名子然後 download 下來放到你的~~寶貝袋~~資料夾裡面，之後 SSH 連線都會用到。
 
 到這裡就成功了
 
 ### 設定 security group
 
-security group （後面簡稱SG） 可以設定允許透過哪些 port 可以傳入資料（稱作 inbound），還有透過哪些 port 可以傳出資料（稱作 outbound）。但大部分是只會設定 inbound 而已，因為傳出跟安全性比較沒有關係（就目前自己的了解）。預設是開啟 `:22` 也就是 ssh 連線的預設 port，如果沒有開這個你就沒辦法連到你的 server 了（還有其他方式可以連到 server 啦，不過這裡先用 ssh）。
+security group （後面簡稱 SG） 可以設定允許透過哪些 port 可以傳入資料（稱作 inbound），還有透過哪些 port 可以傳出資料（稱作 outbound）。但大部分是只會設定 inbound 而已，因為傳出跟安全性比較沒有關係（就目前自己的了解）。預設是開啟 `:22` 也就是 ssh 連線的預設 port，如果沒有開這個你就沒辦法連到你的 server 了（還有其他方式可以連到 server 啦，不過這裡先用 ssh）。
 
 我們可以建立很多不同的 SG，然後依照狀況套用進去。接下來的步驟就是要建立一個 SG，然後開啟我們需要的服務會用到的端口，分別是：
 
 - HTTP: `80` ipv4
 - HTTPS: `443` ipv4
-- FTP: `20-21` ipv4 & ipv6, `900`,  `40000-50000`
+- FTP: `20-21` ipv4 & ipv6, `900`, `40000-50000`
 - MySQL: `3306` ipv4
-
 
 為什麼會開這些 port？每個服務都有一個預設的 port，上面這些就是需要的功能的 port，FTP 的部分就比較奇怪，可以之後在了解。那接下來會講怎麼新增 SG。
 
 1. 點擊 SG 然後 add rule
 2. SG 的基本設定
 
- SGname 隨便填，你喜歡就好。descroption 也是建議可以打個容易識別的名子。VPC (Virtual Private Cloud)，簡單來說就是一個屬於你的虛擬 IP 位置這樣，這個東西用預設的就好了。（這個東西自己也沒有很清楚）
+SGname 隨便填，你喜歡就好。descroption 也是建議可以打個容易識別的名子。VPC (Virtual Private Cloud)，簡單來說就是一個屬於你的虛擬 IP 位置這樣，這個東西用預設的就好了。（這個東西自己也沒有很清楚）
 
-> ❓ VPC是甚麼？
+:::info
+❓ VPC 是甚麼？
+
 自己目前對於 VPC 的理解是，Amazon 只有寥寥幾個 ipv4 的 IP，不可能所有人一人一個，但是他有無數個虛擬。所以他會透過類似 router 的東西，當有人向 寥寥幾個 IP 傳送 Request 時候，用 router 把 request 指向虛擬 IP。不過有一個問題是說他怎麼知道那個原本的 IP 要 router 去哪裡？這個東西關係到網路的東西有點小複雜阿...
 
-3. add rule
+:::
 
+1. add rule
 
 點擊 add rule，然後其實他會有一些預設的 set，可以直接選擇，我們需要設定的東西是 Source，能夠設定說允許哪些 IP 位置能夠連線進來。因為我們是 web server，要讓世界各地的人來看我們的網站，所以這裡就不限制，點三角形有一個 anywhere 的選項，全部都設置為 anywhere。
 
-其實 anywhere 就是設置 ipv4 是 0.0.0.0/0 跟 ipv6 
+其實 anywhere 就是設置 ipv4 是 0.0.0.0/0 跟 ipv6
 
-> ❓ CIDR
-這裡的標示方法是用 CIDR 表示法，不過 CIDR 是啥，還有子網路遮罩又是啥，這裡還有很多坑要填。直接講說 CIDR 是什麼可能要從 IP 是甚麼開始寫了，直接寫說這樣寫代表的意義是甚麼好了。  
->
-> 這裡的用 CIDR 的原因是指定 NET_ID，然後允許下面所有的 HOST 可以連線，像是 132.2.123.222/8 就表示說 可以從 132.0.0.0 ~ 132.256.256.256 都可以連線
-> 
-> 不過這裡有問題是說，所以 132.3.123.222/8 跟 132.23.232.222/8 這兩個是一樣的？因為前面的 132 都是相同的
+:::info
+❓ CIDR
+
+這裡的標示方法是用 CIDR 表示法，不過 CIDR 是啥，還有子網路遮罩又是啥，這裡還有很多坑要填。直接講說 CIDR 是什麼可能要從 IP 是甚麼開始寫了，直接寫說這樣寫代表的意義是甚麼好了。
+
+這裡的用 CIDR 的原因是指定 NET_ID，然後允許下面所有的 HOST 可以連線，像是 132.2.123.222/8 就表示說 可以從 132.0.0.0 ~ 132.256.256.256 都可以連線
+
+不過這裡有問題是說，所以 132.3.123.222/8 跟 132.23.232.222/8 這兩個是一樣的？因為前面的 132 都是相同的
+:::
 
 這樣就設定好 SG 了，設定的部分再細節部分可能有點因人而異，不過大方向就是把需要的 port 打開，然後不限制 IP 進來就對了。
 
-4. 更改 instance 的 SG
+1. 更改 instance 的 SG
 
 回到 instance，選擇自己的 instance 之後點擊 action > networking > change security group ，然後選則剛剛設定的 SG，然後按 add。一定要做這步不然沒用喔，還是會連不上去。
 
 ### 用 ssh 登入 VPS
 
 打開你的 CLI，用哪個都行，有 ssh 就可以。然後輸入
+
 ```
 格式：
 ssh -i "你的剛剛下載的 key 的位置" ubuntu@"你 insatnce 的 Public IP address"
 範例：
 ssh -i ./location.pem ubuntu@3.232.232.232
 ```
+
 會問你 yes 還是 no，不太懂這邊問這個是甚麼意思，不過選 yes 就可以了（就是這種心態才會出問題）
 
 可以稍微來看一下上面的 command 的意思，`-i` 的意思是使用檔案的金鑰認證，後面是 `用戶名稱@IP位置`，要輸入 Public IP DNS 也是可以啦，如果之後有串上自己的 DNS 也可以使用。
 
 或者是可以點進去你的 instance 然後按裡面的 connect > ssh client 就會有教學，複製上去 CLI 就可以了
 
-
-
-
 到這裡就正式把 VPS 設定好了。
 
 ## 安裝 nginx, Mysql, PHP
 
-處理完 instance 就到了安裝的環節了，這裡基本上是參考[這篇文章](
-https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04)
+處理完 instance 就到了安裝的環節了，這裡基本上是參考[這篇文章](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04)
 
-對了，安裝之前，因為讀者可能會找其他的資料（這篇寫的不夠清楚時），要記得盡量找  OS 版本符合的，我們安裝的 OS 是 Ubuntu 18.04。
+對了，安裝之前，因為讀者可能會找其他的資料（這篇寫的不夠清楚時），要記得盡量找 OS 版本符合的，我們安裝的 OS 是 Ubuntu 18.04。
 
 首先先更新一下系統：
+
 ```
 sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
 ```
 
 只要安裝 Package 完他都會問你說（後面也會出現）
+
 ```
 After this operation, 312 kB of additional disk space will be used.
 Do you want to continue? [Y/n]
 ```
 
-問你會占用多少容量，要不要安裝，按 yes 就可以了，哪次不 yes。  
+問你會占用多少容量，要不要安裝，按 yes 就可以了，哪次不 yes。
 
 ### 安裝 Ngnix
 
@@ -162,10 +163,9 @@ Do you want to continue? [Y/n]
 sudo apt install nginx
 ```
 
-稍微解析一下指令在幹嘛， `sudo` 是以管理員的身分執行的意思，`apt` 則是 Ubuntu 管理套件的工具，之後可能會看到 `apt-get` ，其實是一樣的東西，只是 `apt` 把常用的東西抽出來，有點像瑞士刀的感覺，詳細可以看[這篇](https://www.itread01.com/content/1543804995.html#:~:text=apt%E8%88%87apt%2Dget%E4%B9%8B%E9%96%93%E7%9A%84%E5%8D%80%E5%88%A5&text=apt%20%E5%85%B7%E6%9C%89%E6%9B%B4%E7%B2%BE%E6%B8%9B,%E7%B5%84%E7%B9%94%E6%96%B9%E5%BC%8F%E6%9B%B4%E7%82%BA%E6%9C%89%E6%95%88%E3%80%82&text=%E4%BE%8B%E5%A6%82%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BD%BF%E7%94%A8%20apt,get%20%E6%99%82%E7%9B%B8%E5%90%8C%E7%9A%84%E6%93%8D%E4%BD%9C%E3%80%82)，後面就不贅述了，就是下載的 nginx。
+稍微解析一下指令在幹嘛， `sudo` 是以管理員的身分執行的意思，`apt` 則是 Ubuntu 管理套件的工具，之後可能會看到 `apt-get` ，其實是一樣的東西，只是 `apt` 把常用的東西抽出來，有點像瑞士刀的感覺，詳細可以看[這篇-apt 和 apt-get 的區別](https://www.itread01.com/content/1543804995.html#:~:text=apt%E8%88%87apt%2Dget%E4%B9%8B%E9%96%93%E7%9A%84%E5%8D%80%E5%88%A5&text=apt%20%E5%85%B7%E6%9C%89%E6%9B%B4%E7%B2%BE%E6%B8%9B,%E7%B5%84%E7%B9%94%E6%96%B9%E5%BC%8F%E6%9B%B4%E7%82%BA%E6%9C%89%E6%95%88%E3%80%82&text=%E4%BE%8B%E5%A6%82%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BD%BF%E7%94%A8%20apt,get%20%E6%99%82%E7%9B%B8%E5%90%8C%E7%9A%84%E6%93%8D%E4%BD%9C%E3%80%82)，後面就不贅述了，就是下載的 nginx。
 
 這個階段設定好之後，就可以透過 `http://[你的 public IP]` 來連線了，AWS 的 Public IP 可以在 Instance 的資料裡面看到。會顯示 nginx 的預設畫面，這個畫面的資料會被放在 `var/www/html` 裡面，這也是之後我們會放我們東西的地方。
-
 
 ### 設定防火牆
 
@@ -175,8 +175,7 @@ sudo apt install nginx
 
 因為 aws 的 Security Group 就已經阻擋未開啟的 port 連線 server 的功能了，所以 SG 還有 ufw 的設定功能上是重疊的，詳細可以看[這篇](https://serverfault.com/questions/286665/why-have-both-security-groups-and-iptables-on-amazon-ec2)。不過並不是說當你使用 aws，ufw 就完全不用了，ufw 可以做到針對傳遞的內容或者是流量阻擋等等更細節的操作，可以用來防止 DDOS 之類的攻擊。
 
-> 通常在講設定防火牆，其他文章會提到的大多是 ufw（Uncomplicated FireWall），1不過實際上 ufw 背後也是去設定 iptable（可以看[這篇](https://askubuntu.com/questions/952705/ufw-or-iptables-on-ubuntu-for-openvpn)），但是因為 iptable 太複雜了，而且 ubuntu 也已經內建 ufw （ubuntu 18.04），所以大家都用 ufw 去設定。
-
+> 通常在講設定防火牆，其他文章會提到的大多是 ufw（Uncomplicated FireWall），1 不過實際上 ufw 背後也是去設定 iptable（可以看[這篇](https://askubuntu.com/questions/952705/ufw-or-iptables-on-ubuntu-for-openvpn)），但是因為 iptable 太複雜了，而且 ubuntu 也已經內建 ufw （ubuntu 18.04），所以大家都用 ufw 去設定。
 
 ### 安裝及設定 mySQL server
 
@@ -191,7 +190,6 @@ sudo mysql_secure_installation
 ```
 
 接來我們會啟用 mysql-server 的 Validate Password Plugin。後面就不付上指令了，建議自己稍微看一下內容會比較好，能夠理解自己在幹嘛。
-
 
 Validate Password Plugin 會強制你的密碼要有一定限制，繼續剛剛的步驟就可以看到有三種規則，看你自己的要求，不過之後 phpmyadmin 還有我們要用遠端連線資料庫的密碼也要遵守這個規則，可以自行斟酌。
 
@@ -223,7 +221,7 @@ SELECT user,authentication_string,plugin,host FROM mysql.user;
 4 rows in set (0.00 sec)
 ```
 
-可以看到 mysql 在安裝的時候就已經會有預設一些帳戶了。而且 root 在 plugin 是  `auth_socket`，我們要改成 `mysql_native_password` 來用 mysql 設定的密碼登入。
+可以看到 mysql 在安裝的時候就已經會有預設一些帳戶了。而且 root 在 plugin 是 `auth_socket`，我們要改成 `mysql_native_password` 來用 mysql 設定的密碼登入。
 
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
@@ -231,11 +229,15 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password
 
 指令蠻直觀的，可以看一下內容，就是指定用戶以甚麼樣的方式登入，最後要輸入剛剛設定的密碼。
 
-> 有看到說可以用另外一個指令來設定
-> ```
-> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
-> ```
-> 似乎一個是用 mysql 處理帳戶的方式來設定，另外一個就是單純用 UPDATE 的指令來設定身分的 table，而且只改變 plugin。不知道說這兩個有沒有什麼差別。
+:::info
+有看到說可以用另外一個指令來設定
+
+```
+UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+```
+
+似乎一個是用 mysql 處理帳戶的方式來設定，另外一個就是單純用 UPDATE 的指令來設定身分的 table，而且只改變 plugin。不知道說這兩個有沒有什麼差別。
+:::
 
 ```
 FLUSH PRIVILEGES;
@@ -245,7 +247,7 @@ FLUSH PRIVILEGES;
 
 剛剛在修改權限時有看到 `'root'@'localhost'`，這是什麼？我們知道說 `root` 是我們最高權限的帳號，那 `localhost` 呢？
 
-SQL 的權限設定是用 `帳號名稱@登入位置` 來設定的，跟我們一開始登入 ssh 的概念有點像，這兩個合在一起才可以組成完整的登入帳號。所以  `'root'@'localhost'` 表示在 **localhost** 上面登入的 **root**，如果你要從外部（例如不透過 ssh，用程式來遠端連線）連線到 SQLserver 用 root 帳號登入是行不通的，只提供從 `localhost` 連線。也可以設定不管從哪裡連線都可以，後面如果填入 `'%'` 表示不管從哪裡連線都可以（不確定可不可以填入域名）。
+SQL 的權限設定是用 `帳號名稱@登入位置` 來設定的，跟我們一開始登入 ssh 的概念有點像，這兩個合在一起才可以組成完整的登入帳號。所以 `'root'@'localhost'` 表示在 **localhost** 上面登入的 **root**，如果你要從外部（例如不透過 ssh，用程式來遠端連線）連線到 SQLserver 用 root 帳號登入是行不通的，只提供從 `localhost` 連線。也可以設定不管從哪裡連線都可以，後面如果填入 `'%'` 表示不管從哪裡連線都可以（不確定可不可以填入域名）。
 
 SQL 還可以設定從不同的地方連線同一個帳戶可以有不同的權限。之後在處理 PHPmyadmin 的時候會提到。
 
@@ -263,7 +265,9 @@ mysql -u root -p
 
 然後輸入密碼登入。
 
-> 也有看到使用 `sudo mysql -u root mysql` ，這裡自己沒有詳細研究之間的差別。
+:::info
+也有看到使用 `sudo mysql -u root mysql` ，這裡自己沒有詳細研究之間的差別。
+:::
 
 ### PHP
 
@@ -275,10 +279,13 @@ mysql -u root -p
 sudo apt install php-fpm php-mysql
 ```
 
-> 有可能會沒辦法下載(自己有遇到這個問題)，會需要先下載 universe 的 repo
-> ``` 
-> sudo add-apt-repository universe
-> ```
+::: warning
+有可能會沒辦法下載(自己有遇到這個問題)，會需要先下載 universe 的 repo
+
+```
+sudo add-apt-repository universe
+```
+:::
 
 這樣就下載好 php-fpm （PHP FastCGI Process Manager），我們必須手動把 CGI 串上 web server，也就是 nginx。需要手動修改 nginx 的設定檔。
 
@@ -336,10 +343,10 @@ sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/example.co
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 ```
+
 ```
 sudo systemctl reload nginx
 ```
-
 
 接下來就是做剛剛說到的設定連結到 `sites-enabled` 裡面，而且把 default unlink，最後更新 nginx 的設定。
 
@@ -360,7 +367,7 @@ phpinfo();
 
 建立一個 info.php，輸入上面的指令。這個 PHP 指令可以告訴我們 PHP 的設定，還有裝了那些 PHP 的 plugin。
 
-然後你就可以瀏覽器瀏覽這個頁面看看 
+然後你就可以瀏覽器瀏覽這個頁面看看
 
 ```
 http://你的網頁/info.php
@@ -369,10 +376,6 @@ http://你的網頁/info.php
 有跑出東西就是成功了，沒跑出東西就看看設定檔有沒有打錯或者是有沒有更新設定檔，看完記得刪除。
 
 到這裡就完成 LEMP 的設置了。
-
-
-
-
 
 ## 開啟 PHP 遠端連線
 
@@ -416,13 +419,14 @@ sudo systemctl restart mysql
 ```
 mysql -u root -p
 ```
+
 ```
 CREATE USER 'username'@'%' IDENTIFIED BY 'password';
 ```
+
 先登入資料庫，後再建立一個新的帳戶，還記得前面提到的帳戶格式嗎？這裡可以用 % 代表你可以從任何 IP 來登入。
 
-到這裡，可以先用 `SHOW GRANTS FOR [user];` 來看看自己的權限。 
-
+到這裡，可以先用 `SHOW GRANTS FOR [user];` 來看看自己的權限。
 
 ```
 CREATE DATABASE "database_name";
@@ -449,13 +453,14 @@ https 需要一個 Certificate Authority (CA) 發放的證書 (certificate) 來�
 ```
 sudo add-apt-repository ppa:certbot/certbot
 ```
+
 ```
 sudo apt install python-certbot-nginx
 ```
 
 先下載 certbot 的軟體庫，然後在下載 certbot。因為 certbot 的開發比較活躍，如果你適用預設的 ubuntu 軟體庫來下載的話常常已經是之前的版本了，所以我們這裡使用 certbot 自己提供的軟體庫來拿到最新的版本。
 
-### 設定 nginx 
+### 設定 nginx
 
 記得一開始我們設定過 CGI ，現在我們要到同樣的檔案去設定 https。打開一樣的檔案 `/etc/nginx/sites-available/example.com`，把自己的 domain name 加進去，包含 `www.domain.com` 以及 `domain.com`。
 
@@ -469,7 +474,7 @@ https 發證書是跟著 domain name 的，不是跟著 IP，所以要跟著設�
 
 最後記得測試跟 reload nginx，可以去前面翻指令。
 
-### 設定防火牆 
+### 設定防火牆
 
 要把 ngnix 的 port 存取全部打開，SG 有設定了所以這邊沒有設定，想設定可以參考原文。
 
@@ -508,26 +513,18 @@ sudo certbot renew --dry-run
 
 如果沒問題就大功告成囉。
 
-
-
-
-
-
-
-
-
 ## PHPmyadmin
 
 會把 PHPmyadmin 放在的 https 後面的原因是如果透過 http 連線來存取會比較危險一點（雖然可能沒甚麼要盜用我的資料庫...），所以在設定好 https 之後再開始處理 phpmyadmin。
 
 phpmyadmin 的部分是參考[這篇](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-with-nginx-on-an-ubuntu-18-04-server)
 
-
 ### 安裝
 
 ```
 sudo apt update
 ```
+
 ```
 sudo apt install phpmyadmin
 ```
@@ -539,6 +536,7 @@ sudo apt install phpmyadmin
 再來，phpmyadmin 會幫你在 mySQL 裡面建立一個用戶，來存放 phpmyadmin 的資料，而且會要你輸入密碼，照做設定自己的密碼就可以了。
 
 接下來會把 phpmyadmin 連結到 web-server 存取的網站資料夾裡面。
+
 ```
 sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 ```
@@ -571,10 +569,11 @@ sudo mv phpmyadmin secret_admin
 
 ### 禁止 `root` 使用 phpmyadmin 登入
 
-```
+```bash
 sudo nano /etc/phpmyadmin/conf.d/pma_secure.php
 ```
-```
+
+```php
 <?php
 
 # PhpMyAdmin Settings
@@ -593,7 +592,7 @@ $cfg['Servers'][$i]['AllowRoot'] = false;
 
 建立一個 pma_secure.php，然後放進去上面的設定。自己也還沒理解所有的設定，但重要的是下面三個。
 
--  `['auth_type'] = 'cookie'`：讓我們可以用 cookie 來連線，預設的連線方式是 config 有點危險，上面的 blowfish 可以設定驗證 cookie 的 token，系統會要求要打滿 32 字。
+- `['auth_type'] = 'cookie'`：讓我們可以用 cookie 來連線，預設的連線方式是 config 有點危險，上面的 blowfish 可以設定驗證 cookie 的 token，系統會要求要打滿 32 字。
 - `['AllowNoPassword'] = false;`：不讓你用免密碼登入
 - `['AllowRoot'] = false;`：這個就是我們的目標了，禁用 root
 
@@ -605,7 +604,7 @@ $cfg['Servers'][$i]['AllowRoot'] = false;
 
 首先我們要用 openssl 來幫我們建立一組密碼，openssl 是一個提供很多種常用加密方式的工具，已經內建在 ubuntu 上了，常用 linux 會很常看到這個東西。
 
-```
+```bash
 openssl passwd
 ```
 
@@ -631,6 +630,7 @@ sudo nano /etc/nginx/pma_pass
 再來要設定哪些資料夾需要透過帳號密碼驗證才可以進入，懂這個方法之後，其實你也可以自己把你想要的資料夾加入帳號密碼驗證，可以做一個自己的後台。其實也不難，還記得前面我們的 nginx 設定檔嗎？
 
 location block 可以設定存取到特定位置時的動作，我們在 `/secret_admin` (依照剛剛設定的資料夾)裡面設定我們要使用的授權方式，並選擇剛剛建立的帳戶檔案。
+
 ```
 server {
     . . .
@@ -660,6 +660,7 @@ server {
 這部分會比較不同，設定大多是自己研究的，有可能有很多問題或者是還有待優化的部分，歡迎大家一起 debug XD，那一樣先來講講要幹嘛。
 
 我們要做的事情有
+
 - 建立一個獨立的帳戶能夠登入 FTP
 - 可以傳輸我們的檔案到 `/etc/www` （web server 存取的資料夾）裡面
 - 這個帳戶透過 FTP 只能存取到 `/etc/www` 沒辦法再存取上層目錄（安全問題）
@@ -670,13 +671,11 @@ server {
 
 單純的 FTP 就像 http 一樣會讓你在這個網路世界中裸奔，這裡我們會使用 FTPs 來連線，在 FTP 的基礎上使用 ssl 來加密。另外還有一種稱作 SFTP，能夠在 ssh （我們登入 server 採用的協議）的基礎上使用 ftp 傳輸，詳細的內容可以看[這篇](https://www.trustauth.cn/wiki/13883.html)。
 
-
-
 ### 安裝 vtftpd
 
 我們會使用 vsftps 來作為我們的 ftp server，[這裡](http://vsftpd.beasts.org/vsftpd_conf.html)是他的文件。首先是下載，應該很熟悉了。
 
-```
+```bash
 sudo apt update
 sudo apt install vsftpd
 ```
@@ -726,26 +725,27 @@ sudo chown -R username /var/www
   - 擁有者：讀、寫、執行
   - 群組：讀、寫、執行
   - 其他人：讀、寫
-  這個個人是覺得不太妥，這樣權限開太廣了
+    這個個人是覺得不太妥，這樣權限開太廣了
+
 - 建立一個 new_group，然後把 `/var/www` 的 group 改成 new_group，在把 new_user 放進去 new_group。  
   這個似乎是最穩妥的作法，但是好麻煩ㄚ...
 
 這裡應該還可以思考看看如何利用帳戶、群組、還有資料夾權限來得到一個最佳解。
 
+:::info
 
-<details>
-  <summary>linux 權限</summary>
-  
+linux 權限
 
 剛剛有提到權限 776 ，稍微講解一下，linux 的資料夾權限分：
+
 - 三個對象：
-    - 擁有者
-    - 群組
-    - 他人
+  - 擁有者
+  - 群組
+  - 他人
 - 三種權限
-    - 讀取(r, 4)
-    - 寫入(w, 2)
-    - 執行(x, 1)
+  - 讀取(r, 4)
+  - 寫入(w, 2)
+  - 執行(x, 1)
 
 如果擁有者可以讀取 & 寫入，那擁有者的權限就會是 `4 + 2 = 6`。然後權限的三個數字會依序是擁有者、群組、他人，所以剛剛的 `776` 就是：
 
@@ -770,15 +770,17 @@ ls -al /path
 第一個字如果是 `d`，表示是資料夾，是 `-` 表示是檔案。接下來三個一組分別表示 讀取、寫入、執行。然後三組分別是，擁有者、擁有群組、他人。
 
 所以上面就是
+
 - 不是資料夾
 - 擁有者：讀取、寫入、執行
 - 擁有群組：讀取、執行
 - 他人：讀取、執行
 
-</details>
+:::
 
 ### vsftpd 設定
-```
+
+```bash
 sudo nano /etc/vsftpd.conf
 ```
 
@@ -786,7 +788,7 @@ sudo nano /etc/vsftpd.conf
 
 後面的設定一堆，設定原因可以看註解，或者是自己查文件。會提到自己覺得比較特別的，而且這裡是自己的設定，跟參考文章上面有點差別。有 ❗ 的部份表示我自己也沒有非常了解這些設定，但目前這樣是 OK 的，這方面希望多多交流~~debug~~。
 
-```
+```bash
 # Allow anonymous FTP? (Disabled by default).
 anonymous_enable=NO
 #
@@ -800,8 +802,8 @@ chroot_local_user=YES                 # ❗ 讓使用者不能移開設定家目
 local_root=/var/www/                  # ❗ 設定進去的資料夾，有點不清楚和家目錄的關係，但目前這樣是可以用的 XD
 allow_writeable_chroot=YES            # 可以在根目錄寫入資料
 
-local_umask=022                       
-file_open_mode=0777                   
+local_umask=022
+file_open_mode=0777
 ❗ 這兩個要一起看，可以設定上傳上去檔案的權限，自己的理解是，權限會是 `file_open_mode` - `local_umask`，所以就是 777(前面的 0 這裡可以忽略) - `222` = `755`。
 
 # 設定 ftp 被動連線的端口
@@ -815,24 +817,28 @@ userlist_deny=NO                      # 在 userlist 代表用戶的白名單，
 ```
 
 接下來建立 vsftpd.userlist
+
 ```
 echo "sammy" | sudo tee -a /etc/vsftpd.userlist
 ```
 
 重啟 vsftpd
+
 ```
 sudo systemctl restart vsftpd
 ```
 
 到這裡可以用新增的帳戶登入看看，可以用 filezilla 或者是看上面的參考文章
 
-### 設定 ssl 
+### 設定 ssl
 
 建立 ssl 金鑰，其實這裡的金鑰就是 certbot 發給我們的金鑰，所以搞不好也可以沿用，不用自製的？
+
 ```
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem
 ```
-```
+
+```bash
 Output
 Generating a 2048 bit RSA private key
 ............................................................................+++
@@ -857,7 +863,7 @@ Email Address []:
 
 然後又是改設定了
 
-```
+```bash
 # rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 # rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 # 這兩行預設值註解掉
@@ -872,7 +878,7 @@ allow_anon_ssl=NO               # 禁止匿名用戶
 force_local_data_ssl=YES
 force_local_logins_ssl=YES
 
-require_ssl_reuse=NO            
+require_ssl_reuse=NO
 
 
 # ❗ 下面的我沒有設定但文章有，之前設定好像怪怪的... 但不太清楚原因，可以試試看
@@ -881,7 +887,6 @@ ssl_sslv2=NO
 ssl_sslv3=NO
 ssl_ciphers=HIGH
 ```
-
 
 加上前面的設定，自己的設定檔是這樣的（去掉註解）
 
@@ -927,8 +932,8 @@ pasv_max_port=50000
 
 好了之就可以用 filezilla 登入看看了。會跳出說可疑的證書（親手製作的證書被說可疑太傷心了），大方給他按 ok 平反下去，就可以登入啦。
 
-
 ## 參考資料
+
 統整一下參考資料
 
 LEMP server
@@ -939,7 +944,6 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmy
 
 https
 https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04
-
 
 mysql 權限
 https://zhuanlan.zhihu.com/p/55798418
@@ -956,12 +960,10 @@ https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with
 
 ## 其他問題
 
-❓ 什麼是 SSH
+❓ 什麼是 SSH  
 Ssh (Secure Shell) 是一種協定，可以用來作為 client 跟 server 的連接，簡單說就是可以讓我們安全的登入 Server。
 
-
-❓ security group 跟 linux 裡面的 firewall （像是 ufw 等）有甚麼差別？
-
+❓ security group 跟 linux 裡面的 firewall （像是 ufw 等）有甚麼差別？  
 功能上類似，主要是在 server 的哪個環節阻擋的問題。防火牆是可以阻擋網路傳輸內容工具的統稱，實際上可以在很多不同網路的層面來實現這個功能，可能是從 router 就開始阻擋（就是你國小電腦課老師開的東西），或者是運用系統內建的軟體來阻擋（windows 常常莫名其妙跳出來的東西）。
 
 linux 的內核有提供稱作 netfilter 的模組來阻擋或者說過濾網路傳輸的內容，也就是剛剛提到的軟體防火牆（應該是，有錯在麻煩更正），而操作 netfilter 這個防火牆的介面就是 iptable。因為直接操作 iptable 很麻煩，所以就有了一個 ufw （uncomplicated firewall）來讓我們這些菜鳥也能夠好好的操作 netfilter。
@@ -973,7 +975,6 @@ https://serverfault.com/questions/884156/difference-between-security-groups-on-a
 https://serverfault.com/questions/286665/why-have-both-security-groups-and-iptables-on-amazon-ec2
 https://www.awsforbusiness.com/aws-security-groups-different-firewalls/
 https://medium.com/awesome-cloud/aws-difference-between-security-groups-and-network-acls-adc632ea29ae
-
 
 ## 感想
 

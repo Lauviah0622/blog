@@ -1,10 +1,12 @@
 ---
 title: 從本地到雲端，淺談部署和各種部署姿勢
-pubDate: 2016-08-12
-tags: [deploy]
+pubDate: 2021-08-12T00:00:00.000Z
+tags:
+  - deploy
+author: Lavi
 layout: /src/layouts/Post.astro
----
 
+---
 ## Deploy 是什麼
 
 如果拿 Server 來舉例（本篇主要講的內容也是指 server）， server 基本上就是一個程式，而這個程式運行之後其他人就可以透過網路連線到 Server 來拿資料。而 Deploy，也就是部署，可以視為將已經寫好的程式使其運行的過程。
