@@ -12,6 +12,7 @@ import remarkCalcReadingMin from './src/plugins/remarkCalcReadingMin.mjs'
 const root = fileURLToPath(new URL('.', import.meta.url))
 
 const isDev = process.env.DEV
+const site = process.env.VERCEL_ENV === 'preview' ? process.env.PUBLIC_VERCEL_URL :  process.env.SITE 
 
 
 export default defineConfig({
