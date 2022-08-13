@@ -8,23 +8,21 @@ layout: /src/layouts/Post.astro
 ---
 ## Make the bookmark only display icon
 
-Not this 
+Bookmark name which display at the bookmark bar is redundant, because you always can distinguish which page it is with favicon.
 
-![with title](/assets/images/post/20220813_bookmark-tips_151803.png)  
+![with bookmark name](/assets/images/post/20220813_bookmark-tips_151803.png)  
 
+![without name](/assets/images/post/20220813_bookmark-tips_151852.png)  
 
-But this
+If you want to remove it, just edit the bookmark, and delete the name. 
 
-![without title](/assets/images/post/20220813_bookmark-tips_151852.png)  
+![bookmark edit model](/assets/images/post/20220813_bookmark-tips_151955.png)  
 
-Just edit the bookmark, and delete the name. 
+And its so clean!
 
-![picture 5](/assets/images/post/20220813_bookmark-tips_151955.png)  
+![my bookmark bar 😏](/assets/images/post/20220813_bookmark-tips_153856.png)  
 
-And its so clean! 
-
-![picture 11](/assets/images/post/20220813_bookmark-tips_153856.png)  
-
+Ok fine, I know it maybe just nonsense. There has another helpful tips next. 
 
 ## The bookmark which is not only webpage
 
@@ -32,12 +30,12 @@ You can put anything which can be opened in browser and has url in bookmark.
 
 like file: 
 
-![picture 6](/assets/images/post/20220813_bookmark-tips_152718.png)  
+![Add file to bookmark](/assets/images/post/20220813_bookmark-tips_152718.png)  
 
 page of the extension:
 
-![picture 8](/assets/images/post/20220813_bookmark-tips_152834.png)  
+![Add extension page](/assets/images/post/20220813_bookmark-tips_152834.png)  
 
 setting page...
 
-![picture 9](/assets/images/post/20220813_bookmark-tips_152939.png)  
+![Add setting page](/assets/images/post/20220813_bookmark-tips_152939.png)  
