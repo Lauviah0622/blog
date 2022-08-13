@@ -2,26 +2,20 @@
 import Date from '@components/Date.astro';
 
 import wordsCount from '@utils/wordCount';
-// import wordsCountPackage from 'words-count';
-
-// const { wordsCount } = wordsCountPackage;
 
 
 
 const { date, content } = Astro.props;
-
 const calReadTime = (content) => {
-  return Math.floor(wordsCount(content) / 200)
+  return Math.floor(wordsCount(content) / 350)
 }
 
 const time = calReadTime(content);
-
 const souldDShowReadTime = time > 1;
 const text = `・${time}min`;
 
 
 ---
-
 
 <style>
   .time {
