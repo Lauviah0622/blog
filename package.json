@@ -40,8 +40,10 @@
   "dependencies": {
     "@astrojs/rss": "^0.2.0",
     "@types/node": "^18.6.3",
+    "cli-table3": "^0.6.2",
     "commander": "^9.4.0",
     "front-matter": "^4.0.2",
+    "gradient-string": "^2.0.1",
     "js-yaml": "^4.1.0",
     "rehype-figure": "^1.0.1",
     "remark-directive": "^2.0.1",
