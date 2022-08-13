@@ -1,9 +1,9 @@
 .toc {
   position: absolute;
   right: 0;
-  width: 20ch;
+  width: 15vw;
   font-size: 0.8em;
-  margin-right: 1ch;
+  margin-right: 3vw;
   max-height: 70vh;
   overflow-y: scroll;
 
