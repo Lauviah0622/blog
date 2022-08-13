@@ -14,7 +14,7 @@ export default {
     archive: '/archive',
     tips: '/tips',
     tags: '/tags',
-    // collection: '/collection',
+    collection: '/collection',
     // about: '/about',
   },
 }
