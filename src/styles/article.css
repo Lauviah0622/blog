@@ -1,7 +1,8 @@
 .article {
   --section-gap: 4rem;
-  --gap-size: 1.6rem 0;
   --extrude-size: 1.5rem;
+  --gap: 1.6rem;
+  --gap-size: var(--gap) 0;
 
   @media screen and (max-width: 80rem) {
     --extrude-size: 1rem;
@@ -115,7 +116,7 @@
 
   & blockquote {
     position: relative;
-    padding: 2rem;
+    padding: var(--gap);
     padding-right: 0;
     margin: 1.2rem 0;
     font-family: var(--font-family-serif);
@@ -253,6 +254,12 @@
     font-size: 0.9em;
     line-height: inherit;
     overflow-x: auto;
+    --gap: 0.8rem;
+    --gap-size: 0.8rem 0;
+
+    & pre {
+      margin: unset;
+    }
   }
 
   & danger {
