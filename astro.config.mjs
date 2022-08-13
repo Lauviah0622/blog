@@ -12,13 +12,16 @@ import remarkCalcReadingMin from './src/plugins/remarkCalcReadingMin.mjs'
 const root = fileURLToPath(new URL('.', import.meta.url))
 
 const isDev = process.env.DEV
-const site = process.env.VERCEL_ENV === 'preview' ? process.env.PUBLIC_VERCEL_URL :  process.env.SITE 
+const site =
+  process.env.VERCEL_ENV === 'preview'
+    ? process.env.PUBLIC_VERCEL_URL
+    : process.env.SITE ?? 'http://localhost:3000'
 
+console.log('deploy', site)
 
 export default defineConfig({
   integrations: [sitemap(), react()],
-
-  site: 'https://lavi-blog.vercel.app/',
+  site,
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [

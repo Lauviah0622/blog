@@ -1,5 +1,6 @@
 ---
-import '../styles/style.css';
+
+import '~/styles/style.css';
 export interface Props {
   title: string;
   description: string;
@@ -31,7 +32,7 @@ const { title, description } = Astro.props;
   <meta property="og:image" content="https://astro.build/social.png?v=1" />
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={url.href} />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />

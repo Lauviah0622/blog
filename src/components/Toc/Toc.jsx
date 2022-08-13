@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-export default function Toc({ headers }) {
+export default function Toc({ headings }) {
   const [current, setCurrent] = useState('')
 
-  const lastHeaderSlug = headers.at(-1)?.slug ?? ''
-  const firstHeaderSlug = headers.at(0)?.slug ?? ''
+  const lastHeaderSlug = headings.at(-1)?.slug ?? ''
+  const firstHeaderSlug = headings.at(0)?.slug ?? ''
 
   useEffect(() => {
-    if (headers.length === 0) return
+    if (headings.length === 0) return
     const headingObserver = new IntersectionObserver(
       (entries) => {
         if (
@@ -46,7 +46,7 @@ export default function Toc({ headers }) {
   return (
     <nav className="toc">
       <ul>
-        {headers
+        {headings
           .filter(({ depth }) => depth >= 2 && depth <= 4)
           .map(({ depth, slug, text }) => (
             <li

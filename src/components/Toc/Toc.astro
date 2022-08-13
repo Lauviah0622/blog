@@ -1,9 +1,8 @@
 ---
-import Toc from '~/components/Toc'
+import Toc from '~/components/Toc/Toc.jsx'
 import '~/components/Toc/Toc.css'
 
-const {headers} = Astro.props
+const { headings } = Astro.props
 ---
 
-<Toc client:media="(min-width: 80em)" headers={headers} />
-
+<Toc client:media="(min-width: 80em)"  headings={headings} />
