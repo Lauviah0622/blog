@@ -83,6 +83,10 @@
     padding-left: 1.8rem;
     font-family: var(--font-family-serif);
     margin: 0;
+
+    & p {
+      padding: 0;
+    }
   }
 
   & p ~ ul,
