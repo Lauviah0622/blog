@@ -6,6 +6,11 @@
   margin-right: 2vw;
   max-height: 70vh;
   overflow-y: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none
+  }
 
   & li {
     --size-base: 1.5ch;

@@ -2,13 +2,23 @@ import React, { useEffect, useState } from 'react'
 
 export default function Toc({ headers }) {
   const [current, setCurrent] = useState('')
-  const lastHeaderSlug = headers.at(-1).slug
-  const firstHeaderSlug = headers.at(0).slug
+
+  const lastHeaderSlug = headers.at(-1)?.slug ?? ''
+  const firstHeaderSlug = headers.at(0)?.slug ?? ''
 
   useEffect(() => {
+    const current = document.querySelector('.toc .current')
+    if (!current) return
+    current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    })
+  }, [current])
+
+  useEffect(() => {
+    if (headers.length === 0) return
     const headingObserver = new IntersectionObserver(
       (entries) => {
-       
         if (
           window.innerHeight + window.pageYOffset >=
           document.body.offsetHeight
