@@ -1,19 +1,12 @@
 ---
 import Hamburger from './Hamburger'
 import './Hamburger.css'
+import metadata from '~/metadata';
 
-const navLink = {
-  landing: '/',
-  archive: '/archive',
-  tips: '/tips',
-  tags: '/tags',
-  collection: '/collection',
-  about: '/about',
-};
 ---
 
 <div class="hamburger__container only-mobile">
-  <Hamburger client:only="react" links={navLink} />
+  <Hamburger client:only="react" links={metadata.navLink} />
 </div>
 
 <style>
