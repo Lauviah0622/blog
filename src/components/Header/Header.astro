@@ -2,18 +2,10 @@
 import RssIcon from "~/components/icons/Rss.astro";
 import Logo from "../Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import metadata from "~/metadata";
+import metadata from '~/metadata';
 import css from "~/utils/css";
 
-const currentUrl = Astro.canonicalURL.pathname;
-
-const navLink = {
-  archive: '/archive',
-  tips: '/tips',
-  tags: '/tags',
-  collection: '/collection',
-  about: '/about',
-};
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 
 ---
@@ -53,7 +45,7 @@ const navLink = {
     align-items: baseline;
     gap: clamp(10px, 2vw, 2ch);
 
-    
+
 
     --size: min(5vw, 1.5rem);
 
@@ -101,8 +93,8 @@ const navLink = {
     <div>
       <nav class="nav">
         <Logo />
-        {Object.entries(navLink).map(([text, link]) =>
-        <a href={link} class={css('only-desktop', currentUrl.includes(link) ? 'current' : '' )}>{text}</a>)}
+        {Object.entries(metadata.navLink).map(([text, link]) =>
+        <a href={link} class={css('only-desktop', canonicalURL.pathname === link ? 'current' : '' )}>{text}</a>)}
       </nav>
 
       <div class="header__items">
