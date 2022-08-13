@@ -6,8 +6,6 @@ tags:
 layout: /src/layouts/Post.astro
 
 ---
-# 為什要用 IIFE
-
 ### 防止污染全局變數
 因為 var 是 依照 function 來區分 scope(function scope) 的，所以以前都會用 IIFE 來避免汙染。但現在的 const 還有 let 都是 block scop。所以如果怕污染可以直接用大括號包起來就可以。
 

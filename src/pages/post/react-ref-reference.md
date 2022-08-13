@@ -8,8 +8,6 @@ summary: 除了拿 DOM element 還有存變數外，更全面的了解 Ref 一�
 layout: /src/layouts/Post.astro
 
 ---
-# React Ref 的一點研究
-
 > A JavaScript library for building user interfaces
 
 React 是狀態和 UI 的 Library 我們都知道，使用了 React 可以這樣思考：每一個狀態都會產生出對應的 UI。使用了 React 之後，就很少使用像是 DOM 的原生 API 來操作元素了，但還是會有需要直接從 DOM 元素取得資料或者是操作的情境，這時候就是使用 ref 的時候。

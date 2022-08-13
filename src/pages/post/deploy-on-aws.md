@@ -1,6 +1,6 @@
 ---
 title: 在 AWS 上面部署 LEMP server, PHPmyadmin, FTP
-pubDate: 2021-10-17T00:00:00.000Z
+pubDate: 2020-10-17T00:00:00.000Z
 tags:
   - deploy
 layout: /src/layouts/Post.astro
