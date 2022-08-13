@@ -1,13 +1,11 @@
 ---
-title: '[極短篇] 資料庫的 ACID 是什麼？'
+title: 資料庫的 ACID 是什麼？
 pubDate: 2020-04-24T00:00:00.000Z
 tags:
   - database
 layout: /src/layouts/Post.astro
 
 ---
-> 本文章擷取自 [程式導師實驗計畫第四期作業](https://github.com/Lidemy/mentor-program-4th-Lauviah0622/blob/master/homeworks)並做改寫
-
 操作資料庫裏面有一個很重要的東西叫做 transaction。簡單說，就是一連串必須要一起進行的操作，如果一個操錯失敗，所以已經執行的操作都必須取消。例如：
 
 > A 匯錢給 B，必須要執行兩個步驟

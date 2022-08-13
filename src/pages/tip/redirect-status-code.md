@@ -1,5 +1,5 @@
 ---
-title: '[極短篇] 關於重新導向的 status code'
+title: 關於重新導向的 status code
 pubDate: 2021-07-15T00:00:00.000Z
 tags:
   - HTTP

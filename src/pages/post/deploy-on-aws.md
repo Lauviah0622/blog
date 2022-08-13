@@ -279,7 +279,7 @@ mysql -u root -p
 sudo apt install php-fpm php-mysql
 ```
 
-::: warning
+:::warning
 有可能會沒辦法下載(自己有遇到這個問題)，會需要先下載 universe 的 repo
 
 ```

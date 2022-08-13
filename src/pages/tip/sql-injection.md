@@ -1,5 +1,5 @@
 ---
-title: '[極短篇] 稍微看看 SQL injection 原理'
+title: 稍微看看 SQL injection 原理
 pubDate: 2020-04-24T00:00:00.000Z
 tags:
   - security

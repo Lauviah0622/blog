@@ -1,5 +1,5 @@
 ---
-title: '[極短篇] JSONP'
+title: JSONP
 pubDate: 2020-09-27T00:00:00.000Z
 tags:
   - javascript

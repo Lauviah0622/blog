@@ -1,5 +1,5 @@
 ---
-title: '[極短篇] HTTP 的 Safe method 還有 Idempotent method'
+title: HTTP 的 Safe method 還有 Idempotent method
 pubDate: 2020-06-06T00:00:00.000Z
 tags:
   - HTTP
