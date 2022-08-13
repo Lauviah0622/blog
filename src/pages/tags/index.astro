@@ -7,7 +7,7 @@ const sorted = sort(allPosts)
 
 const allTagPosts = sorted.reduce((allTags, post) => {
   const tags = post.frontmatter.tags
-  tags.forEach(tag => {
+  tags.forEach((tag) => {
     if (allTags?.[tag]) {
       allTags[tag].push(post)
     } else {
