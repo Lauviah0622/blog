@@ -2,7 +2,7 @@
 layout: /src/layouts/Collection.astro
 ---
 
-> 這裡是藏經閣，放了一些長灰塵的東西，而且常常還沒看過就先收了進來
+> 這裡是藏經閣，看到有趣的內容先收藏進來，然後再放到長灰塵
 
 # Resources
 
@@ -26,6 +26,7 @@ layout: /src/layouts/Collection.astro
 
 - 🏆[Javascript: the first year](https://dl.acm.org/doi/10.1145/3386327)  
   [中文版](https://cn.history.js.org/)在此，JS 二十年的歷史都在這了
+
 ## Typescript 
 - [Type challenges](https://github.com/type-challenges/type-challenges)
 - 
@@ -87,9 +88,26 @@ layout: /src/layouts/Collection.astro
 - [Chokidar](https://github.com/paulmillr/chokidar)：node.js 的原生 `fs.watch` 有些問題，這套 Lib 做了一些補強
 - [Cheerio](https://cheerio.js.org/index.html)：HTML parser
 - [Serverless-offline](https://github.com/dherault/serverless-offline)：可以在 local 測試 aws lamda
-- 
+- [Rome](https://github.com/rome/tools)：把所有前端開發需要的工具都集成於一身的套件
+- [Prepack](https://prepack.io/)：JS 的解抽象工具，把多層的 function 攤平來增加執行速度
+- [PixiJS](https://pixijs.com/)：2D render library，特點是快快快！還有完全支持 WebGL
+- [react-konva](https://konvajs.org/docs/react/index.html)：Canvas library can use with react
+- [Yjs](https://github.com/yjs/yjs)：JS 的 CRDT framework implementation，簡單說就是能夠實作共同編輯的工具。
+- [ImageMagick](https://imagemagick.org/index.php)：cli 版 PS
+- [Giscuss](https://giscus.app/)：類似 utterance，只是使用 github discussion 而不是 github issue
+- [Linaria](https://github.com/callstack/linaria)：底層使用 css variable 的 css-in-js 工具
 
+#### Monorepo
 
+- [Lerna](https://lerna.js.org/)
+- [TurboRepo](https://turborepo.org/)
+- [Nx](https://nx.dev/)
+
+#### State Management 
+- Recoil
+- Zustand
+- valito
+- jotai
 
 #### Headless UI library
 - [ReachUI](https://reach.tech/)：包含許多比較基本的的組件
