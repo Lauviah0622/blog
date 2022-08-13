@@ -15,14 +15,20 @@ const POST_FOLDER = './src/pages/post'
 const program = new Command()
 
 program.command('posts <source>').action((source) => {
+  console.log(`loading... ${source}`)
   const files = loadPath(source)
   // console.log(files)
+  console.log(`create Md model...`)
   const markdowns = markdownsConstructor(files)
 
   // console.log('prev: ', markdowns)
+  console.log(`copy image start`)
   copyImage(markdowns)
+  console.log(`copy image done`)
   // console.log('next: ', markdowns)
+  console.log(`copy post start`)
   copyPost(markdowns)
+  console.log(`copy post done`)
 })
 
 program.command('tips <source>').action((source) => {
@@ -40,6 +46,7 @@ const { from } = program.opts()
 function copyPost(markdowns) {
   markdowns.forEach((mk) => {
     console.log(mk)
+    if (!mk.frontmatter.frontmatter) return
     const frontMatterText = yaml.dump(mk.frontmatter.attributes, {
       styles: {
         '!!timestamp': 'YYYY-MM-DD',
@@ -91,11 +98,14 @@ function copyImage(markdowns) {
 
         const imageFileName = path.basename(source)
         const dist = path.normalize(`${IMAGE_FOLDER}/${imageFileName}`)
-        fs.copyFileSync(imageSource, dist)
+        try {
+          fs.copyFileSync(imageSource, dist)
+
+        } catch(err) {
+          console.log(err)
+        }
 
         image.dist = toRelativePath(dist)
-
-        // console.log('dist', source, dist)
         mk.frontmatter.body = mk.frontmatter.body.replace(source, image.dist)
       }
     }
@@ -119,6 +129,7 @@ function relativeToAbsPath(fileName, relativePath = './') {
 function loadPath(path) {
   const stats = fs.statSync(path)
   if (stats.isDirectory()) {
+    
     const files = fs
       .readdirSync(path, { encoding: 'utf-8' })
       .map((name) => {
@@ -136,6 +147,7 @@ function loadPath(path) {
       })
     return files
   } else if (stats.isFile()) {
+    
     const content = fs.readFileSync(path, 'utf-8')
     return [
       {
