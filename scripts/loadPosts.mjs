@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import { Command } from 'commander'
 import fm from 'front-matter'
+import 'dotenv/config'
 import yaml from 'js-yaml'
 import * as path from 'path'
 import gradient from 'gradient-string'
@@ -9,9 +10,10 @@ import Table from 'cli-table3'
 // const { program } = require('commander')
 // const fm = require('front-matter')
 
-const LAYOUT = '/src/layouts/Post.astro'
+const POST_LAYOUT = '/src/layouts/Post.astro'
 const IMAGE_FOLDER = './public/assets/images/post/'
 const POST_FOLDER = './src/pages/post'
+const TIP_FOLDER = './src/pages/tip'
 const HEAD = [
   'filename',
   'willImport',
@@ -23,7 +25,12 @@ const HEAD = [
   'tags',
   'layout',
   'draft',
+  'image',
 ]
+
+const IMAGE = ['no image', 'pass', 'missing']
+const POSTS_SOURCE = process.env.POSTS_SOURCE
+const TIPS_SOURCE = process.env.TIPS_SOURCE
 // const POST_FOLDER = './test/dist/'
 
 const printSafe = (text) => console.log(gradient.mind(text))
@@ -31,14 +38,13 @@ const printError = (text) => console.log(gradient.fruit(text))
 
 const program = new Command()
 
-program.command('posts <source>').action((source) => {
-  printSafe(`loading... ${source}`)
-  const files = loadPath(source)
-  // printMind(files)
+program.command('posts').action(() => {
+  printSafe(`loading posts from ${POSTS_SOURCE}... `)
+  const files = loadPath(POSTS_SOURCE)
   printSafe(`create Md model...`)
   const markdowns = markdownsConstructor(files)
 
-  // printMind('prev: ', markdowns)
+  printSafe('prev: ', files)
 
   check(markdowns)
 
@@ -46,12 +52,24 @@ program.command('posts <source>').action((source) => {
   copyImage(markdowns)
   printSafe(`copy image done`)
   printSafe(`copy post start`)
-  copyPost(markdowns)
+  copyPost(markdowns, POST_FOLDER)
   printSafe(`copy post done`)
 })
 
-program.command('tips <source>').action((source) => {
-  // console.log(source)
+program.command('tips').action(() => {
+  printSafe(`loading tips from ${TIPS_SOURCE}...`)
+  const files = loadPath(TIPS_SOURCE)
+  printSafe(`create Md model...`)
+  const markdowns = markdownsConstructor(files)
+
+  check(markdowns)
+
+  printSafe(`copy image start`)
+  copyImage(markdowns)
+  printSafe(`copy image done`)
+  printSafe(`copy post start`)
+  copyPost(markdowns, TIP_FOLDER)
+  printSafe(`copy post done`)
 })
 
 program.command('collect <source>').action((source) => {
@@ -70,7 +88,18 @@ function printTable(data) {
     const row = []
     head.forEach((col) => {
       const val = check[col]
-      row.push(val)
+
+      let log
+      switch (col) {
+        case 'image':
+          log = IMAGE[val]
+          break
+
+        default:
+          log = val
+          break
+      }
+      row.push(log)
     })
     table.push(row)
   })
@@ -89,26 +118,32 @@ function check(markdowns) {
   printTable(data)
 }
 
-function copyPost(markdowns) {
-  markdowns.forEach((mk) => {
-    if (!mk.willImport) return
-    const frontMatterText = yaml.dump(mk.frontmatter.attributes, {
-      styles: {
-        '!!timestamp': 'YYYY-MM-DD',
-      },
+function copyPost(markdowns, distDir) {
+  markdowns
+    .filter(({ willImport }) => willImport)
+    .map((mk) => {
+      mk.frontmatter.attributes['layout'] = POST_LAYOUT
+      return mk
     })
+    .forEach((mk) => {
+      if (!mk.willImport) return
+      const frontMatterText = yaml.dump(mk.frontmatter.attributes, {
+        styles: {
+          '!!timestamp': 'YYYY-MM-DD',
+        },
+      })
 
-    const body = mk.frontmatter.body
+      const body = mk.frontmatter.body
 
-    const post = `---
+      const post = `---
 ${frontMatterText}
 ---
 ${body}`
 
-    const fileName = path.basename(mk.path)
-    const dist = path.normalize(`${POST_FOLDER}/${fileName}`)
-    fs.writeFileSync(dist, post, { encoding: 'utf-8' })
-  })
+      const fileName = path.basename(mk.path)
+      const dist = path.normalize(`${distDir}/${fileName}`)
+      fs.writeFileSync(dist, post, { encoding: 'utf-8' })
+    })
 }
 
 function copyImage(markdowns) {
@@ -150,7 +185,7 @@ at ${md.path}
           }
         }
 
-        image.dist = toRelativePath(dist)
+        image.dist = `/${removePublic(dist)}`
         md.frontmatter.body = md.frontmatter.body.replace(source, image.dist)
       }
     }
@@ -165,10 +200,8 @@ function addLayout(markdowns) {
   }
 }
 
-function relativeToAbsPath(fileName, relativePath = './') {
-  const dir = relativePath.replace(/\.\//, '')
-
-  return path.normalize(`${process.cwd()}/${dir}${dir ? '/' : ''}${fileName}`)
+function relativeToAbsPath(filename, relativePath = './') {
+  return path.resolve(`${relativePath}/${filename}`)
 }
 
 function loadPath(loadedPath) {
@@ -178,6 +211,7 @@ function loadPath(loadedPath) {
       .readdirSync(loadedPath, { encoding: 'utf-8' })
       .map((name) => {
         const absPath = relativeToAbsPath(name, loadedPath)
+
         const stat = fs.statSync(absPath)
         return {
           path: absPath,
@@ -216,13 +250,19 @@ function markdownCheck(md) {
   const willImport = frontmatter && title && pubDate && !draft
   const cover = !!frontmatter.attributes?.cover
 
+  const imagesExist = md.images
+    .filter(({ source }) => isLocalPath(source))
+    .map(({ source }) => {
+      const mkAbsPath = path.resolve(md.path)
+      const mkAbsDir = path.dirname(mkAbsPath)
+      const imagePath = path.resolve(`${mkAbsDir}/${source}`)
+
+      return { exist: fs.existsSync(imagePath), source }
+    })
+
+  const isImagesExist = imagesExist.every(({ exist }) => exist)
   // const images = [...md.images]
-  // if (cover) {
-  //   images.push({
-  //     source: frontmatter.attributes.cover,
-  //   })
-  // }
-  // const isLocalImagesLost = checkIsLocalImageLost(images)
+  const image = md.images.length === 0 ? 0 : isImagesExist ? 1 : 2
 
   const check = {
     filename: md.filename,
@@ -237,6 +277,7 @@ function markdownCheck(md) {
     layout: !!frontmatter.attributes?.layout,
     draft,
     willImport,
+    image,
   }
   return check
 }
@@ -246,8 +287,6 @@ function checkIsLocalImageLost(images) {
   //   const mdDir = path.dirname(md.path)
   //   const mkAbsPath = path.resolve(md.path)
   //   const mkAbsDir = path.dirname(mkAbsPath)
-
-    
   // })
 }
 
@@ -261,9 +300,12 @@ function getFileNameFromPath(filePath) {
   return fileName
 }
 
+function removePublic(path) {
+  return path.replace('public/', '')
+}
+
 function toRelativePath(path) {
   return `./${path}`
-  return path
 }
 
 function markdownsConstructor(files) {
@@ -277,7 +319,7 @@ function markdownsConstructor(files) {
       const bodyImagesMatchesIter = file.frontmatter.body.matchAll(
         /!\[(.*?)\]\((.*?)(\s?'(.*?)')?\)/gm
       )
-      const bodyImages = Array.from(bodyImagesMatchesIter)
+      const images = Array.from(bodyImagesMatchesIter)
         .map((match) => {
           const [raw, alt, source, _, title] = match
           return {
@@ -289,32 +331,10 @@ function markdownsConstructor(files) {
         })
         .filter(({ source }) => !!source)
 
-      const nextFile = { ...file }
-
-      if (bodyImages.length !== 0) {
-        nextFile.images = bodyImages
+      return {
+        ...file,
+        images,
       }
-
-      return nextFile
     })
   return markdowns
 }
-
-/*
-
-const check = frontMatterCheck(frontmatter)
- */
-
-/*
-產生 absSource 的
-
-.map((image) => {
-          const nextImage = {...image}
-          const isLocal = isLocalPath(nextImage.source)
-          
-          if (isLocal) {
-            nextImage.absSource = relativeToAbsPath(nextImage.source, )
-          }
-          return nextImage
-        })
-*/
