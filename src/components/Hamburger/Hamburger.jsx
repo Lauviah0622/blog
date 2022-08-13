@@ -62,7 +62,7 @@ export default function Hamburger({ links }) {
             <a
               href={link}
               key={text}
-              className={window.location.pathname === link && 'current-link'}
+              className={css(window.location.pathname === link && 'current-link')}
             >
               {text}
             </a>
