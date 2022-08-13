@@ -25,7 +25,7 @@ const headers = content.astro?.headers
   <h1 class="title">{content.title}</h1>
   <DateTimeCount date={content.pubDate} content={content.astro.source} />
 </div>
-{content.image && <img src={content.image} class="cover" />}
+{content.cover && <img src={content.cover} class="cover" />}
 <!-- <Content> -->
 <div class="article">
   <slot />

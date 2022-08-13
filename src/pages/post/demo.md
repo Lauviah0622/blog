@@ -3,7 +3,7 @@ title: DEMO
 pubDate: 2017-06-01
 tags: ['personal']
 layout: /src/layouts/Post.astro
-image: http://placehold.jp/500x2000.png
+cover: http://placehold.jp/500x2000.png
 summary: Enable typographer option to see result.
 ---
 
