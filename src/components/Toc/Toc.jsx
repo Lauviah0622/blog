@@ -56,8 +56,9 @@ export default function Toc({ headers }) {
               ref={(e) => {
                 if (e?.className === 'current') {
                   const toc = document.querySelector('.toc')
-                  console.log(toc)
-                  toc.scrollTop = e.offsetTop - toc.offsetHeight / 2
+                  window.requestAnimationFrame(() => {
+                    toc.scrollTop = e.offsetTop - toc.offsetHeight / 2
+                  })
                 }
               }}
             >
