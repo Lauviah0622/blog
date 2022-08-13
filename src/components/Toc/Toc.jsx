@@ -7,15 +7,6 @@ export default function Toc({ headers }) {
   const firstHeaderSlug = headers.at(0)?.slug ?? ''
 
   useEffect(() => {
-    const current = document.querySelector('.toc .current')
-    if (!current) return
-    current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-    })
-  }, [current])
-
-  useEffect(() => {
     if (headers.length === 0) return
     const headingObserver = new IntersectionObserver(
       (entries) => {
@@ -38,7 +29,7 @@ export default function Toc({ headers }) {
         }
       },
       {
-        rootMargin: '-10% 0% -25% 0%',
+        rootMargin: '-5% 0% -55% 0%',
         threshold: 1,
       }
     )
@@ -62,6 +53,13 @@ export default function Toc({ headers }) {
               key={slug}
               className={`${current === slug ? 'current' : ''}`}
               data-depth={depth}
+              ref={(e) => {
+                if (e?.className === 'current') {
+                  const toc = document.querySelector('.toc')
+                  console.log(toc)
+                  toc.scrollTop = e.offsetTop - toc.offsetHeight / 2
+                }
+              }}
             >
               <a href={`#${slug}`}>{text.replace(/^#/, '')}</a>
               {/* for remove # of header */}

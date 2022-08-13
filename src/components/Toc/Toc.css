@@ -7,9 +7,10 @@
   max-height: 70vh;
   overflow-y: scroll;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
-    display: none
+    display: none;
   }
 
   & li {
@@ -23,7 +24,6 @@
     text-overflow: ellipsis;
     color: var(--color-text-transparent);
 
-    
     &[data-depth='3'] {
       padding-left: calc(var(--size-base) + 1 * var(--size-padding));
     }
