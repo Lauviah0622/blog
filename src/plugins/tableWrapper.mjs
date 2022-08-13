@@ -9,8 +9,6 @@ function rehypeTable(option) {
 
   return function (tree) {
     visit(tree, { tagName: 'table' }, (node, index) => {
-      console.log('rehypeTable', { tree, node, index })
-
       const wrappedTable = h('div', { class: className }, node)
       tree.children[index] = wrappedTable
     })
