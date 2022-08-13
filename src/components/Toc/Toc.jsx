@@ -14,7 +14,7 @@ export default function Toc({ headers }) {
         }
       },
       {
-        rootMargin: '-10% 0% -50% 0%',
+        rootMargin: '-10% 0% -25% 0%',
         threshold: 1,
       }
     )
