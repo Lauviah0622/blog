@@ -6,6 +6,8 @@ import metadata from '~/metadata';
 import css from "~/utils/css";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pathname = Astro.url.pathname.replace(/\/$/, '')
+console.log(pathname)
 
 
 ---
@@ -94,7 +96,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <nav class="nav">
         <Logo />
         {Object.entries(metadata.navLink).map(([text, link]) =>
-        <a href={link} class={css('only-desktop', canonicalURL.pathname === link ? 'current' : '' )}>{text}</a>)}
+        <a href={link} class={css('only-desktop', pathname===link || (link==='/' && pathname==='' ) ? 'current' : ''
+          )}>{text}</a>)}
       </nav>
 
       <div class="header__items">
