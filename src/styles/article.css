@@ -8,11 +8,12 @@
   }
 
   --link-color: var(--color-secondary);
-
-  /* padding-top: 3rem; */
-
   & :is(h1, h2, h3, h4, h5, h6) {
     position: relative;
+
+    & strong {
+      color: var(--color-text);
+    }
 
     & > a:first-child {
       position: absolute;
@@ -53,6 +54,7 @@
       transform: translateY(-0.55em);
       background-color: var(--link-color);
       mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M18.364 15.536L16.95 14.12l1.414-1.414a5 5 0 1 0-7.071-7.071L9.879 7.05 8.464 5.636 9.88 4.222a7 7 0 0 1 9.9 9.9l-1.415 1.414zm-2.828 2.828l-1.415 1.414a7 7 0 0 1-9.9-9.9l1.415-1.414L7.05 9.88l-1.414 1.414a5 5 0 1 0 7.071 7.071l1.414-1.414 1.415 1.414zm-.708-10.607l1.415 1.415-7.071 7.07-1.415-1.414 7.071-7.07z"/></svg>');
+      /* reference to https://antfu.me/posts/icons-in-pure-css-zh */
     }
   }
 
@@ -185,12 +187,10 @@
     /* transform: translateX(-50%); */
     /* width: calc(100% + 2 * var(--extrude-size)); */
     border-collapse: collapse;
-    
 
     @nest [data-theme='dark'] & {
       background-color: var(--dark-bg-reverse-opacity);
     }
-
 
     & tr,
     & tbody,
