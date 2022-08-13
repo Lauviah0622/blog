@@ -160,7 +160,7 @@ function copyImage(markdowns) {
 
       const dist = path.normalize(`${IMAGE_FOLDER}/${fileName}`)
       fs.copyFileSync(source, dist)
-      md.frontmatter.attributes.cover = toRelativePath(dist)
+      md.frontmatter.attributes.cover = `/${removePublic(dist)}`
     }
 
     if (md.images) {
