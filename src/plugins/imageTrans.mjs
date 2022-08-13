@@ -11,7 +11,7 @@ function rehypeFigure(option) {
     const figure = h('figure', { class: className }, [
       h('img', { ...properties, loading: 'lazy' }),
       properties.alt && properties.alt.trim().length > 0
-        ? h('figcaption', properties.alt)
+        ? h('figcaption', properties.alt || properties.title)
         : '',
     ])
     return figure
