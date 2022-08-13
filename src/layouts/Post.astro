@@ -4,8 +4,8 @@ import DateTimeCount from '@components/DateTimeCount.astro';
 
 
 import TagsList from '@components/TagsList.astro';
-import Toc from '@components/Toc'
-import '@components/Toc/Toc.css'
+import Toc from '@components/Toc/Toc.astro'
+// import '@components/Toc/Toc.css'
 
 
 
@@ -18,7 +18,7 @@ const headers = content.astro?.headers
 <Base className="align-left">
 <aside>
   {headers &&
-  <Toc client:media="(max-width: 1000px)" headers={headers} />}
+  <Toc headers={headers} />}
 </aside>
 <div class="heading">
   <TagsList tags={content.tags} />

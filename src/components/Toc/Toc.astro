@@ -1,0 +1,9 @@
+---
+import Toc from '@components/Toc'
+import '@components/Toc/Toc.css'
+
+const {headers} = Astro.props
+---
+
+<Toc client:media="(min-width: 80em)" headers={headers} />
+
