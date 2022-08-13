@@ -1,10 +1,11 @@
 ---
-import Tags from '@layouts/Tags.astro'
-import metadata from '@metadata'
+import Tags from '~/layouts/Tags.astro'
+import sort from '~/utils/sortPosts'
 
 let allPosts = await Astro.glob('/src/pages/post/*.md');
+const sorted = sort(allPosts)
 
-const allTagPosts = allPosts.reduce((allTags, post) => {
+const allTagPosts = sorted.reduce((allTags, post) => {
   const tags = post.frontmatter.tags
   tags.forEach(tag => {
     if (allTags?.[tag]) {

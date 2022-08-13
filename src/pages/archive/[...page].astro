@@ -1,17 +1,14 @@
 ---
-import Archive from '@layouts/Archive.astro';
-import metadata from '@metadata'
-
-// const PAGE_SIZE = 4
+import Archive from '~/layouts/Archive.astro';
+import sort from '~/utils/sortPosts'
 
 export async function getStaticPaths({ paginate }) {
 
   const PAGE_SIZE = 20
-  // 位什麼只能用 string literal!!???
   let allPosts = await Astro.glob('/src/pages/post/*.md');
-  // const testPosts = Array.from(Array(40), (_, i) => i)
+  const sortedPage = sort(allPosts)
 
-  return paginate(allPosts, { pageSize: PAGE_SIZE });
+  return paginate(sortedPage, { pageSize: PAGE_SIZE });
 
 }
 

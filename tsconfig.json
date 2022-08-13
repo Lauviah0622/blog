@@ -13,14 +13,7 @@
     "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@utils/*": ["src/utils/*"],
-      "@pages/*": ["src/pages/*"],
-      "@plugins/*": ["src/plugins/*"],
-      "@scripts/*": ["src/scripts/*"],
-      "@posts": ["src/posts/*.md"],
-      "@metadata": ["src/metadata.js"],
+      "~/*": ["src/*"]
     }
   }
 }
