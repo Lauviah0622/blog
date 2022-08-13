@@ -17,7 +17,7 @@ const {
   <h4>
     <a href={post.url}>{title}</a>
   </h4>
-  <p>{summary}</p>
+  <p class="summary">{summary}</p>
   <TagsList tags={tags} align="right" />
 
   <Date date={pubDate} />
@@ -33,7 +33,6 @@ const {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    min-height: 14em;
     font-size: .9em;
 
     &:hover {
@@ -50,22 +49,20 @@ const {
     padding-bottom: 1.5em;
     height: auto;
     flex: 1 0 auto;
-    /* color: var(--color-text-secondary); */
     font-size: 0.9em;
+  }
+
+  .summary {
+    min-height: 4em;
   }
 
   :global(.tags) {
     justify-content: flex-end;
-
-    /* justify-self: flex-end */
-
   }
 
   :global(.time) {
     text-align: right;
     margin-top: .3em;
-    /* color: var(-) */
-    /* justify-self: flex-end */
   }
 </style>
 
