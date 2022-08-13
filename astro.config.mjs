@@ -17,8 +17,6 @@ const site =
     ? process.env.PUBLIC_VERCEL_URL
     : process.env.SITE ?? 'http://localhost:3000'
 
-console.log('deploy', site)
-
 export default defineConfig({
   integrations: [sitemap(), react()],
   site,

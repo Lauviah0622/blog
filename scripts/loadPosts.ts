@@ -59,7 +59,6 @@ function frontMatterCheck(text) {
 ;(function () {
   const files = loadPath(from)
   files?.map((file) => {
-    // console.log(f)
 
     frontMatterCheck(file.content)
 
