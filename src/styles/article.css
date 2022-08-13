@@ -237,8 +237,9 @@
     }
   }
 
-  & .footnotes {
-    margin-top: var(--section-gap);
+  & *:is(.footnotes, .epilogue) {
+    margin-block: calc(var(--section-gap) / 2);
+    padding-block: calc(var(--section-gap) / 2);
     border-top: solid 1px var(--color-text);
   }
 }

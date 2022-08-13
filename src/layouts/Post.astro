@@ -5,6 +5,7 @@ import DateTimeCount from '~/components/DateTimeCount.astro';
 
 import TagsList from '~/components/TagsList.astro';
 import Toc from '~/components/Toc/Toc.astro'
+import Epilogue from '~/components/Epilogue.astro';
 
 const url = new URL(Astro.url.pathname, Astro.site);
 const { content, headings } = Astro.props;
@@ -30,14 +31,8 @@ const props = Astro.props
 }
 <div class="article">
   <slot />
+  <Epilogue/>
 
-  <hr>
-  <p>
-    如果有任何問題或者是想法歡迎<a target="_blank" href="mailto:">來信</a>，或在 <a target="_blank"
-      href="https://github.com/Lauviah0622/blog/issues">github repo 留下 issue</a>
-      <br>
-      感謝您的收看與建議 🙂
-  </p>
 </div>
 
 </Base>
@@ -50,9 +45,6 @@ const props = Astro.props
     right: 0;
   }
 
-  aside {
-    z-index: 99;
-  }
 
   :global(html) {
     scroll-padding-top: 70px;
