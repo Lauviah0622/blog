@@ -2,10 +2,24 @@ import React, { useEffect, useState } from 'react'
 
 export default function Toc({ headers }) {
   const [current, setCurrent] = useState('')
+  const lastHeaderSlug = headers.at(-1).slug
+  const firstHeaderSlug = headers.at(0).slug
 
   useEffect(() => {
     const headingObserver = new IntersectionObserver(
       (entries) => {
+       
+        if (
+          window.innerHeight + window.pageYOffset >=
+          document.body.offsetHeight
+        ) {
+          setCurrent(lastHeaderSlug)
+        }
+
+        if (window.pageYOffset === 0) {
+          setCurrent(firstHeaderSlug)
+        }
+
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setCurrent(entry.target.id)

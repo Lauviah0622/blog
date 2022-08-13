@@ -25,7 +25,11 @@ const headers = content.astro?.headers
   <h1 class="title">{content.title}</h1>
   <DateTimeCount date={content.pubDate} content={content.astro.source} />
 </div>
-{content.cover && <img src={content.cover} class="cover" />}
+{content.cover &&
+<div class="cover">
+  <img src={content.cover} />
+</div>
+}
 <!-- <Content> -->
 <div class="article">
   <slot />
@@ -41,8 +45,9 @@ const headers = content.astro?.headers
     right: 0;
   }
 
-
-
+  aside {
+    z-index: 99;
+  }
 
   :global(html) {
     scroll-padding-top: 70px;
@@ -50,7 +55,7 @@ const headers = content.astro?.headers
   }
 
   :global(main.center.align-left) {
-    grid-template-columns: 4fr min(var(--max-width), calc(100% - 64px)) 5fr;
+    grid-template-columns: 5fr min(var(--max-width), calc(100% - 64px)) 6fr;
   }
 
   .title {
@@ -59,16 +64,35 @@ const headers = content.astro?.headers
 
   .cover {
     margin-bottom: 2em;
-    /* width: calc(100% + 10ch); */
-    height: 70vh;
-    aspect-ratio: 16/9;
-    /* width: 75%; */
-    max-height: unset;
-    /* -o-object-fit: cover; */
-    object-fit: contain;
-    grid-column: 1/4;
+    width: 120%;
     justify-self: center;
-    max-width: min(1000px, 100vw);
+
+
+    & img {
+      aspect-ratio: 3/2;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      --shadow-color: 0deg 0% 0%;
+      box-shadow:
+        0.1px 0.5px 0.7px hsl(var(--shadow-color) / 0.04),
+        0.7px 2.2px 3.2px -0.2px hsl(var(--shadow-color) / 0.09),
+        1.4px 4.8px 7px -0.5px hsl(var(--shadow-color) / 0.14),
+        3.1px 10.3px 15px -0.7px hsl(var(--shadow-color) / 0.19);
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .cover {
+      width: 100vw;
+      max-height: auto;
+
+
+      & img {
+        aspect-ratio: 2/3;
+      }
+
+    }
   }
 
   .heading {
