@@ -6,13 +6,15 @@ import DateTimeCount from '~/components/DateTimeCount.astro';
 import TagsList from '~/components/TagsList.astro';
 import Toc from '~/components/Toc/Toc.astro'
 
+const url = new URL(Astro.url.pathname, Astro.site);
 const { content } = Astro.props;
 
+``
 const headers = content.astro?.headers
 
 ---
 
-<Base className="align-left">
+<Base className="align-left" title={content.title} description={content.description} permalink={url.href}>
 <aside>
   {headers &&
   <Toc headers={headers} />}
