@@ -2,7 +2,8 @@
 import Base from '~/layouts/Base.astro';
 import ArchiveItem from '~/components/ArchiveItem.astro';
 
-const { tags, baseUrl } = Astro.props;
+const { tags } = Astro.props;
+const baseUrl = `${Astro.url.pathname}/`
 ---
 
 <style>
@@ -47,8 +48,6 @@ const { tags, baseUrl } = Astro.props;
       width: 95%;
     }
   }
-
-  
 </style>
 
 <Base>

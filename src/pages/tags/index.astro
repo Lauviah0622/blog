@@ -17,7 +17,6 @@ const allTagPosts = sorted.reduce((allTags, post) => {
   return allTags
 }, {})
 
-
 ---
 
-<Tags tags={allTagPosts} baseUrl={Astro.canonicalURL.pathname} />
+<Tags tags={allTagPosts} baseUrl={Astro.url} />
