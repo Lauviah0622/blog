@@ -1,8 +1,9 @@
 ---
 import Base from '~/layouts/Base.astro';
-import PostItem from '~/components/PostItem.astro';
+import Toc from '~/components/Toc/Toc.astro'
+import Epilogue from '~/components/Epilogue.astro';
 
-const { content } = Astro.props;
+const { headings } = Astro.props;
 
 ---
 
@@ -11,16 +12,14 @@ const { content } = Astro.props;
     text-transform: capitalize;
   }
 
-  ul {
-    
-  }
+  ul {}
 </style>
 
-<Base>
+<Base className="align-left" title='Collection' permalink={Astro.url.href}>
+<Toc headings={headings} />
 <h1>Collection</h1>
-
-
 <div class="article">
   <slot />
+  <Epilogue />
 </div>
 </Base>
