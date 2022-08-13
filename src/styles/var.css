@@ -107,6 +107,7 @@ body {
   --color-bg: var(--dark-bg);
   --color-bg-reverse: var(--dark-bg-reverse);
   --color-bg-opacity: var(--dark-bg-opacity);
+  --color-bg-opacity-3: hsla(var(--dark-bg), 0.6);
   --color-bg-secondary: var(--dark-bg-secondary);
   --font-weight-normal: 300;
 }
