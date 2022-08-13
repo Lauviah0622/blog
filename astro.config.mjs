@@ -7,6 +7,7 @@ import react from '@astrojs/react'
 import { h } from 'hastscript'
 import { toString } from 'hast-util-to-string'
 import { fileURLToPath } from 'url'
+import remarkCalcReadingMin from './src/plugins/remarkCalcReadingMin.mjs'
 
 const root = fileURLToPath(new URL('.', import.meta.url))
 
@@ -20,6 +21,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [
+      remarkCalcReadingMin,
       'remark-gfm',
       ['remark-directive', {}],
       ['remark-directive-rehype', {}],
@@ -48,7 +50,6 @@ export default defineConfig({
           },
         },
       ],
-      // [`rehype-figure`, {}],
       [`${root}/src/plugins/imageTrans.mjs`, {}],
       [`${root}/src/plugins/tableWrapper.mjs`, {}],
     ],

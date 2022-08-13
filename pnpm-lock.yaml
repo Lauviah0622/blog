@@ -20,12 +20,14 @@ specifiers:
   hast-util-to-string: ^2.0.0
   hastscript: ^7.0.2
   js-yaml: ^4.1.0
+  mdast-util-to-string: ^3.1.0
   postcss: ^8.4.16
   postcss-custom-media: ^8.0.2
   postcss-import: ^14.1.0
   postcss-nesting: ^10.1.10
   react: ^18.2.0
   react-dom: ^18.2.0
+  reading-time: ^1.5.0
   rehype-autolink-headings: ^6.1.1
   rehype-figure: ^1.0.1
   rehype-highlight: ^5.0.2
@@ -50,6 +52,8 @@ dependencies:
   front-matter: 4.0.2
   gradient-string: 2.0.1
   js-yaml: 4.1.0
+  mdast-util-to-string: 3.1.0
+  reading-time: 1.5.0
   rehype-figure: 1.0.1
   remark-directive: 2.0.1
   remark-directive-rehype: 0.4.0
@@ -3273,6 +3277,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /reading-time/1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
+    dev: false
 
   /recast/0.20.5:
     resolution: {integrity: sha512-E5qICoPoNL4yU0H0NoBDntNB0Q5oMSNh9usFctYniLBluTthi3RsQVBXIJNbApOlvSwW/RGxIuokPcAc59J5fQ==}

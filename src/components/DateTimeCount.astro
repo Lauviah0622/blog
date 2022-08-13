@@ -1,19 +1,10 @@
 ---
 import Date from '~/components/Date.astro';
 
-import wordsCount from '~/utils/wordCount';
-
-
-
-const { date, content } = Astro.props;
-const calReadTime = (content) => {
-  return Math.floor(wordsCount(content) / 350)
-}
-
-const time = calReadTime(content);
-const souldDShowReadTime = time > 1;
-const text = `・${time}min`;
-
+const { date, minutesRead } = Astro.props;
+const ceilMin = Math.ceil(minutesRead)
+const souldDShowReadTime = ceilMin > 1;
+const text = `・${ceilMin}min`;
 
 ---
 

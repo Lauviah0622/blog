@@ -20,7 +20,7 @@ const headers = content.astro?.headers
 <div class="heading">
   <TagsList tags={content.tags} />
   <h1 class="title">{content.title}</h1>
-  <DateTimeCount date={content.pubDate} content={content.astro.source} />
+  <DateTimeCount date={content.pubDate} minutesRead={content.minutesRead} />
 </div>
 {content.cover &&
 <div class="cover">
