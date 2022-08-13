@@ -1,6 +1,7 @@
 ---
 import Base from '~/layouts/Base.astro';
 import ArchiveItem from '~/components/ArchiveItem.astro';
+import metadata from '~/metadata';
 
 const { tags } = Astro.props;
 const baseUrl = `${Astro.url.pathname}/`
@@ -50,7 +51,7 @@ const baseUrl = `${Astro.url.pathname}/`
   }
 </style>
 
-<Base>
+<Base title={metadata.title.tags}>
 <h1>Tags</h1>
 <ul class="tagList">
   {Object.keys(tags).map((tag) => <a href={`${baseUrl}${tag}`}>

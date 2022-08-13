@@ -1,13 +1,15 @@
 ---
 
+import metadata from '~/metadata';
 import '~/styles/style.css';
+
 export interface Props {
   title: string;
   description: string;
 }
 
 const url = new URL(Astro.url.pathname, Astro.site);
-const { title, description } = Astro.props;
+const { title, description = metadata.description } = Astro.props;
 
 ---
 
@@ -32,7 +34,7 @@ const { title, description } = Astro.props;
   <meta property="og:image" content="https://astro.build/social.png?v=1" />
 
   <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={url.href} />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />

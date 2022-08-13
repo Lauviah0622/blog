@@ -3,6 +3,7 @@ import Base from './Base.astro';
 
 import Pagination from '~/components/Pagination/Pagination.astro';
 import ArchiveItem from '~/components/ArchiveItem.astro';
+import metadata from '~/metadata';
 
 const { page, baseUrl } = Astro.props;
 
@@ -14,14 +15,13 @@ const { page, baseUrl } = Astro.props;
     flex-direction: column;
     gap: 1.5rem;
   }
-
 </style>
 
-<Base>
+<Base title={metadata.title.archive}>
 <h1>Archive</h1>
 <ul class="postlist">
   {page.data.map((post) =>
   <ArchiveItem post={post} />)}
 </ul>
-<Pagination page={page} baseUrl={baseUrl}/>
+<Pagination page={page} baseUrl={baseUrl} />
 </Base>

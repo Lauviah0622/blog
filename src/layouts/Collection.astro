@@ -2,6 +2,8 @@
 import Base from '~/layouts/Base.astro';
 import Toc from '~/components/Toc/Toc.astro'
 import Epilogue from '~/components/Epilogue.astro';
+import metadata from '~/metadata';
+
 
 const { headings } = Astro.props;
 
@@ -15,7 +17,7 @@ const { headings } = Astro.props;
   ul {}
 </style>
 
-<Base className="align-left" title='Collection' permalink={Astro.url.href}>
+<Base className="align-left" title={metadata.title.collection}>
 <Toc headings={headings} />
 <h1>Collection</h1>
 <div class="article">

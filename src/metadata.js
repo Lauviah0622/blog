@@ -1,5 +1,6 @@
 export default {
   blogName: 'Apprentice Log',
+  description: 'The log of the apprentice',
   pageSize: {
     posts: 10,
     archive: 20,
@@ -17,4 +18,10 @@ export default {
     collection: '/collection',
     // about: '/about',
   },
+  title: {
+    archive: 'Archive',
+    collection: 'Collection',
+    tips: 'Tips',
+    tags: 'Tags'
+  }
 }

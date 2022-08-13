@@ -6,7 +6,8 @@ import Hamburger from '~/components/Hamburger/Hamburger.astro';
 import css from '~/utils/css'
 import metadata from '~/metadata';
 
-const { className = '', title = metadata.blogName, description } = Astro.props;
+const { className = '', title: pageTitle, description } = Astro.props;
+const title = pageTitle ? `${pageTitle} - ${metadata.blogName}` : metadata.blogName
 const mainClassName = css([className])
 
 ---

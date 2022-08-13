@@ -16,7 +16,7 @@ const { tag, posts } = Astro.props;
   }
 </style>
 
-<Base>
+<Base title={`#${tag}`}>
 <h1 class="tag">{tag}</h1>
 
 <ul class="postlist">
