@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import css from '@utils/css'
+import css from '~/utils/css'
 
 export default function Hamburger({ links }) {
   const [open, setOpen] = useState(false)
@@ -62,7 +62,9 @@ export default function Hamburger({ links }) {
             <a
               href={link}
               key={text}
-              className={css(window.location.pathname === link && 'current-link')}
+              className={css(
+                window.location.pathname === link && 'current-link'
+              )}
             >
               {text}
             </a>
