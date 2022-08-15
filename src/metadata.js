@@ -12,8 +12,8 @@ export default {
 
   navLink: {
     landing: '/',
-    archive: '/archive',
     tips: '/tips',
+    archive: '/archive',
     tags: '/tags',
     collection: '/collection',
     // about: '/about',
