@@ -12,6 +12,7 @@ layout: /src/layouts/Collection.astro
 - 🏃🏽‍♂️[Functional Programming in Javascript](http://reactivex.io/learnrx/)
 - [TypeScript for Functional Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html)
 - [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [mostly-adequate-guide](https://github.com/MostlyAdequate/mostly-adequate-guide) Mostly adequate guide to FP (in javascript)：[中文版](https://jigsawye.gitbooks.io/mostly-adequate-guide/content/)
 
 ### Design patterns
 
@@ -40,6 +41,9 @@ layout: /src/layouts/Collection.astro
 - [Various ways to include comments on your static site](https://darekkay.com/blog/static-site-comments/)
 - [Curiosity](https://curiositystream.com/)：科普版 Netflix
 - [Learning Test-Driven Development](https://www.amazon.com/Learning-Test-Driven-Development-Polyglot-Uncluttered/dp/1098106474)
+- [Land of Lisp](https://nostarch.com/lisp.htm) 很酷的 Lisp 教學
+- [動態特效網站規則 SOP](https://blockstudio.tw/blog/web-animation-sop/)
+- [从图片优化说起](https://cjting.me/2019/07/29/image-optimization/)
 
 ## Books
 - ❓[漫步華爾街](https://www.books.com.tw/products/0010887459?sloc=main)  
