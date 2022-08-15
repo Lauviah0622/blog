@@ -6,7 +6,8 @@ export async function getStaticPaths({ paginate }) {
 
   const PAGE_SIZE = 20
   let allPosts = await Astro.glob('/src/pages/post/*.md');
-  const sortedPage = sort(allPosts)
+  let allTips = await Astro.glob('/src/pages/tip/*.md');
+  const sortedPage = sort([...allPosts, ...allTips])
 
   return paginate(sortedPage, { pageSize: PAGE_SIZE });
 
