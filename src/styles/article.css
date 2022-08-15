@@ -23,7 +23,6 @@
       @media screen and (max-width: 80rem) {
         left: -1.2ch;
       }
-      /* bottom: 0; */
       color: var(--link-color);
 
       &::after {
@@ -89,8 +88,7 @@
     }
   }
 
-  & p ~ ul,
-  & p ~ ol {
+  & p + :is(ul, ol, p) {
     padding-top: 0;
   }
 
@@ -180,17 +178,10 @@
     border-radius: 5px 5px 0 0;
   }
 
-  & .table-container {
-    @nest & + & {
-      /* margin-top: 1.6rem; */
-    }
-  }
 
   & .table-container table {
     table-layout: fixed;
     min-width: 100%;
-    /* transform: translateX(-50%); */
-    /* width: calc(100% + 2 * var(--extrude-size)); */
     border-collapse: collapse;
 
     @nest [data-theme='dark'] & {
@@ -230,7 +221,6 @@
     border: 0.5px solid var(--color-primary);
     padding: 0.7rem 2ch;
     width: min(min-content, 30ch);
-    /* word-break: break-word; */
 
     &:first-of-type {
       border-left-width: 0;
