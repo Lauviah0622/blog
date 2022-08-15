@@ -34,15 +34,16 @@ const {
         "title title"
         "tags tags"
         "summary summary";
+
+        row-gap: .7rem;
     }
   }
 
   h4 {
     grid-area: title;
-    /* font-size: 1.2rem; */
     padding: 0;
     color: var(--color-text);
-
+    align-self: end;
 
   }
 
@@ -53,8 +54,10 @@ const {
   :global(.time) {
     grid-area: time;
     margin: 0;
-    padding: 0 1ch 0 0;
+    padding: 0 1ch 0.3em 0;
     color: var(--color-text-secondary);
+    align-self: end;
+    /* font-size: 1.2rem; */
 
   }
 </style>
