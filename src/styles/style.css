@@ -251,6 +251,14 @@ ul {
     content: '#';
   }
 }
+
+/* fix LA-179 */
+pre .tag {
+  text-transform: unset;
+  &::before {
+    content: none;
+  }
+}
 /* Specific */
 
 article {
