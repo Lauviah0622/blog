@@ -141,5 +141,3 @@ outline 可以在 border 外面再加上邊框。而 `outline` 這個屬性是 `
 這個東西可以應用在哪？請諒小弟才疏學淺…我也不知道，反正就是很酷就對了。不過我們可能可以嘗試更多不同的 CSS 屬性組合，找一些 CSS 數值的 edge case，可能也有相同的效果。
 
 如果有甚麼想法可以多多交流，有錯誤也歡迎在下面指正或者是留言。 Big guy is John，感謝各位收看。
-
-_Originally published at_ [_http://github.com_](https://gist.github.com/1290f33eca120c10ff394ed1218a53cc)_._

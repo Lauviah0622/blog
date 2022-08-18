@@ -12,10 +12,6 @@ const { isCurrent, url } = Astro.props;
     border-bottom: 2px solid var(--color-secondary);
   }
 </style>
-
-<script>
-  
-</script>
   
 <li class={isCurrent ? 'isCurrent' : '' }>
   {Array.isArray(url) ?

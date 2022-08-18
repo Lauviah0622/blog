@@ -275,7 +275,3 @@ template 本身有透過 `<meta>` 來做 [CSP](https://developer.mozilla.org/en-
 - 認真做個 og image
 
 除此之外也還有一些樣式上的 bug 要處理就是。不過總算是有一個自己的平台可以開始累積內容 🙂。
-
-
-
-
