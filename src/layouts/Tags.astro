@@ -1,9 +1,9 @@
 ---
-import Base from '~/layouts/Base.astro';
-import ArchiveItem from '~/components/ArchiveItem.astro';
-import metadata from '~/metadata';
+import Base from '~/layouts/Base.astro'
+import ArchiveItem from '~/components/ArchiveItem.astro'
+import metadata from '~/metadata'
 
-const { tags } = Astro.props;
+const { tags } = Astro.props
 const baseUrl = `${Astro.url.pathname}/`
 ---
 
@@ -14,7 +14,8 @@ const baseUrl = `${Astro.url.pathname}/`
 
   .tagList {
     display: flex;
-    gap: .2rem;
+    gap: 0.2rem;
+    flex-wrap: wrap;
 
     & a:hover {
       text-decoration: none;
@@ -25,11 +26,11 @@ const baseUrl = `${Astro.url.pathname}/`
       margin: 0.3ch;
       padding: 0.3em 0.4em;
       border-radius: 0.3ch;
-      font-size: .9em;
+      font-size: 0.9em;
       color: var(--color-bg);
 
       &:hover {
-        background-color: var(--color-text-secondary)
+        background-color: var(--color-text-secondary);
       }
     }
   }
@@ -52,20 +53,32 @@ const baseUrl = `${Astro.url.pathname}/`
 </style>
 
 <Base title={metadata.title.tags}>
-<h1>Tags</h1>
-<ul class="tagList">
-  {Object.keys(tags).map((tag) => <a href={`${baseUrl}${tag}`}>
-    <li class="tag">{tag}</li>
-  </a>)}
-</ul>
-<div class="postlist">
-  {Object.entries(tags).map(([tag, posts]) => {
-  return (
-  <ul>
-    <h3><a href={`${baseUrl}${tag}`} class="tag tag-link">{tag}</a></h3>
-    {posts.map((post) =>
-    <ArchiveItem post={post} showTags={false} />)}
+  <h1>Tags</h1>
+  <ul class="tagList">
+    {
+      Object.keys(tags).map((tag) => (
+        <a href={`${baseUrl}${tag}`}>
+          <li class="tag">{tag}</li>
+        </a>
+      ))
+    }
   </ul>
-  )})}
-</div>
+  <div class="postlist">
+    {
+      Object.entries(tags).map(([tag, posts]) => {
+        return (
+          <ul>
+            <h3>
+              <a href={`${baseUrl}${tag}`} class="tag tag-link">
+                {tag}
+              </a>
+            </h3>
+            {posts.map((post) => (
+              <ArchiveItem post={post} showTags={false} />
+            ))}
+          </ul>
+        )
+      })
+    }
+  </div>
 </Base>
