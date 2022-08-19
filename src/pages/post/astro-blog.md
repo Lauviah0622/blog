@@ -13,9 +13,7 @@ layout: /src/layouts/Post.astro
 
 對一個前端工程師來說，不論你學的是哪個框架，Astro 會是現代建構靜態網站的好選擇之一。
 
----
-
-沒錯，我又重寫部落格了。
+沒錯，又重寫部落格了。
 
 ## 為何重寫？
 
@@ -380,6 +378,8 @@ Remark 還有 Rehype 有一些（自己覺得並沒有算很多）的 plugin 可
 
 到目前為止，好像提的都是優點，但還是得平衡打擊一下。
 
+### Cons
+
 自己用下來有遇到幾個問題，首先先來提一個或許已經不是問題的問題：不太穩定
 
 ![蠻頻繁釋出小版本更新的，所以要注意 release note](/assets/images/post/20220819_astro-blog_061108.png)  
@@ -388,7 +388,7 @@ Remark 還有 Rehype 有一些（自己覺得並沒有算很多）的 plugin 可
 在最初開發時使用的是 beta 版，在用的時候也沒想太多，但沒想到最後要佈署的時候發布正式版了，API 改動讓自己在興奮到爆炸要佈署前潑了我一桶冷水。
 
 
-另外，因為 `.astro` 檔案需要透過 parser 解析之後再做 bundle。所以會遇到一些再 parser 以及 bundler 上的限制
+另外，因為 `.astro` 檔案需要透過 parser 解析之後再做 bundle。所以會遇到一些 parser 以及 bundler 上的限制
 
 :::info
 Astro 本身是建構在 vite 之上，可以簡單想像成一套非常複雜的 vite config，但當然不單純只是這樣
@@ -412,7 +412,7 @@ const contact = Astro.fetchContent(`*.${lang}.md`);
 
 [^2]:詳細的問題可以看 repo 的 [issue](https://github.com/withastro/astro/issues/1700)
 
-`.astro` file 還有另外一個問題，自己相當依賴 auto format 的功能，雖然 Astro 有提供官方的 Vscode extension，但是再 auto format 的部分還是有點笨...常常 format 出來很奇怪的 indent。
+`.astro` file 還有另外一個問題，自己相當依賴 auto format 的功能，雖然 Astro 有提供官方的 Vscode extension，但是 auto format 的部分還是有點笨...常常 format 出來很奇怪的 indent。
 
 另外，比起成熟的 SSG 框架，像是 Hugo, Hexo, Gatsby 等等，目前 Astro 的生態比較沒有豐富的 start project，如果比較沒有客製化需求的用戶會比較痛苦一點。
 
