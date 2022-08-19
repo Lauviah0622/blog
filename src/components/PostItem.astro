@@ -2,19 +2,9 @@
 import TagsList from '~/components/TagsList.astro'
 import DateTimeCount from '~/components/DateTimeCount.astro'
 
-const { post, showTags = true } = Astro.props;
+const { post, showTags = true } = Astro.props
 
-
-const {
-  title,
-  pubDate,
-  tags,
-  summary,
-  minutesRead
-} = post.frontmatter
-
-
-
+const { title, pubDate, tags, summary, minutesRead } = post.frontmatter
 ---
 
 <style>
@@ -35,7 +25,6 @@ const {
     }
   }
 
-
   h2 {
     padding: 0;
 
@@ -49,15 +38,14 @@ const {
     margin-bottom: 0.5em;
 
     & a:not(:last-of-type) {
-      margin-right: .5ch;
+      margin-right: 0.5ch;
     }
   }
 
-
   :global(.time) {
     font-size: 0.8em;
-    margin: .3em 0 1em 0;
-    color: var(--color-text-primary)
+    margin: 0.3em 0 1em 0;
+    color: var(--color-text-primary);
   }
 
   .summary {
@@ -71,8 +59,7 @@ const {
 
 <li class="postItem">
   <article>
-    {showTags &&
-    <TagsList tags={tags} />}
+    {showTags && <TagsList tags={tags} />}
     <h2>
       <a href={post.url}>
         {title}
