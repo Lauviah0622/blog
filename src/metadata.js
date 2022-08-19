@@ -11,7 +11,7 @@ export default {
   },
 
   navLink: {
-    landing: '/',
+    posts: '/posts',
     tips: '/tips',
     archive: '/archive',
     tags: '/tags',
@@ -22,6 +22,6 @@ export default {
     archive: 'Archive',
     collection: 'Collection',
     tips: 'Tips',
-    tags: 'Tags'
-  }
+    tags: 'Tags',
+  },
 }
