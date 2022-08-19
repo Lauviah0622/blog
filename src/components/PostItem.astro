@@ -10,6 +10,7 @@ const {
   pubDate,
   tags,
   summary,
+  minutesRead
 } = post.frontmatter
 
 
@@ -77,7 +78,7 @@ const {
         {title}
       </a>
     </h2>
-    <DateTimeCount date={pubDate} content={post.rawContent()} />
+    <DateTimeCount date={pubDate} minutesRead={minutesRead} />
     {summary && <p class="summary">{summary}</p>}
   </article>
 </li>
