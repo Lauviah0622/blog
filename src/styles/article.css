@@ -16,6 +16,10 @@
       color: var(--color-text);
     }
 
+    & > a {
+      word-break: break-all;
+    }
+
     & > a:first-child {
       position: absolute;
       left: -1.4ch;
@@ -39,7 +43,7 @@
 
   & a {
     /* --color: var(--color-secondary); */
-    word-break: break-all;
+    word-break: break-word;
     color: var(--link-color);
 
     &::after {
@@ -102,7 +106,7 @@
     margin-top: var(--section-gap);
     margin-bottom: var(--section-gap);
     color: var(--color-text-transparent);
-    opacity: .5;
+    opacity: 0.5;
   }
 
   & figure {
