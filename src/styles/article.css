@@ -109,10 +109,20 @@
     padding: var(--gap-size);
     align-items: center;
 
+    & img {
+      --shadow-color: 0deg 0% 0%;
+      box-shadow: 0.3px 0.5px 0.9px var(--color-text-transparent),
+        1.2px 2.4px 4px var(--color-text-transparent);
+    }
+
     & figcaption {
       color: var(--color-text-secondary);
       font-size: 0.8em;
       margin: 0.8em;
+    }
+
+    @media screen and (max-width: 80rem) {
+      margin: 0;
     }
   }
 
@@ -177,7 +187,6 @@
     transform: translateX(-50%);
     border-radius: 5px 5px 0 0;
   }
-
 
   & .table-container table {
     table-layout: fixed;
