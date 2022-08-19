@@ -32,6 +32,10 @@ layout: /src/layouts/Collection.astro
 
 - [zettelkasten.de](https://zettelkasten.de/posts/overview/)
 
+
+### UI
+- [UI guildline](https://www.uiguideline.com/components)：將常見的 UI component 以 gallery 的方式檢視，也列出各種 design guideline
+- [the component gallery](https://component.gallery/)： 和上面網站差不多，這種東西不就是多多益善嗎？
 ### Misc
 
 - 🏆[The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
