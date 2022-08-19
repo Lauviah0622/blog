@@ -101,6 +101,8 @@
   & hr {
     margin-top: var(--section-gap);
     margin-bottom: var(--section-gap);
+    color: var(--color-text-transparent);
+    opacity: .5;
   }
 
   & figure {
