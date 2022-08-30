@@ -134,5 +134,7 @@ layout: /src/layouts/Collection.astro
 - [Local tunnel](https://theboroer.github.io/localtunnel-www/)：免費（但這種服務有可能免費嗎？不知道是掛在什麼 domain）
 - [ngrok](https://ngrok.com/)：expose 多個 port 需要付費
 
-[^overbuild]：[頂樓加蓋](https://twitter.com/overbuild_io)，由 Denny(工程師)，還有 Affe(PM)主持的 U質節目，也是少數幾乎全部聽完的 podcast
-[^anthonyFu]：[Anthony Fu](https://antfu.me/)
+
+
+[^overbuild]:[頂樓加蓋](https://twitter.com/overbuild_io)，由 Denny(工程師)，還有 Affe(PM)主持的 U質節目，也是少數幾乎全部聽完的 podcast
+[^anthonyFu]:[Anthony Fu](https://antfu.me/)
