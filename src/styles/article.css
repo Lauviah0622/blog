@@ -45,6 +45,7 @@
     /* --color: var(--color-secondary); */
     word-break: break-word;
     color: var(--link-color);
+    cursor: pointer;
 
     &::after {
       --size: 0.6em;
