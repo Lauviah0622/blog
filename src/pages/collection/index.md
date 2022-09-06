@@ -2,7 +2,7 @@
 layout: /src/layouts/Collection.astro
 ---
 
-> 這裡是藏經閣，先收再說，然後放到長灰塵的東西
+> 這裡是藏經閣：先收藏，再放到長灰塵
 
 # Resources
 
@@ -19,6 +19,7 @@ layout: /src/layouts/Collection.astro
 
 - ❓[Refactoring Guru](https://refactoring.guru/design-patterns)
 - [patterns.dev](https://www.patterns.dev/)
+
 
 
 
@@ -43,6 +44,7 @@ layout: /src/layouts/Collection.astro
 - [Various ways to include comments on your static site](https://darekkay.com/blog/static-site-comments/)
 - [Curiosity](https://curiositystream.com/)：科普版 Netflix
 - [Learning Test-Driven Development](https://www.amazon.com/Learning-Test-Driven-Development-Polyglot-Uncluttered/dp/1098106474)
+- [JavaScript Patterns](https://stackblitz.com/@lydiahallie/collections/javascript-patterns)：[Lydia Hallie](https://twitter.com/lydiahallie) 蒐集的 Javascript Patterns，包含 JS 的 Design pattern, nodejs, React 等等
 
 
 
@@ -91,6 +93,8 @@ layout: /src/layouts/Collection.astro
 - [Giscuss](https://giscus.app/)：類似 utterance，只是使用 github discussion 而不是 github issue
 - [Linaria](https://github.com/callstack/linaria)：底層使用 css variable 的 css-in-js 工具
 - [Statly](https://stately.ai/)：透過 GUI 的操作可以直接改動 state machine 的設定，但基本上是建構在 [Xstate](https://xstate.js.org/) 上面的
+- [Licecap](https://github.com/justinfrankel/licecap)：開源螢幕錄影工具，會用 GIF 形式存下來，稍微陽春一點，但很可靠
+- [Kap](https://github.com/wulkano/Kap)：一樣是 Mac 開源螢幕錄影工具，但主要用 electron 來寫的，然後 UI 比較漂亮 XD
 #### Monorepo
 
 - [Lerna](https://lerna.js.org/)
@@ -134,7 +138,5 @@ layout: /src/layouts/Collection.astro
 - [Local tunnel](https://theboroer.github.io/localtunnel-www/)：免費（但這種服務有可能免費嗎？不知道是掛在什麼 domain）
 - [ngrok](https://ngrok.com/)：expose 多個 port 需要付費
 
-
-
-[^overbuild]:[頂樓加蓋](https://twitter.com/overbuild_io)，由 Denny(工程師)，還有 Affe(PM)主持的 U質節目，也是少數幾乎全部聽完的 podcast
-[^anthonyFu]:[Anthony Fu](https://antfu.me/)
+[^overbuild]：[頂樓加蓋](https://twitter.com/overbuild_io)，由 Denny(工程師)，還有 Affe(PM)主持的 U質節目，也是少數幾乎全部聽完的 podcast
+[^anthonyFu]：[Anthony Fu](https://antfu.me/)
