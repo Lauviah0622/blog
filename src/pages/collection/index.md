@@ -2,7 +2,7 @@
 layout: /src/layouts/Collection.astro
 ---
 
-> 這裡是藏經閣：先收藏，再放到長灰塵
+> 這裡是藏經閣：先收藏，然後再放到長灰塵
 
 # Resources
 
@@ -19,6 +19,7 @@ layout: /src/layouts/Collection.astro
 
 - ❓[Refactoring Guru](https://refactoring.guru/design-patterns)
 - [patterns.dev](https://www.patterns.dev/)
+- [Scott Wlaschin - Talk Session: Domain Modeling Made Functional](https://www.youtube.com/watch?v=PLFl95c-IiU)：functional programing 結合 Domain Driven Develope，內容蠻淺顯易懂的。這樣的模式在和非工程師交流也可以順利的溝通
 
 
 
@@ -27,12 +28,17 @@ layout: /src/layouts/Collection.astro
 
 - 🏆[Javascript: the first year](https://dl.acm.org/doi/10.1145/3386327)  
   [中文版](https://cn.history.js.org/)在此，JS 二十年的歷史都在這了
+- [Exploring ES6](https://exploringjs.com/es6.html)
 ## Typescript 
 - [Type challenges](https://github.com/type-challenges/type-challenges)
 
 
 ## Zettelkasten
 - [zettelkasten.de](https://zettelkasten.de/posts/overview/)
+
+## Backend
+
+- [architecturenotes](https://architecturenotes.co/)：部落格中有一些後端架構設計相關的文章，每一篇都圖文並茂
 
 
 ## Misc
@@ -95,6 +101,15 @@ layout: /src/layouts/Collection.astro
 - [Statly](https://stately.ai/)：透過 GUI 的操作可以直接改動 state machine 的設定，但基本上是建構在 [Xstate](https://xstate.js.org/) 上面的
 - [Licecap](https://github.com/justinfrankel/licecap)：開源螢幕錄影工具，會用 GIF 形式存下來，稍微陽春一點，但很可靠
 - [Kap](https://github.com/wulkano/Kap)：一樣是 Mac 開源螢幕錄影工具，但主要用 electron 來寫的，然後 UI 比較漂亮 XD
+- [Lyra.js](https://docs.lyrajs.io/)：full-text search engine，可以用在部落格的搜尋
+- [F2](https://github.com/ayoisaiah/f2)：cli batch renaming tool，用 go 寫的
+- [starship](https://github.com/starship/starship)：定位類似於 oh-my-zsh，也是 command-line prompt，但自己用起來 setting 比較簡單。
+
+
+#### Code Editor Library
+- [CodeMirror](https://codemirror.net/)：一款比較簡單的編輯器，最有名的應用是 google devtool 就使用 CodeMirror
+- [Monaco](https://github.com/microsoft/monaco-editor)：VScode 使用的 code editor，優點是在 intellisense 方面功能豐富
+- 
 #### Monorepo
 
 - [Lerna](https://lerna.js.org/)
