@@ -1,27 +1,31 @@
 ---
-import Base from '~/layouts/Base.astro';
+import Base from '~/layouts/Base.astro'
 import Toc from '~/components/Toc/Toc.astro'
-import Epilogue from '~/components/Epilogue.astro';
-import metadata from '~/metadata';
+import Epilogue from '~/components/Epilogue.astro'
+import metadata from '~/metadata'
+import Date from '~/components/Date.astro'
 
-
-const { headings } = Astro.props;
-
+const { headings, updateDate, pubDate } = Astro.props
 ---
 
 <style>
   h1 {
     text-transform: capitalize;
   }
-
-  ul {}
 </style>
 
 <Base className="align-left" title={metadata.title.collection}>
-<Toc headings={headings} />
-<h1>Collection</h1>
-<div class="article">
-  <slot />
-  <Epilogue />
-</div>
+  <Toc headings={headings} />
+  <h1>Collection</h1>
+  <div class="time">
+    Starting from <Date date={pubDate} naked />, and last updated on <Date
+      date={updateDate}
+      naked
+    />
+  </div>
+
+  <div class="article">
+    <slot />
+    <Epilogue />
+  </div>
 </Base>
