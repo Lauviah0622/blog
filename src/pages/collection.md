@@ -1,21 +1,24 @@
 ---
 layout: /src/layouts/Collection.astro
----
+pubDate: 2022.8.12
+updateData: 2022.09.17
 
+---
 > 這裡是藏經閣：先收藏，然後再放到長灰塵
 
-# Resources
+
+## Resources
 
 
 
-## Functional programing
+### Functional programing
 
 - ❓[Introduction · 函数式编程指北](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 - 🏃🏽‍♂️[Functional Programming in Javascript](http://reactivex.io/learnrx/)
 - [TypeScript for Functional Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html)
 - [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 
-## Design patterns
+### Design patterns
 
 - ❓[Refactoring Guru](https://refactoring.guru/design-patterns)
 - [patterns.dev](https://www.patterns.dev/)
@@ -24,24 +27,24 @@ layout: /src/layouts/Collection.astro
 
 
 
-## Javascript
+### Javascript
 
 - 🏆[Javascript: the first year](https://dl.acm.org/doi/10.1145/3386327)  
   [中文版](https://cn.history.js.org/)在此，JS 二十年的歷史都在這了
 - [Exploring ES6](https://exploringjs.com/es6.html)
-## Typescript 
+### Typescript 
 - [Type challenges](https://github.com/type-challenges/type-challenges)
 
 
-## Zettelkasten
+### Zettelkasten
 - [zettelkasten.de](https://zettelkasten.de/posts/overview/)
 
-## Backend
+### Backend
 
 - [architecturenotes](https://architecturenotes.co/)：部落格中有一些後端架構設計相關的文章，每一篇都圖文並茂
 
 
-## Misc
+### Misc
 
 - 🏆[The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [Build Your Own X](https://build-your-own-x.vercel.app/)
@@ -57,7 +60,7 @@ layout: /src/layouts/Collection.astro
 
 ---
 
-# Books
+## Books
 - ❓[漫步華爾街](https://www.books.com.tw/products/0010887459?sloc=main)  
   在 podcast 頂樓加蓋[^overbuild]聽到有人推薦他們這本書作為投資的起手式，但是他們更推薦下面這本
 - ❓[簡單致富](https://www.books.com.tw/products/0010899661)  
@@ -74,7 +77,7 @@ layout: /src/layouts/Collection.astro
 
 ---
 
-# Utils 
+## Utils 
 
 - [Mirage JS](https://miragejs.com/)： An API mocking library for frontend developers
 - [wireshark](https://www.wireshark.org/)：監聽 Network Protocol 的工具
