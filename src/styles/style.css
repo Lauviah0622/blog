@@ -238,6 +238,8 @@ body {
 
 .time {
   font-size: 0.9em;
+  font-family: var(--font-family-serif);
+    white-space: nowrap;
 }
 
 ul {

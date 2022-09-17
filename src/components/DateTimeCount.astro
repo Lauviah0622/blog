@@ -1,19 +1,11 @@
 ---
-import Date from '~/components/Date.astro';
+import Date from '~/components/Date.astro'
 
-const { date, minutesRead } = Astro.props;
+const { date, minutesRead } = Astro.props
 const ceilMin = Math.ceil(minutesRead)
-const souldDShowReadTime = ceilMin > 1;
-const text = `・${ceilMin}min`;
-
+const souldDShowReadTime = ceilMin > 1
+const text = `・${ceilMin}min`
 ---
-
-<style>
-  .time {
-    font-family: var(--font-family-serif);
-    white-space: nowrap;
-  }
-</style>
 
 <div class="time">
   <Date date={date} naked={true} />
