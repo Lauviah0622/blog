@@ -16,6 +16,12 @@
     var(--primary-saturation),
     var(--primary-light)
   );
+  --light-primary-transparent: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    var(--primary-light),
+    60%
+  );
   --light-secondary: hsl(
     var(--secondary-hue),
     var(--secondary-saturation),
@@ -38,6 +44,12 @@
     var(--primary-hue),
     var(--primary-saturation),
     var(--primary-light)
+  );
+  --dark-primary-transparent: hsl(
+    var(--primary-hue),
+    var(--primary-saturation),
+    var(--primary-light),
+    60%
   );
   --dark-secondary: hsl(var(--secondary-hue), var(--secondary-saturation), 60%);
   --dark-bg: hsl(var(--primary-hue), 5%, 10%);
@@ -75,6 +87,7 @@
 
 body {
   --color-primary: var(--light-primary);
+  --color-primary-transparent: var(--light-primary-transparent);
   --color-secondary: var(--light-secondary);
   --color-text: var(--light-text);
   --color-text-transparent: var(--light-text-transparent);
@@ -99,6 +112,7 @@ body {
 
 [data-theme='dark'] body {
   --color-primary: var(--dark-primary);
+  --color-primary-transparent: var(--dark-primary-transparent);
   --color-secondary: var(--dark-secondary);
   --color-text: var(--dark-text);
   --color-text-transparent: var(--dark-text-transparent);
