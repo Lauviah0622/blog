@@ -7,7 +7,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "import": "node ./scripts/loadPosts.mjs"
+    "import": "node ./scripts/import.mjs"
   },
   "devDependencies": {
     "@astrojs/partytown": "^0.1.9",
