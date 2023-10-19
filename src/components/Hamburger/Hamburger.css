@@ -23,7 +23,6 @@
     7.2px 14.2px 22.4px -0.6px hsl(var(--shadow-color) / 0.15);
   overflow: hidden;
   transform: scale(1);
-  /* visibility: visible; */
   transition: transform 0.2s;
 
   &.hide {
@@ -42,8 +41,12 @@
   /* background-color: var(--color-primary); */
   top: 50%;
   left: 50%;
-  transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
+  
+  
   transform-origin: center;
+  @media (prefers-reduced-motion: no-preference) { 
+    transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
+  }
 }
 
 .hamburger__icon .top {
@@ -79,15 +82,14 @@
   width: 100%;
   background-color: var(--color-bg-opacity);
   overflow: hidden;
-  transition: 0.2s;
   opacity: 0;
   transform: translateY(15vh);
   z-index: 99;
   align-content: end;
-  /* pointer-events: none; */
-}
 
-.hamburger__menu {
+  @media (prefers-reduced-motion: no-preference) {
+    transition: 0.2s;
+  }
 }
 
 .hamburger__menu--open {
