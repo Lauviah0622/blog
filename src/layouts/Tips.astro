@@ -1,20 +1,18 @@
 ---
-import Base from './Base.astro';
-import Pagination from '~/components/Pagination/Pagination.astro';
-import TipItem from '~/components/TipItem/TipItem.astro';
-import metadata from '~/metadata';
+import Base from './Base.astro'
+import Pagination from '~/components/Pagination/Pagination.astro'
+import TipItem from '~/components/TipItem/TipItem.astro'
+import metadata from '~/metadata'
 
-const { page, baseUrl } = Astro.props;
-
+const { page, baseUrl } = Astro.props
 ---
 
 <Base className="wider" title={metadata.title.tips}>
-<h1>Tips</h1>
-<ul class="tipsList postlist">
-  {page.data.map((post) =>
-  <TipItem post={post} />)}
-</ul>
-<Pagination page={page} baseUrl={baseUrl} />
+  <h1>Tips</h1>
+  <ul class="tipsList postlist">
+    {page.data.map((post) => <TipItem post={post} />)}
+  </ul>
+  <Pagination page={page} baseUrl={baseUrl} />
 </Base>
 
 <style>

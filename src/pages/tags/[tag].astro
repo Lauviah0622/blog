@@ -1,42 +1,39 @@
 ---
-import Tag from '~/layouts/Tag.astro';
+import Tag from '~/layouts/Tag.astro'
 import metadata from '~/metadata'
 import sort from '~/utils/sortPosts'
 
 export async function getStaticPaths({ paginate }) {
-  let allPosts = await Astro.glob('/src/pages/post/*.md');
+  let allPosts = await Astro.glob('/src/pages/post/*.md')
   const sortedPosts = sort(allPosts)
 
   const allTagPosts = sortedPosts.reduce((allTags, post) => {
     const tags = post.frontmatter.tags
-    tags.forEach(tag => {
+    tags.forEach((tag) => {
       if (allTags?.[tag]) {
         allTags[tag].push(post)
       } else {
         allTags[tag] = [post]
       }
-    });
+    })
     return allTags
   }, {})
 
   const paths = Object.entries(allTagPosts).map(([tag, posts]) => {
     return {
       params: {
-        tag
+        tag,
       },
       props: {
-        tag, posts
-      }
+        tag,
+        posts,
+      },
     }
   })
   return paths
-
 }
 
-
-const { tag, posts } = Astro.props;
-
-
+const { tag, posts } = Astro.props
 ---
 
 <Tag tag={tag} posts={posts} />

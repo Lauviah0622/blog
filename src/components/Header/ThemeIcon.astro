@@ -2,7 +2,7 @@
 ---
 
 <style is:global>
-  @custom-media --motionOK (prefers-reduced-motion: no-preference);
+  /* @custom-media --motionOK (prefers-reduced-motion: no-preference); */
 
 
   .sun-and-moon {
@@ -56,11 +56,7 @@
       }
     }
 
-    @media (--motionOK) {
-      /* & :is(.moon, .sun, .sub-beams) {
-        
-      } */
-
+    @media (prefers-reduced-motion: no-preference) {
       &>.sun {
         transition: transform .5s var(--ease-elastic-3);
       }

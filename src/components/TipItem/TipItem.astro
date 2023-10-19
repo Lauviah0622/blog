@@ -29,7 +29,7 @@ const {
     background-color: var(--color-bg-secondary);
     outline: 2px solid transparent;
     cursor: pointer;
-    transition: outline .2s;
+    
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -38,6 +38,10 @@ const {
     &:hover {
       outline: 2px solid var(--color-secondary);
 
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: outline .2s;
     }
   }
 

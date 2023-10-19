@@ -1,17 +1,14 @@
 ---
-import Base from './Base.astro';
-import Pagination from '~/components/Pagination/Pagination.astro';
-import PostItem from '~/components/PostItem.astro';
+import Base from './Base.astro'
+import Pagination from '~/components/Pagination/Pagination.astro'
+import PostItem from '~/components/PostItem.astro'
 
-const { page, baseUrl } = Astro.props;
-
+const { page, baseUrl } = Astro.props
 ---
 
 <Base>
-
-<ul class="postlist">
-  {page.data.map((post) =>
-  <PostItem post={post}/>)}
-</ul>
-<Pagination page={page} baseUrl={baseUrl} />
+  <ul class="postlist">
+    {page.data.map((post) => <PostItem post={post} />)}
+  </ul>
+  <Pagination page={page} baseUrl={baseUrl} />
 </Base>

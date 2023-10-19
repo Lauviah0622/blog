@@ -1,31 +1,29 @@
 ---
-import BaseHead from '~/components/BaseHead.astro';
-import Header from '~/components/Header/Header.astro';
-import Footer from '~/components/Footer/Footer.astro';
-import Hamburger from '~/components/Hamburger/Hamburger.astro';
+import BaseHead from '~/components/BaseHead.astro'
+import Header from '~/components/Header/Header.astro'
+import Footer from '~/components/Footer/Footer.astro'
+import Hamburger from '~/components/Hamburger/Hamburger.astro'
 import css from '~/utils/css'
-import metadata from '~/metadata';
+import metadata from '~/metadata'
 
-const { className = '', title: pageTitle, description } = Astro.props;
-const title = pageTitle ? `${pageTitle} - ${metadata.blogName}` : metadata.blogName
+const { className = '', title: pageTitle, description } = Astro.props
+const title = pageTitle
+  ? `${pageTitle} - ${metadata.blogName}`
+  : metadata.blogName
 const mainClassName = css([className])
-
 ---
 
 <html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
 
-
-<head>
-  <BaseHead title={title} description={description} />
-</head>
-
-<body>
-  <Hamburger />
-  <Header />
-  <main class={css('center', mainClassName )}>
-    <slot />
-  </main>
-  <Footer />
-</body>
-
+  <body>
+    <Hamburger />
+    <Header />
+    <main class={css('center', mainClassName)}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

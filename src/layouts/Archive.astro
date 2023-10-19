@@ -1,12 +1,11 @@
 ---
-import Base from './Base.astro';
+import Base from './Base.astro'
 
-import Pagination from '~/components/Pagination/Pagination.astro';
-import ArchiveItem from '~/components/ArchiveItem.astro';
-import metadata from '~/metadata';
+import Pagination from '~/components/Pagination/Pagination.astro'
+import ArchiveItem from '~/components/ArchiveItem.astro'
+import metadata from '~/metadata'
 
-const { page, baseUrl } = Astro.props;
-
+const { page, baseUrl } = Astro.props
 ---
 
 <style>
@@ -22,10 +21,9 @@ const { page, baseUrl } = Astro.props;
 </style>
 
 <Base title={metadata.title.archive}>
-<h1>Archive</h1>
-<ul class="postlist">
-  {page.data.map((post) =>
-  <ArchiveItem post={post} />)}
-</ul>
-<Pagination page={page} baseUrl={baseUrl} />
+  <h1>Archive</h1>
+  <ul class="postlist">
+    {page.data.map((post) => <ArchiveItem post={post} />)}
+  </ul>
+  <Pagination page={page} baseUrl={baseUrl} />
 </Base>

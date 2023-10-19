@@ -1,26 +1,19 @@
 ---
-import Base from '~/layouts/Base.astro';
-import PostItem from '~/components/PostItem.astro';
+import Base from '~/layouts/Base.astro'
+import PostItem from '~/components/PostItem.astro'
 
-const { tag, posts } = Astro.props;
-
+const { tag, posts } = Astro.props
 ---
 
 <style>
   h1 {
     text-transform: capitalize;
   }
-
-  ul {
-    
-  }
 </style>
 
 <Base title={`#${tag}`}>
-<h1 class="tag">{tag}</h1>
-
-<ul class="postlist">
-  {posts.map((post) =>
-  <PostItem post={post} showTags={false} />)}
-</ul>
+  <h1 class="tag">{tag}</h1>
+  <ul class="postlist">
+    {posts.map((post) => <PostItem post={post} showTags={false} />)}
+  </ul>
 </Base>

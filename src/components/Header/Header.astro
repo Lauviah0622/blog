@@ -72,7 +72,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '')
       text-transform: capitalize;
       text-decoration: underline;
       text-decoration-thickness: 2px;
-      transition: text-decoration-color .2s;
+      
       text-decoration-color: transparent;
 
       @nest &.current,
@@ -81,6 +81,10 @@ const pathname = Astro.url.pathname.replace(/\/$/, '')
         text-decoration-color: var(--color-secondary);
         text-decoration-skip-ink: none;
         text-decoration-thickness: 3px;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: text-decoration-color .2s;
       }
     }
   }

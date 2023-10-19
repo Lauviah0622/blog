@@ -2,7 +2,7 @@
 import Tags from '~/layouts/Tags.astro'
 import sort from '~/utils/sortPosts'
 
-let allPosts = await Astro.glob('/src/pages/post/*.md');
+let allPosts = await Astro.glob('/src/pages/post/*.md')
 const sorted = sort(allPosts)
 
 const allTagPosts = sorted.reduce((allTags, post) => {
@@ -13,10 +13,9 @@ const allTagPosts = sorted.reduce((allTags, post) => {
     } else {
       allTags[tag] = [post]
     }
-  });
+  })
   return allTags
 }, {})
-
 ---
 
 <Tags tags={allTagPosts} baseUrl={Astro.url} />
