@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^0.2.2",
+    "@supabase/supabase-js": "^2.38.2",
     "@types/node": "^18.7.1",
     "cli-table3": "^0.6.2",
     "commander": "^9.4.0",
