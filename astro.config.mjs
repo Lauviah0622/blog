@@ -9,6 +9,8 @@ import { toString } from 'hast-util-to-string'
 import { fileURLToPath } from 'url'
 import remarkCalcReadingMin from './src/plugins/remarkCalcReadingMin.mjs'
 
+import nodejs from '@astrojs/node'
+
 const root = fileURLToPath(new URL('.', import.meta.url))
 
 const isDev = process.env.DEV
@@ -18,6 +20,10 @@ const site =
     : process.env.SITE ?? 'http://localhost:3000'
 
 export default defineConfig({
+  output: 'hybrid',
+  adapter: nodejs({
+    mode: 'standalone',
+  }),
   integrations: [sitemap(), react()],
   site,
   markdown: {
