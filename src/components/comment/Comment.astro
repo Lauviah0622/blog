@@ -1,0 +1,37 @@
+---
+type props = {
+  user_name: string
+  email?: string
+  created_at: string
+}
+
+const { user_name, email, created_at } = Astro.props
+
+const title = email ? `${user_name} <${email}\>` : user_name
+---
+
+<style>
+  .container {
+    border-bottom: 2px var(--color-primary-transparent) solid;
+  }
+
+  .title {
+    color: var(--color-text-secondary);
+  }
+
+  .content {
+    padding-top: 0;
+  }
+
+  .time {
+    text-align: right;
+    color: var(--color-text-secondary);
+  }
+</style>
+<div class="container">
+  <h5 class="title">{title}</h5>
+  <p class="content">
+    <slot />
+  </p>
+  <h6 class="time">{created_at}</h6>
+</div>

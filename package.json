@@ -1,6 +1,9 @@
 {
   "name": "@example/blog",
   "version": "0.0.1",
+  "engines": {
+    "node": "^19.0.0"
+  },
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -48,6 +51,7 @@
     "front-matter": "^4.0.2",
     "gradient-string": "^2.0.1",
     "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mdast-util-to-string": "^3.1.0",
     "reading-time": "^1.5.0",
     "rehype-figure": "^1.0.1",

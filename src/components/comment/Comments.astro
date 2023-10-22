@@ -1,0 +1,49 @@
+---
+import { PostComment } from './Comment'
+import supabase from '~/api/supabase'
+import { Key } from '~/api/key'
+import Comment from './Comment.astro'
+
+const matchPathLastString = /[\w-]+$/
+// 這個 match 是錯的...因為可能會有 # anchor
+const match = Astro.url.pathname.match(matchPathLastString)
+const [slug] = match
+
+const { data: comments, error } = await supabase
+  .from('Comments')
+  .select()
+  .eq('slug', slug)
+
+const key = await new Key().init()
+---
+
+<style>
+  .comments {
+    border-top: solid 1px var(--color-text);
+  }
+</style>
+
+{
+  !error && (
+    <div class="article comments">
+      <h2 id="comment">
+        Comments
+        <a href="#comments">#</a>
+      </h2>
+      <div>
+        {comments.map(({ content, email, user_name, created_at }) => (
+          <Comment
+            user_name={user_name}
+            email={email}
+            created_at={new Date(created_at).toLocaleString()}
+          >
+            {content}
+          </Comment>
+        ))}
+      </div>
+      <PostComment client:visible token={key.createJwt({ slug })} />
+    </div>
+  )
+}
+<!-- TODO error UI-->
+{error && 'error'}

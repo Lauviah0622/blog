@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro'
+
+import { Comment } from '../components/comment/Comment'
+import supabase from '~/api/supabase'
+import { Key } from '~/api/key'
+
+const matchPathLastString = /[\w-]+$/
+// 這個 match 是錯的...因為可能會有 # anchor
+const match = Astro.url.pathname.match(matchPathLastString)
+const [slug] = match
+
+const { data: comments, error } = await supabase
+  .from('Comments')
+  .select()
+  .eq('slug', slug)
+
+const key = await new Key().init()
+// <!-- error handle? -->
+// 獨立出一個 component 然後用 isError 的 tag，如果 error 就
+// 1. 顯示 error UI
+// 2. 通知某個 monitor 之類的
+
+// 改成 JWT token
+
+// 如果 LeaveComment 已經 expired 怎麼辦？ => 請他重新整理 => 或者 UI 重新整理
+console.log(slug)
+---
+
+<style></style>
+<Base>
+  <h3>Comment</h3>
+  <div>
+    {
+      comments.map(({ content, email, user_name }) => (
+        <>
+          <div>
+            <p>{user_name}</p>
+            <p>{email}</p>
+            <p>{content}</p>
+          </div>
+          <br />
+        </>
+      ))
+    }
+  </div>
+  <hr />
+  <div>
+    <Comment client:only="react" token={key.createJwt({ slug })} />
+  </div>
+</Base>
+ ~/api/key
+../components/comment/Comment
