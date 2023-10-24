@@ -36,6 +36,9 @@ export const GET: APIRoute = async () => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+
+    console.log('POST /comment');
+    
     const matchJWT = /^Bearer ((?:\.?(?:[A-Za-z0-9-_]+)){3})$/m
     const match = request.headers.get('Authorization').match(matchJWT)
 
@@ -74,10 +77,18 @@ export const POST: APIRoute = async ({ request }) => {
 
     const responseBody = data
 
-    return new Response(JSON.stringify(responseBody), { status: 200 })
+    return new Response(JSON.stringify(responseBody), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
   } catch (err) {
     return new Response(JSON.stringify({ message: err.message }), {
       status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
   }
 }

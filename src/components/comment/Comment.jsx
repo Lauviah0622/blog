@@ -42,15 +42,16 @@ export function PostComment({ token }) {
               body[key] = value
             }
 
-            const res = await fetch('http://localhost:4321/api/comment', {
+            const res = await fetch('/api/comment', {
               method: 'POST',
               body: JSON.stringify(body),
               headers: {
                 Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
               },
             })
             setIsLoading(false)
-            location.reload()
+            // location.reload()
           }}
         >
           {isLoading ? 'loading...' : 'submit'}

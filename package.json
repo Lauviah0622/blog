@@ -1,6 +1,6 @@
 {
-  "name": "@example/blog",
-  "version": "0.0.1",
+  "name": "@lavi/blog",
+  "version": "1.1.1",
   "engines": {
     "node": "^18.0.0"
   },
@@ -43,6 +43,7 @@
   "dependencies": {
     "@astrojs/node": "^6.0.3",
     "@astrojs/rss": "^3.0.0",
+    "@astrojs/vercel": "^5.0.2",
     "@supabase/supabase-js": "^2.38.2",
     "@types/node": "^18.7.1",
     "cli-table3": "^0.6.2",
