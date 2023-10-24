@@ -8,7 +8,7 @@ import { Key } from '~/api/key'
 const matchPathLastString = /[\w-]+$/
 // 這個 match 是錯的...因為可能會有 # anchor
 const match = Astro.url.pathname.match(matchPathLastString)
-const [slug] = match
+const [slug] = match ?? []
 
 const { data: comments, error } = await supabase
   .from('Comments')
