@@ -14,7 +14,7 @@ const items = [...Object.values(posts), ...Object.values(tips)]
     return dayjs(dateA).isAfter(dayjs(dateB)) ? -1 : 1
   })
 
-export const get = () =>
+export const GET = () =>
   rss({
     // `<title>` field in output xml
     title: 'Apprentice :og',
