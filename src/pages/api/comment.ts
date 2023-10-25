@@ -36,9 +36,8 @@ export const GET: APIRoute = async () => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    console.log('POST /comment')
 
-    console.log('POST /comment');
-    
     const matchJWT = /^Bearer ((?:\.?(?:[A-Za-z0-9-_]+)){3})$/m
     const match = request.headers.get('Authorization').match(matchJWT)
 
@@ -91,4 +90,34 @@ export const POST: APIRoute = async ({ request }) => {
       },
     })
   }
+}
+
+export default async function handler(request: Request) {
+  const urlParams = new URL(request.url).searchParams
+  const query = Object.fromEntries(urlParams)
+  const cookies = request.headers.get('cookie')
+  let body
+  try {
+    body = await request.json()
+  } catch (e) {
+    body = null
+  }
+
+  return new Response(
+    JSON.stringify({
+      body,
+      query,
+      cookies,
+    }),
+    {
+      status: 200,
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
+}
+
+export const config = {
+  runtime: 'edge',
 }
