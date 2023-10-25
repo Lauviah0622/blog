@@ -25,7 +25,7 @@ console.log('site', site)
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid',
+  output: 'server',
   adapter: vercel(),
   integrations: [sitemap(), react()],
   site,
