@@ -11,12 +11,7 @@ type Body = {
 const matchEmail =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-const matchUsername = /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/
-
-const checkUserName = (input: string | undefined) => {
-  if (!input) return false
-  return /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/.exec(input) && input.length <= 64
-}
+const matchUsername = /[_a-zA-Z0-9-]*/
 
 export const GET: APIRoute = async () => {
   try {
@@ -75,7 +70,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const responseBody = data
-
     return new Response(JSON.stringify(responseBody), {
       status: 200,
       headers: {
@@ -90,34 +84,4 @@ export const POST: APIRoute = async ({ request }) => {
       },
     })
   }
-}
-
-export default async function handler(request: Request) {
-  const urlParams = new URL(request.url).searchParams
-  const query = Object.fromEntries(urlParams)
-  const cookies = request.headers.get('cookie')
-  let body
-  try {
-    body = await request.json()
-  } catch (e) {
-    body = null
-  }
-
-  return new Response(
-    JSON.stringify({
-      body,
-      query,
-      cookies,
-    }),
-    {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
-    }
-  )
-}
-
-export const config = {
-  runtime: 'edge',
 }

@@ -51,7 +51,7 @@ export function PostComment({ token }) {
               },
             })
             setIsLoading(false)
-            // location.reload()
+            location.reload()
           }}
         >
           {isLoading ? 'loading...' : 'submit'}
