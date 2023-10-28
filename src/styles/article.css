@@ -41,8 +41,6 @@
     }
   }
 
-  
-
   & a {
     word-break: break-word;
     color: var(--link-color);
@@ -125,6 +123,7 @@
     & img {
       box-shadow: 0px 0px 4px var(--color-text-transparent),
         0px 0px 8px var(--color-text-transparent);
+      border-radius: 10px;
     }
 
     & figcaption {

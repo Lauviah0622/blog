@@ -1,6 +1,7 @@
 ---
 import HomePage from '~/layouts/HomePage.astro'
 
+export const prerender = true;
 export async function getStaticPaths({ paginate }) {
   const pageSize = 10
   let allPosts = await Astro.glob('/src/pages/post/*.md')

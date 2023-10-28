@@ -1,0 +1,313 @@
+---
+import Layout from './Layout.astro'
+
+const { token } = Astro.props
+---
+
+<style>
+  .create {
+    margin-block: 1em;
+    border-radius: 1em;
+    background: var(--color-bg-secondary);
+
+    &:focus-within {
+      box-shadow: 0 0 2px 2px #ffffff33;
+    }
+    & :global(.container) {
+      border-bottom: unset;
+    }
+  }
+
+  input,
+  textarea,
+  button {
+    color: inherit;
+    background-color: transparent;
+    border-style: unset;
+
+    &:focus-visible {
+      outline: unset;
+    }
+
+    &[value=''] {
+      color: var(--color-text-transparent);
+    }
+  }
+
+  input {
+    --under-line-color: var(--color-text-transparent);
+    border-bottom: 1px solid var(--under-line-color);
+
+    &:focus-visible {
+      --under-line-color: var(--color-secondary);
+    }
+
+    &:placeholder-shown {
+      color: var(--color-text-reverse);
+    }
+  }
+
+  .name {
+    display: inline-flex;
+    height: min-content;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .content {
+    margin-block: 1em;
+    &:has(textarea:focus) {
+      outline: 0.5px solid var(--color-secondary);
+    }
+  }
+
+  .name,
+  .content {
+    border-radius: 0.5em;
+    background-color: var(--color-bg);
+  }
+
+  .auto-grow-wrapper {
+    display: grid;
+
+    &::after {
+      content: attr(data-replicated-value) ' ';
+
+      visibility: hidden;
+    }
+
+    & > textarea {
+      /* You could leave this, but after a user resizes, then it ruins the auto sizing */
+      resize: none;
+
+      /* For hode scrollbar in Firefox */
+      overflow: hidden;
+    }
+
+    &::after,
+    & > textarea {
+      /* Identical styling both pseudo element and text area */
+      padding: 0rem;
+      font: inherit;
+      grid-area: 1 / 1 / 2 / 2; /* fill with container */
+      margin: 0.3em;
+      min-width: 0; /* prevent grid size blowout */
+
+      white-space: pre-line;
+      overflow-wrap: break-word;
+    }
+  }
+
+  .email-wrapper,
+  .name-wrapper {
+    color: var(--color-secondary);
+    display: inline-grid;
+    margin: 0.3em;
+
+    &::after {
+      content: attr(data-replicated-value) ' ';
+      /* sync content with element */
+      visibility: hidden;
+    }
+
+    &::after,
+    & > span {
+      display: flex;
+      grid-area: 1 / 1 / 2 / 2;
+    }
+
+    & span:has(> input[name]) {
+      flex-grow: 1;
+
+      & input[name] {
+        width: 100%;
+      }
+    }
+
+    &::after,
+    & input[name] {
+      font: inherit;
+      letter-spacing: normal;
+      padding: 1px 2px;
+
+      min-width: 0; /* prevent grid size blowout */
+    }
+  }
+
+  .name-wrapper {
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .submit > button {
+    border-radius: 0.5em;
+    padding: 0.5em;
+    text-transform: capitalize;
+    transition: 0.25s;
+    outline: 1px solid transparent;
+
+    &:hover {
+      background-color: var(--color-text-reverse);
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      outline-color: var(--color-secondary);
+    }
+
+    &:active {
+      color: var(--color-secondary);
+      outline-color: var(--color-secondary);
+    }
+
+    &[disabled] {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .submit {
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+    align-items: baseline;
+    & .error {
+      font-size: 0.8em;
+      color: var(--color-danger);
+    }
+  }
+</style>
+
+<div class="create">
+  <form method="post" id="form" data-is-loading={false} data-token={token}>
+    <script>
+      document
+        .querySelector('#form')
+        .addEventListener('submit', async function (e) {
+          try {
+            e.preventDefault()
+
+            this.removeAttribute('data-error')
+            this.setAttribute('data-is-loading', '')
+            const formData = new FormData(this)
+
+            const body = {}
+            for (const [key, value] of formData) {
+              body[key] = value
+            }
+            const token = this.getAttribute('data-token')
+            const res = await fetch('/api/comment', {
+              method: 'POST',
+              body: JSON.stringify(body),
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+            })
+            if (!res.ok) {
+              const content = await res.json()
+              throw new Error(content.message)
+            }
+            this.removeAttribute('data-is-loading')
+
+            location.reload()
+          } catch (err) {
+            console.error(err.message)
+            this.setAttribute('data-error', err.message)
+          } finally {
+            this.removeAttribute('data-is-loading')
+          }
+        })
+    </script>
+    <Layout>
+      <div slot="title">
+        <span class="name">
+          <span class="name-wrapper">
+            <span>
+              <span>
+                <input
+                  placeholder="username"
+                  type="text"
+                  name="username"
+                  oninput="
+                  document.querySelector('.name-wrapper').dataset.replicatedValue = `${this.value}`
+                  "
+                  maxlength="63"
+                  required
+                />
+              </span>
+            </span>
+          </span>
+          <span class="email-wrapper">
+            <span>
+              <span>
+                {'<'}
+              </span>
+              <span>
+                <input
+                  placeholder="email(optional)"
+                  type="email"
+                  name="email"
+                  oninput="
+                  document.querySelector('.email-wrapper').dataset.replicatedValue = `<${this.value}>`
+                  "
+                />
+              </span>
+              <span>
+                {'>'}
+              </span>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div class="content">
+        <div class="auto-grow-wrapper">
+          <textarea
+            placeholder="content"
+            name="content"
+            required
+            oninput="
+            this.parentNode.dataset.replicatedValue = this.value
+            "
+            rows="3"></textarea>
+        </div>
+      </div>
+      <div slot="end" class="submit">
+        <span class="error" id="error"></span>
+        <button type="submit" id="submit">submit</button>
+        <script>
+          const IS_LOADING = 'data-is-loading'
+          const ERROR_MESSAGE = 'data-error'
+          const form = document.getElementById('form')
+          const submit = document.getElementById('submit')
+          const error = document.getElementById('error')
+
+          const observer = new MutationObserver(function (mutations) {
+            for (const mutation of mutations) {
+              if (mutation.attributeName === IS_LOADING) {
+                const isLoading = form.getAttribute(IS_LOADING) === ''
+
+                if (isLoading) {
+                  submit.innerHTML = 'loading...'
+                  submit.setAttribute('disabled', '')
+                } else {
+                  submit.innerHTML = 'submit'
+                  submit.removeAttribute('disabled')
+                }
+              }
+
+              if (mutation.attributeName === ERROR_MESSAGE) {
+                const errorMessage = form.getAttribute(ERROR_MESSAGE) ?? ''
+                error.innerText = errorMessage
+              }
+            }
+          })
+
+          observer.observe(form, {
+            attributes: true,
+          })
+        </script>
+      </div>
+    </Layout>
+  </form>
+</div>

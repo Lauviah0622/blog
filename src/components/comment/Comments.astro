@@ -1,0 +1,69 @@
+---
+import supabase from '~/api/supabase'
+import { Key } from '~/api/key'
+import Comment from './Comment.astro'
+import CreateComment from './CreateComment.astro'
+
+const matchPathLastString = /[\w-]+$/
+const match = Astro.url.pathname.match(matchPathLastString)
+const [slug] = match ?? []
+
+const { data: comments, error } = await supabase
+  .from('Comments')
+  .select()
+  .eq('slug', slug)
+
+const key = await new Key().init()
+---
+
+<style>
+  .comments {
+    border-top: solid 1px var(--color-text);
+  }
+
+  .create {
+    border-radius: 1em;
+    background: var(--color-bg-opacity);
+
+    & input {
+      background-color: transparent;
+      border-style: unset;
+      padding: 0.5em 0.5em 0.2em 0.5em;
+      color: inherit;
+    }
+
+    & .name {
+      display: inline-block;
+      height: min-content;
+      background-color: var(--color-bg);
+    }
+  }
+</style>
+
+{
+  !error && (
+    <div class="article comments">
+      <h2 id="comments">
+        <a aria-hidden tabindex="-1" href="#comments">
+          #
+        </a>
+        Comments
+      </h2>
+      <CreateComment token={key.createJwt({ slug })} />
+      <div>
+        {comments.map(({ content, email, username, created_at, id }) => {
+          return (
+            <Comment
+              id={id}
+              username={username}
+              email={email}
+              content={content}
+              created_at={created_at}
+            />
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+<!-- TODO error UI-->

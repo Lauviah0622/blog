@@ -3,6 +3,7 @@ import Tips from '~/layouts/Tips.astro'
 import metadata from '~/metadata'
 import sort from '~/utils/sortPosts'
 
+export const prerender = true;
 export async function getStaticPaths({ paginate }) {
   let allPosts = await Astro.glob('/src/pages/tip/*.md')
   const sortedPosts = sort(allPosts)

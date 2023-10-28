@@ -8,22 +8,25 @@ import { h } from 'hastscript'
 import { toString } from 'hast-util-to-string'
 import { fileURLToPath } from 'url'
 import remarkCalcReadingMin from './src/plugins/remarkCalcReadingMin.mjs'
-
 import nodejs from '@astrojs/node'
-
+import vercel from '@astrojs/vercel/serverless'
 const root = fileURLToPath(new URL('.', import.meta.url))
-
 const isDev = process.env.DEV
 const site =
   process.env.VERCEL_ENV === 'preview'
-    ? process.env.PUBLIC_VERCEL_URL
+    ? `https://${process.env.PUBLIC_VERCEL_URL}`
     : process.env.SITE ?? 'http://localhost:3000'
+console.log('site env', {
+  PUBLIC_VERCEL_URL: process.env.PUBLIC_VERCEL_URL,
+  VERCEL_ENV: process.env.VERCEL_ENV,
+  SITE: process.env.SITE,
+})
+console.log('site', site)
 
+// https://astro.build/config
 export default defineConfig({
-  output: 'hybrid',
-  adapter: nodejs({
-    mode: 'standalone',
-  }),
+  output: 'server',
+  adapter: vercel(),
   integrations: [sitemap(), react()],
   site,
   markdown: {
