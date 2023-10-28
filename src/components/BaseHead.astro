@@ -42,7 +42,6 @@ const { title, description = metadata.description } = Astro.props;
 
   <!-- Fonts -->
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap" />
 
@@ -81,8 +80,6 @@ const { title, description = metadata.description } = Astro.props;
     }
 
     window.onload = () => {
-      // reflectPreference()
-
       document.querySelector('#theme-toggle').addEventListener('click', onClick)
     }
 

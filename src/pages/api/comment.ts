@@ -3,7 +3,7 @@ import { Key } from '../../api/key'
 import supabase from '~/api/supabase'
 
 type Body = {
-  user_name: string
+  username: string
   email: string
   content: string
 }
@@ -13,36 +13,16 @@ const matchEmail =
 
 const matchUsername = /[_a-zA-Z0-9-]*/
 
-export const GET: APIRoute = async () => {
-  try {
-    const key = new Key()
-    await key.init()
-    // await key.expire()
-
-    const payload = { key: key.key, isValid: key.isValid }
-
-    return new Response(JSON.stringify(payload), { status: 200 })
-  } catch (err) {
-    return new Response(JSON.stringify({ message: err.message }), {
-      status: 400,
-    })
-  }
-}
+const matchJWT = /^Bearer ((?:\.?(?:[A-Za-z0-9-_]+)){3})$/m
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    console.log('POST /comment')
+    const JWT = matchJWT.exec(request.headers.get('Authorization'))
 
-    const matchJWT = /^Bearer ((?:\.?(?:[A-Za-z0-9-_]+)){3})$/m
-    const match = request.headers.get('Authorization').match(matchJWT)
+    if (!JWT) throw new Error('invalid authorization')
 
-    if (!match) throw new Error('invalid authorization')
-
-    const [, token] = match
+    const [, token] = JWT
     const payload = Key.verifyToken(token)
-    console.log('payload', payload)
-
-    // return new Response(JSON.stringify({}), { status: 200 })
 
     const key = await new Key().init(payload.key)
 
@@ -52,13 +32,12 @@ export const POST: APIRoute = async ({ request }) => {
 
     const commentData = { ...body, slug: payload.slug }
 
-    // TODO email check in FE
     if (!commentData.slug) throw new Error('invalid path')
     if (matchEmail && !matchEmail.exec(commentData?.email))
       throw new Error('invalid email')
-    if (!matchUsername.exec(commentData?.user_name))
+    if (!matchUsername.exec(commentData?.username))
       throw new Error('invalid username')
-    if (commentData?.user_name.length >= 64) throw new Error('invalid username')
+    if (commentData?.username.length >= 64) throw new Error('invalid username')
 
     const { error, data } = await supabase
       .from('Comments')
@@ -77,6 +56,8 @@ export const POST: APIRoute = async ({ request }) => {
       },
     })
   } catch (err) {
+    console.error(err)
+
     return new Response(JSON.stringify({ message: err.message }), {
       status: 400,
       headers: {

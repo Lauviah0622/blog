@@ -2,6 +2,7 @@
 import Archive from '~/layouts/Archive.astro'
 import sort from '~/utils/sortPosts'
 
+export const prerender = true;
 export async function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 20
   let allPosts = await Astro.glob('/src/pages/post/*.md')

@@ -1,0 +1,29 @@
+<style>
+  .container {
+    border-bottom: 0.5px var(--color-primary-transparent) solid;
+    padding-block: 1em;
+    margin-inline: 1em;
+
+    & .title {
+      & > :global(a) {
+        position: static;
+      }
+    }
+  }
+
+  .end {
+    text-align: right;
+    color: var(--color-text-secondary);
+  }
+</style>
+<div class="container">
+  <div class="title">
+    <slot name="title" />
+  </div>
+  <div class="content">
+    <slot />
+  </div>
+  <div class="end">
+    <slot name="end" />
+  </div>
+</div>

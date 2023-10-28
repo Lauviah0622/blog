@@ -1,37 +1,37 @@
 ---
-type props = {
-  user_name: string
+import Layout from './Layout.astro'
+
+export type prop = {
+  id: string
   email?: string
+  content: string
+  username: string
   created_at: string
 }
 
-const { user_name, email, created_at } = Astro.props
+const { content, email, username, created_at, id } = Astro.props
 
-const title = email ? `${user_name} <${email}\>` : user_name
+const commentId = `c-${id}`
+const title = email ? `${username} <${email}\>` : username
+const time = new Date(created_at).toLocaleString()
 ---
 
 <style>
-  .container {
-    border-bottom: 2px var(--color-primary-transparent) solid;
+  h5 > a {
+    position: relative;
+    left: 0;
   }
 
-  .title {
-    color: var(--color-text-secondary);
-  }
-
-  .content {
-    padding-top: 0;
-  }
-
-  .time {
-    text-align: right;
-    color: var(--color-text-secondary);
+  p {
+    padding: 1em;
   }
 </style>
-<div class="container">
-  <h5 class="title">{title}</h5>
-  <p class="content">
-    <slot />
-  </p>
-  <h6 class="time">{created_at}</h6>
-</div>
+<Layout>
+  <h5 slot="title" id={commentId}>
+    <a href={`#${commentId}`}>{title}</a>
+  </h5>
+  <p>{content}</p>
+  <h6 slot="end" class="time">
+    {time}
+  </h6>
+</Layout>

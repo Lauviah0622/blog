@@ -3,11 +3,19 @@ import Toc from '~/components/Toc/Toc.jsx'
 import '~/components/Toc/Toc.css'
 
 const { headings } = Astro.props
+
+const COMMENTS = { depth: 2, slug: 'comments', text: '#Comments' }
 ---
 
 <aside>
-  {headings &&
-  <Toc client:media="(min-width: 80em)" headings={headings} />}
+  {
+    headings && (
+      <Toc
+        client:media="(min-width: 80em)"
+        headings={[...headings, COMMENTS]}
+      />
+    )
+  }
 </aside>
 
 <style>

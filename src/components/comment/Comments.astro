@@ -1,11 +1,10 @@
 ---
-import { PostComment } from './Comment'
 import supabase from '~/api/supabase'
 import { Key } from '~/api/key'
 import Comment from './Comment.astro'
+import CreateComment from './CreateComment.astro'
 
 const matchPathLastString = /[\w-]+$/
-// 這個 match 是錯的...因為可能會有 # anchor
 const match = Astro.url.pathname.match(matchPathLastString)
 const [slug] = match ?? []
 
@@ -21,29 +20,48 @@ const key = await new Key().init()
   .comments {
     border-top: solid 1px var(--color-text);
   }
+
+  .create {
+    border-radius: 1em;
+    background: var(--color-bg-opacity);
+
+    & input {
+      background-color: transparent;
+      border-style: unset;
+      padding: 0.5em 0.5em 0.2em 0.5em;
+      color: inherit;
+    }
+
+    & .name {
+      display: inline-block;
+      height: min-content;
+      background-color: var(--color-bg);
+    }
+  }
 </style>
 
 {
   !error && (
     <div class="article comments">
-      <h2 id="comment">
+      <h2 id="comments">
         Comments
-        <a href="#comments">#</a>
+        <a aria-hidden tabindex="-1" href="#comments">#</a>
       </h2>
+      <CreateComment token={key.createJwt({ slug })} />
       <div>
-        {comments.map(({ content, email, user_name, created_at }) => (
-          <Comment
-            user_name={user_name}
-            email={email}
-            created_at={new Date(created_at).toLocaleString()}
-          >
-            {content}
-          </Comment>
-        ))}
+        {comments.map(({ content, email, username, created_at, id }) => {
+          return (
+            <Comment
+              id={id}
+              username={username}
+              email={email}
+              content={content}
+              created_at={created_at}
+            />
+          )
+        })}
       </div>
-      <PostComment client:visible token={key.createJwt({ slug })} />
     </div>
   )
 }
 <!-- TODO error UI-->
-{error && 'error'}
