@@ -304,9 +304,6 @@ K: 0x00 0x00 0x00 0x6B
 
 這篇文章對字元編碼進行了很基本的介紹，下一篇會更深入介紹一些編碼標準、以及一些源自於編碼的字串處理問題。
 
-
-- 一些字元計算錯誤的問題
-
 [^2]: [HTML Standard](https://html.spec.whatwg.org/multipage/semantics.html#charset)
 [^3]: [RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#appendix-B)
 [^4]: 來自  [UnicodeStandard-15.0](https://www.unicode.org/versions/Unicode15.0.0/UnicodeStandard-15.0.pdf) - 2.2 Unicode Design Principles
