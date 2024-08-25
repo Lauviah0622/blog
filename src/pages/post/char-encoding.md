@@ -104,7 +104,7 @@ Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外�
 
 ### 什麼是 code point？
 
-code point (中文譯做碼點[^12]）表示在一套編碼中有多少的位置能夠用來表示字符。在剛剛的 ASCII 中就有 128 個 code points，而 Latin1 編碼則使用 8 個 bit ，也就是共 256 個 code points。而字元編碼中的一部分：character set （字及）很重要的一部分就是將字元對應到各自的碼點上。
+code point （中文譯做碼點[^12]）表示在一套編碼中有多少的位置能夠用來表示字符。在剛剛的 ASCII 中就有 128 個 code points，而 Latin1 編碼則使用 8 個 bit ，也就是共 256 個 code points。而字元編碼中字集 character set 所處理的就是將字元對應到各自的碼點上。
 
 ### Code point 的位置就代表實際儲存的方式嗎？
 
@@ -115,11 +115,11 @@ code point (中文譯做碼點[^12]）表示在一套編碼中有多少的位置
 剛剛提到的 ASCII 是會使用 7 bits 的空間，但在大部分的系統中，都會使用 8 bit（使用 8 bit 非 7bit 會多出很多好處，存取記憶體時通常以 8bit 為單位），也就是一個 byte 來儲存一個 ASCII 的符號。
 
 
-:::
-事實上當然不可能用了 8bit，只放入 7bit 的 ASCII。有個常用的編碼標準是 Latin1，他完全相容 ASCII，並且擴充了幾個帶有變音符的字母，可以滿足大部分拉丁語族丁（也就是普遍認知的西方語言）的需要。
+:::info
+事實上當然不可能用了 8bit，卻只放入 7bit 的 ASCII。有個常用的編碼標準是 Latin1 正使用了一個 byte 來作編碼。Latin1 完全相容 ASCII，並且擴充了幾個帶有變音符的字母，可以滿足大部分拉丁語族（也就是普遍認知的西方語言）的需要。
 :::
 
-但即使是使用了 1 個 byte，也僅僅只有 256 個 code points，對於亞洲國家的語言是完全不夠的。於此，有兩個作法（這兩個作法在 ANSI C standard C89 中有被明確的定義）可以解決這個問題，分別是 Wide characters （寬字元）以及 Multibyte Characters。
+但即使是使用了 1 個 byte，也僅僅只有 256 個 code points，對於亞洲國家的語言是完全不夠的。於此，有兩個作法（這兩個作法在 C 語言的標準中被明確的定義）可以解決這個問題，分別是 Wide characters （寬字元）以及 Multibyte Characters。
 
 ### Wide characters （寬字元）
 
@@ -193,17 +193,17 @@ K: 0x6B
 
 其中最大的差異就是，就如剛剛提到以 Multibyte Characters 方式編碼的 UTF-8 每個字元的編碼並不一定相同長度，而 UCS-2 則是每個字都相同。除此之外 UTF-8 可以表示褉型文字，但 UCS-2 不行。
 
-## Wide Char 以及 Multibyte char 的優缺點
+## Wide character 以及 Multibyte character 的優缺點
 
 了解兩者差異，可以簡單來聊聊兩者的優缺點
 
-- 花費的儲存空間：Multibyte char 在拉丁語族（也就是大部分人認知的西方語言）中效率高，因為可以用更少的空間表示。而 Wide ㄏhar 則沒有這個優勢
+- 花費的儲存空間：Multibyte char 在拉丁語族（也就是大部分人認知的西方語言）中效率高，因為可以用更少的空間表示。而 Wide Character 則沒有這個優勢
 - 向後兼容：這是比你想像的還重要的一點，前面有提到 ASCII 是最被廣泛使用的編碼標準，而 UTF-8 可以完全兼容 ASCII，UCS-2 則需要另外轉換。這也是 utf-8 被廣泛使用在各種標準（例如 HTML5[^2], HTTP 的預設 charset[^3]）裡面的原因。
 - 處理速度：Wide char 固定長度讓計算字串長度、解析都很方便。但 Multibyte char 就需要特殊處理。
 
 綜上所述，可以得到比較簡單的結論：
-- Wide char 比較適合在高效處理文字的場合
-- Multibyte char 則是適合在需要兼容不同系統時使用
+- Wide character 比較適合在高效處理文字的場合
+- Multibyte character 則是適合在需要兼容不同系統時使用
 
 ## Unicode 還有 Basic Multilingual Plane
 
@@ -222,7 +222,7 @@ Unicode 目前允許從  0x0 至 0x10FFFF 個 code points（碼位）。如果�
 
 | 平面                 | 範圍                  | 中文名           | 英文名                                           |
 | ------------------ | ------------------- | ------------- | --------------------------------------------- |
-| 0號                 | `0x0000`至`0xFFFF`   | **基本多文種平面**，  | Basic Multilingual Plane，簡稱**BMP**            |
+| 0號                 | `0x0000`至`0xFFFF`   | **基本多文種平面**  | Basic Multilingual Plane，簡稱**BMP**            |
 | 1號                 | `0x10000`至`0x1FFFF` | **多文種補充平面**   | Supplementary Multilingual Plane，簡稱**SMP**    |
 | 2號                 | `0x20000`至`0x2FFFF` | **表意文字補充平面**  | Supplementary Ideographic Plane，簡稱**SIP**     |
 | 3號                 | `0x30000`至`0x3FFFF` | **表意文字第三平面**  | Tertiary Ideographic Plane，簡稱**TIP**          |
@@ -230,13 +230,15 @@ Unicode 目前允許從  0x0 至 0x10FFFF 個 code points（碼位）。如果�
 | 14號                | `0xE0000`至`0xEFFFF` | **特別用途補充平面**  | Supplementary Special-purpose Plane，簡稱**SSP** |
 | 15號                | `0xF0000`至`0xFFFFF` | 保留作為私人使用區（A區） | Private Use Area-A，簡稱**PUA-A**                |
 | 16號                | `0x100000`至`10FFFF` | 保留作為私人使用區（B區） | Private Use Area-B，簡稱**PUA-B**                |
+
+
 搬運自 [wiki](https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84#%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%BC%94%E5%8A%A9%E5%B9%B3%E9%9D%A2)[^8]
 
 每個不同的平面包含了不同語言的文字，其中值得關注的是 BMP 以及 SMP。
 
 前面提到 UCS-2 因為使用 2 個 byte ，所以只能表示 65535 個字。這正是 Unicode 中 BMP 的範圍：從 0x0000 至 0xFFFF  。而剛剛提到的楔形文字以及現在流行的 Emoji 則是在 SMP （多文種補充平面） 中，是無法用單純的 UCS-2 來表示的。
 
-:::
+:::info
 除了 Plain 之外，每個 Plain 之中還有實際依照不同文字系統來區分的 Block，例如注音符號就位於 `0x3100`至`0x312F` 的 Unicode Block “Bopomofo” 以及 `U+31A0` 至 `U+31BF` Unicode Block “Bopomofo Extended” [^9]
 :::
 
