@@ -7,7 +7,7 @@ author: Lavi
 layout: /src/layouts/Post.astro
 ---
 
-# 「文字」是如何在電腦上面顯示的？
+## 「文字」是如何在電腦上面顯示的？
 
 在電腦上，所有的東西都會被轉成 1 還有 0，文字也不例外。
 
@@ -30,7 +30,7 @@ k: 11
 
 這種將文字轉換成某個集合的方式就稱為字元編碼（character encoding）。上面範例編碼方式將英文的小寫字母轉換成數字，數字又可以在依照不同的需要使用不同的格式（例如十進位或者是二進位）。
 
-# ASCII
+## ASCII
 
 了解了什麼是編碼，我們可以看一下 ASCII ，一種被廣泛使用的編碼方式。下面是 ASCII 的 encoding table
 
@@ -69,13 +69,13 @@ ASCII 有幾個特點
 
 了解了 ASCII，就可以說是了解字元編碼的基礎了。那再更進一步之前，可以先來聊聊一些術語以及定義。
 
-### Character Encoding 字元編碼
+#### Character Encoding 字元編碼
 
 Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外一個形式的行為就可以稱作 encoding 編碼。不只是剛剛提到的文字轉換成數字，包含音訊、視訊等也都可以進行編碼。
 
 在這篇文章則專注在 Character encoding，將 Character （字元）轉換成計算機可使用、傳遞的格式。
 
-### 那什麼是 character（字元）
+#### 那什麼是 character（字元）
 
 :::info
 在這裡的 character 基本上是參考 Unicode standard 中的解釋
@@ -102,15 +102,15 @@ Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外�
 
 但撇除複雜的案例，一樣可以這樣理解：Character 字元是以意義為單位，來作為文字編碼、使用的最小元素
 
-### 什麼是 code point？
+#### 什麼是 code point？
 
 code point (中文譯做碼點[^12]）表示在一套編碼中有多少的位置能夠用來表示字符。在剛剛的 ASCII 中就有 128 個 code points，而 Latin1 編碼則使用 8 個 bit ，也就是共 256 個 code points。而字元編碼中的一部分：character set （字及）很重要的一部分就是將字元對應到各自的碼點上。
 
-### Code point 的位置就代表實際儲存的方式嗎？
+#### Code point 的位置就代表實際儲存的方式嗎？
 
 非也，Code point 只是所謂的「位置」。實際儲存要考慮更多東西，大部分的編碼方式並不會直接以 code point 的位置儲存。例如 Unicode 在標準中，雖然字元對應到統一的 code point，但提供了三種不同的編碼方式：UTF-8, UTF-16, UTF-32。
 
-# Wide characters 以及 Multibyte Characters
+## Wide characters 以及 Multibyte Characters
 
 剛剛提到的 ASCII 是會使用 7 bits 的空間，但在大部分的系統中，都會使用 8 bit（使用 8 bit 非 7bit 會多出很多好處，存取記憶體時通常以 8bit 為單位），也就是一個 byte 來儲存一個 ASCII 的符號。
 
@@ -121,7 +121,7 @@ code point (中文譯做碼點[^12]）表示在一套編碼中有多少的位置
 
 但即使是使用了 1 個 byte，也僅僅只有 256 個 code points，對於亞洲國家的語言是完全不夠的。於此，有兩個作法（這兩個作法在 ANSI C standard C89 中有被明確的定義）可以解決這個問題，分別是 Wide characters （寬字元）以及 Multibyte Characters。
 
-## Wide characters （寬字元）
+### Wide characters （寬字元）
 
 這是一個很直覺的方法：
 
@@ -133,7 +133,7 @@ Wide characters 代表著
 
 既然 8bit (1byte) 只能表示 256 個，那我們可以使用兩個 bytes ，那就能夠表示 65536 個字。
 
-## UCS-2
+### UCS-2
 
 了解了 Wide characters，我們來看看其中一個 Wide characters 的編碼標準 - UCS-2
 
@@ -161,13 +161,13 @@ K: 0x00 0x6B
 > 用楔形文字刻下了永遠 那已風化千年的誓言 一切又重演
 
 歌詞裡面提到楔形文字，那如果我要用楔形文字表達鴨子呢？UCS-2 無法表示楔形文字，因為楔形文字已經不再 UCS-2 能表示的字元中（UCS-2 僅能表示 Unicode 中 BMP 的字）
-## Multibyte Characters
+### Multibyte Characters
 
 而另外一個作法比較特別，不一定要使用同樣的長度來表達每一個字，不同的字元會儲存成不同的長度
 
 舉個例子，當表達 Latin1 可以表達的字母時，我們只需要使用 1 個 byte 來表示就好，但當需要表示例如漢字或者日文？就可以使用 2 byte 來表示
 
-## UTF-8
+### UTF-8
 
 上面同樣的範例，我們可以用 UTF-8 來表示看看差異
 
@@ -193,7 +193,7 @@ K: 0x6B
 
 其中最大的差異就是，就如剛剛提到以 Multibyte Characters 方式編碼的 UTF-8 每個字元的編碼並不一定相同長度，而 UCS-2 則是每個字都相同。除此之外 UTF-8 可以表示褉型文字，但 UCS-2 不行。
 
-# Wide Char 以及 Multibyte char 的優缺點
+## Wide Char 以及 Multibyte char 的優缺點
 
 了解兩者差異，可以簡單來聊聊兩者的優缺點
 
@@ -205,7 +205,7 @@ K: 0x6B
 - Wide char 比較適合在高效處理文字的場合
 - Multibyte char 則是適合在需要兼容不同系統時使用
 
-# Unicode 還有 Basic Multilingual Plane
+## Unicode 還有 Basic Multilingual Plane
 
 剛剛有提到一個東西是 BMP (Basic Multilingual Plane)，這是什麼？
 
@@ -242,7 +242,7 @@ Unicode 目前允許從  0x0 至 0x10FFFF 個 code points（碼位）。如果�
 
 前面把 UCS-2 講的很一文不值，但真的是這樣嗎？
 
-# UTF-16 與 UCS-2
+## UTF-16 與 UCS-2
 
 事實上，大部分人都不會接觸到純正的 UCS-2 編碼了[^11]。Unicode 官方提出的有三種編碼[^10]
 
@@ -275,7 +275,7 @@ K: 0x00 0x6B
 
 作為一種 Multibyte character，UTF-16 的 code points 能夠表示超出 BMP 範圍的文字（包含了 1112064 個 code points）。這也是 UTF-16 可以成為廣泛兼容標準的一個因素。
 
-# UTF-32
+## UTF-32
 
 UTF-32 和 UTF-8、UTF-16 不同，則使用 Wide characters，所有的字元都是同樣的寬度。同樣的範例在 UTF-32 中的表示法如下
 
@@ -300,7 +300,7 @@ K: 0x00 0x00 0x00 0x6B
 𐎪：0x00 0x01 0x03 0xAA
 ```
 
-# Conclusion
+## Conclusion
 
 這篇文章對字元編碼進行了很基本的介紹，下一篇會更深入介紹一些編碼標準、以及一些源自於編碼的字串處理問題。
 
