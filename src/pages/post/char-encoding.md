@@ -69,13 +69,13 @@ ASCII 有幾個特點
 
 了解了 ASCII，就可以說是了解字元編碼的基礎了。那再更進一步之前，可以先來聊聊一些術語以及定義。
 
-#### Character Encoding 字元編碼
+### Character Encoding 字元編碼
 
 Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外一個形式的行為就可以稱作 encoding 編碼。不只是剛剛提到的文字轉換成數字，包含音訊、視訊等也都可以進行編碼。
 
 在這篇文章則專注在 Character encoding，將 Character （字元）轉換成計算機可使用、傳遞的格式。
 
-#### 那什麼是 character（字元）
+### 那什麼是 character（字元）
 
 :::info
 在這裡的 character 基本上是參考 Unicode standard 中的解釋
@@ -102,11 +102,11 @@ Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外�
 
 但撇除複雜的案例，一樣可以這樣理解：Character 字元是以意義為單位，來作為文字編碼、使用的最小元素
 
-#### 什麼是 code point？
+### 什麼是 code point？
 
 code point (中文譯做碼點[^12]）表示在一套編碼中有多少的位置能夠用來表示字符。在剛剛的 ASCII 中就有 128 個 code points，而 Latin1 編碼則使用 8 個 bit ，也就是共 256 個 code points。而字元編碼中的一部分：character set （字及）很重要的一部分就是將字元對應到各自的碼點上。
 
-#### Code point 的位置就代表實際儲存的方式嗎？
+### Code point 的位置就代表實際儲存的方式嗎？
 
 非也，Code point 只是所謂的「位置」。實際儲存要考慮更多東西，大部分的編碼方式並不會直接以 code point 的位置儲存。例如 Unicode 在標準中，雖然字元對應到統一的 code point，但提供了三種不同的編碼方式：UTF-8, UTF-16, UTF-32。
 
