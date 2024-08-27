@@ -80,10 +80,12 @@ Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外�
 :::info
 在這裡的 character 基本上是參考 Unicode standard 中的解釋
 
-> Characters are the abstract representations of the smallest components of written language that have semantic value.
->
->字元是書寫文字中具有語意的最小組成的抽象表現
->
+> Characters are the abstract representations of the smallest components of written language that have semantic value.  
+>  
+>   
+>字元是書寫文字中具有語意的最小組成的抽象表現  
+>  
+>  
 >The Unicode Standard, Version 15.0 -  2.2 Unicode Design Principles - Characters, Not Glyphs
 :::
 
@@ -96,11 +98,11 @@ Encoding 是一個很廣泛的概念，基本上把一套資訊轉換成另外�
 
 反過來，有沒有即使書寫方式相同，卻是被認為是不同字元的案例？
 
-舉個例子[^13]，希臘文的 Σ 與數學符號的求和符號 ∑ （summation）兩者雖然書寫方式一樣，而且求和符號也的確是源自於希臘文的 Σ，但兩者使用至今已有不同的意涵，所以會被視為不同的字元。
+舉個例子，希臘文的 Σ 與數學符號的求和符號 ∑ （summation）兩者雖然書寫方式一樣，而且求和符號也的確是源自於希臘文的 Σ，但兩者使用至今已有不同的意涵，所以會被視為不同的字元。
 
-上面都只是很簡單的舉例，但是事實上在 CJK （中文、日文、韓文中皆使用漢字，在這一議題上會簡稱為 CJK ）中，同一個文字在不同的文化中都不同，甚至還有異體字。最後這些也都被 Unicode 收錄為不同的字元
+話雖如此，上面都只是很簡單的舉例，但是事實上在 CJK （中文、日文、韓文中皆使用漢字，在這一議題上會簡稱為 CJK ）中，同一個文字在不同的文化中都不同，甚至還有異體字。最後這些也都被 Unicode 收錄為不同的字元
 
-但撇除複雜的案例，一樣可以這樣理解：Character 字元是以意義為單位，來作為文字編碼、使用的最小元素
+但撇除複雜的案例，可以這樣理解：Character 字元是以意義為單位，來作為文字編碼、使用的最小元素
 
 ### 什麼是 code point？
 
@@ -198,7 +200,7 @@ K: 0x6B
 了解兩者差異，可以簡單來聊聊兩者的優缺點
 
 - 花費的儲存空間：Multibyte char 在拉丁語族（也就是大部分人認知的西方語言）中效率高，因為可以用更少的空間表示。而 Wide Character 則沒有這個優勢
-- 向後兼容：這是比你想像的還重要的一點，前面有提到 ASCII 是最被廣泛使用的編碼標準，而 UTF-8 可以完全兼容 ASCII，UCS-2 則需要另外轉換。這也是 utf-8 被廣泛使用在各種標準（例如 HTML5[^2], HTTP 的預設 charset[^3]）裡面的原因。
+- 向後兼容：這是比你想像的還重要的一點，前面有提到 ASCII 是最被廣泛使用的編碼標準，而 UTF-8 可以完全兼容 ASCII，UCS-2 則需要另外轉換。這也是 utf-8 被廣泛使用在各種標準（例如 HTML5[^2] 以及 HTTP header 中 charset 的預設值[^3]）裡面的原因。
 - 處理速度：Wide char 固定長度讓計算字串長度、解析都很方便。但 Multibyte char 就需要特殊處理。
 
 綜上所述，可以得到比較簡單的結論：
