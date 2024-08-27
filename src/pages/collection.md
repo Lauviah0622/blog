@@ -1,7 +1,7 @@
 ---
 layout: /src/layouts/Collection.astro
 pubDate: 2022.8.12
-updateData: 2022.09.17
+updateDate: 2022.09.17
 
 ---
 > 這裡是藏經閣：先收藏，然後再放到長灰塵

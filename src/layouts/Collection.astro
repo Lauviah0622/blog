@@ -5,7 +5,9 @@ import Epilogue from '~/components/Epilogue.astro'
 import metadata from '~/metadata'
 import Date from '~/components/Date.astro'
 
-const { headings, updateDate, pubDate } = Astro.props
+const { headings, updateDate, pubDate } = Astro.props.frontmatter
+
+
 ---
 
 <style>
@@ -18,7 +20,7 @@ const { headings, updateDate, pubDate } = Astro.props
   <Toc headings={headings} />
   <h1>Collection</h1>
   <div class="time">
-    Starting from <Date date={pubDate} naked />, and last updated on <Date
+    Starting from <Date date={pubDate} naked />, and lastest updated on <Date
       date={updateDate}
       naked
     />
