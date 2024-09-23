@@ -191,8 +191,6 @@ const Add = ({setOperation}) => <button onClick={() => {setOperation(() => (a: n
 (amountsList: number[], Currency) => exchangedAmountList: number[]
 ```
 
----
-
 一開始可能會思考這裡有幾個狀態
 - 金額的 input 輸入框
 - 指定的貨幣
