@@ -63,6 +63,7 @@ export default defineConfig({
       ],
       [`${root}/src/plugins/imageTrans.mjs`, {}],
       [`${root}/src/plugins/tableWrapper.mjs`, {}],
+      [`${root}/src/plugins/rawIframeWrapper.mjs`, {}],
     ],
   },
 })

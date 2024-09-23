@@ -42,7 +42,7 @@
   }
 
   & a {
-    word-break: break-word;
+    word-break: break-all;
     color: var(--link-color);
     cursor: pointer;
     font-weight: 500;
@@ -187,6 +187,11 @@
     font-size: 0.9em;
     line-height: inherit;
     overflow-x: auto;
+  }
+
+  & .iframe-container {
+    width: calc(100% + calc(calc(var(--extrude-size)) * 2));
+    margin: 1.2rem calc(var(--extrude-size) * -1);
   }
 
   & .table-container {
