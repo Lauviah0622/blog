@@ -6,6 +6,7 @@ tags:
   - UI
 author: Lavi
 layout: /src/layouts/Post.astro
+summary: 用了 React 這麼久，你的 useState 過去都放了什麼？
 ---
 
 作為 React 使用者，你的 useState 過去都放了什麼？`useState` 的官方敘述是這樣：
