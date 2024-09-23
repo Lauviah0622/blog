@@ -15,7 +15,7 @@ summary: 用了 React 這麼久，你的 useState 過去都放了什麼？
 
 而 useState 的[型別](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/v17/index.d.ts#L926)是這樣的
 
-```
+```ts
 function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>];
 ```
 
@@ -38,7 +38,7 @@ const [fun, setFun] = useState(() => {
   })
 ```
 
-```
+```ts
 console.log(fun) //undefined
 ```
 
