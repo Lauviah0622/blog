@@ -1,11 +1,15 @@
 .article {
   --section-gap: 4rem;
   --extrude-size: 1.5rem;
-  --gap: 1.6rem;
+  --gap: 2rem;
   --gap-size: var(--gap) 0;
+  --spacing: 1.2rem;
 
   @media screen and (max-width: 80rem) {
+    --section-gap: 2rem;
+    --gap: 1.5rem;
     --extrude-size: 1rem;
+    --spacing: 0.8rem;
   }
 
   --link-color: var(--color-secondary);
@@ -73,12 +77,16 @@
   }
 
   & p {
-    padding: var(--gap-size);
+    margin: var(--gap-size);
   }
 
   & li {
     padding: 0.4rem 0;
     list-style-type: unset;
+
+    > p {
+      margin: 0;
+    }
 
     &::marker {
       color: var(--color-text-secondary);
@@ -87,10 +95,14 @@
 
   & ol,
   & ul {
-    padding: var(--gap-size);
+    margin: var(--gap-size);
     padding-left: 1.8rem;
     font-family: var(--font-family-serif);
     margin: 0;
+
+    @media screen and (max-width: 80rem) {
+      padding-left: 0rem;
+    }
 
     & p {
       padding: 0;
@@ -104,7 +116,7 @@
   & :is(ol, ul) :is(ol, ul) {
     padding-top: 0;
     padding-bottom: 0;
-    padding-left: 1.2rem;
+    padding-left: var(--spacing);
   }
 
   & hr {
@@ -117,7 +129,7 @@
   & figure {
     display: flex;
     flex-direction: column;
-    padding: var(--gap-size);
+    margin-block: var(--gap-size);
     align-items: center;
 
     & img {
@@ -140,9 +152,10 @@
 
   & blockquote {
     position: relative;
-    padding: var(--gap);
+    padding-inline: var(--gap);
+    padding-block: calc(var(--gap) / 8);
     padding-right: 0;
-    margin: 1.2rem 0;
+    margin: var(--gap) 0;
     font-family: var(--font-family-serif);
 
     &::before {
@@ -181,8 +194,8 @@
   & pre {
     background-color: var(--color-bg-reverse);
     color: var(--color-text-reverse);
-    margin: 1.2rem calc(var(--extrude-size) * -1);
-    padding: 1.2rem 2rem;
+    margin: var(--spacing) calc(var(--extrude-size) * -1);
+    padding: var(--spacing) 2rem;
     border-radius: var(--block-border-radius);
     font-size: 0.9em;
     line-height: inherit;
@@ -191,7 +204,15 @@
 
   & .iframe-container {
     width: calc(100% + calc(calc(var(--extrude-size)) * 2));
-    margin: 1.2rem calc(var(--extrude-size) * -1);
+    margin: var(--gap) calc(var(--extrude-size) * -1);
+
+    & > iframe {
+      width: 100%;
+      aspect-ratio: 500 / 315;
+      box-shadow: 0px 0px 4px var(--color-text-transparent),
+        0px 0px 8px var(--color-text-transparent);
+      border-radius: 10px;
+    }
   }
 
   & .table-container {
@@ -268,14 +289,18 @@
     display: block;
     background-color: var(--color-bg-reverse);
     color: var(--color-text-reverse);
-    margin: 1.2rem calc(var(--extrude-size) * -1);
-    padding: 1.2rem 2rem;
+    margin: var(--spacing) calc(var(--extrude-size) * -1);
+    padding: var(--spacing) 2rem;
     border-radius: var(--block-border-radius);
     font-size: 0.9em;
     line-height: inherit;
     overflow-x: auto;
     --gap: 0.8rem;
     --gap-size: 0.8rem 0;
+
+    @media screen and (max-width: 80rem) {
+      padding: var(--spacing) 2rem;
+    }
 
     & pre {
       margin: unset;
