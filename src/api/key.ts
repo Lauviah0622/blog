@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken'
 const head = <T = any>(arr: T[]) => (arr?.[0] ? arr[0] : undefined)
 
 const JWT_SECRET = import.meta.env.JWT_SECRET
+const IS_DEV = import.meta.env.DEV
+
 
 export class Key {
   #LIFETIME_MS = 1000 * 60 * 60 * 24 // a day
@@ -13,7 +15,7 @@ export class Key {
       ? await supabase.from('Keys').select().eq('key', key)
       : await supabase.from('Keys').insert({}).select()
 
-    if (error) {
+    if (error && !IS_DEV) {
       throw new Error(error.message)
     }
 
@@ -31,7 +33,7 @@ export class Key {
       .eq('key', key)
       .select()
 
-    if (error) {
+    if (error && !IS_DEV) {
       throw new Error(error.message)
     }
 
