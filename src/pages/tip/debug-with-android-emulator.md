@@ -8,8 +8,6 @@ layout: /src/layouts/Post.astro
 
 ---
 
-# 如何在使用 Android emulator Debug mobile website
-
 ## 大方向
 - 安裝 emulator
 - 建立虛擬機
