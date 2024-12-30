@@ -6,6 +6,7 @@ tags:
   - music
   - movie
 author: Lavi
+summary: 不管你熟悉的是哪個 Django，你都會覺得有趣
 layout: /src/layouts/Post.astro
 ---
 
