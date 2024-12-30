@@ -129,7 +129,6 @@
   & figure {
     display: flex;
     flex-direction: column;
-    margin-block: var(--gap-size);
     align-items: center;
 
     & img {
@@ -145,8 +144,8 @@
       margin: 0.8em;
     }
 
-    @media screen and (max-width: 80rem) {
-      margin: 0;
+    & + & {
+      margin-block: var(--gap-size);
     }
   }
 
