@@ -1,6 +1,6 @@
 ---
 import Tags from '~/layouts/Tags.astro'
-import sort from '~/utils/sortPosts'
+import sort from '~/utils/posts'
 
 let allPosts = await Astro.glob('/src/pages/post/*.md')
 const sorted = sort(allPosts)

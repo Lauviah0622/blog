@@ -1,11 +1,13 @@
 ---
 import HomePage from '~/layouts/HomePage.astro'
 import metadata from '~/metadata'
-import sort from '~/utils/sortPosts'
+import { sortPosts } from '~/utils/posts'
 
 let allPosts = await Astro.glob('/src/pages/post/*.md')
 
-const sortedPage = sort(allPosts)
+const sortedPage = sortPosts(allPosts).filter((p) => {
+  return !p.frontmatter?.draft
+})
 const pageSize = metadata.pageSize.posts
 const lastPage = Math.ceil(sortedPage.length / pageSize)
 
