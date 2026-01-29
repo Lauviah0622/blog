@@ -1,0 +1,34 @@
+---
+import HomePage from '~/layouts/HomePage.astro'
+import metadata from '~/metadata'
+import { sortPosts } from '~/utils/posts'
+
+let allPosts = await Astro.glob('/src/pages/post/*.md')
+
+const sortedPage = sortPosts(allPosts).filter((p) => {
+  return !p.frontmatter?.draft
+})
+const pageSize = metadata.pageSize.posts
+const lastPage = Math.ceil(sortedPage.length / pageSize)
+
+const page = {
+  data: sortedPage.slice(0, pageSize),
+  start: 0,
+  end: sortedPage.length - 1,
+  size: pageSize,
+  total: sortedPage.length,
+  currentPage: 1,
+  lastPage,
+  url: {
+    current: '/posts/',
+    next: lastPage > 1 ? '/posts/2/' : undefined,
+  },
+}
+
+const baseUrl = '/posts/'
+---
+
+<HomePage page={page} baseUrl={baseUrl} />
+<script>
+  console.log(t)
+</script>
