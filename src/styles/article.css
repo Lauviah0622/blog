@@ -13,6 +13,7 @@
   }
 
   --link-color: var(--color-secondary);
+
   & :is(h1, h2, h3, h4, h5, h6) {
     position: relative;
 
@@ -20,17 +21,18 @@
       color: var(--color-text);
     }
 
-    & > a {
+    &>a {
       word-break: break-all;
     }
 
-    & > a:first-child {
+    &>a:first-child {
       position: absolute;
       left: -1.4ch;
 
       @media screen and (max-width: 80rem) {
         left: -1.2ch;
       }
+
       color: var(--link-color);
 
       &::after {
@@ -84,7 +86,7 @@
     padding: 0.4rem 0;
     list-style-type: unset;
 
-    > p {
+    >p {
       margin: 0;
     }
 
@@ -109,7 +111,7 @@
     }
   }
 
-  & p + :is(ul, ol, p) {
+  & p+ :is(ul, ol, p) {
     padding-top: 0;
   }
 
@@ -144,7 +146,7 @@
       margin: 0.8em;
     }
 
-    & + & {
+    &+& {
       margin-block: var(--gap-size);
     }
   }
@@ -169,10 +171,15 @@
       border-radius: 2px;
     }
 
-    & > ol,
-    & > ul {
+    &>ol,
+    &>ul {
       padding: 0;
     }
+
+    &>p {
+      margin-block: calc(calc(var(--gap) / 3) * 2);
+    }
+
   }
 
   & code {
@@ -180,7 +187,7 @@
     font-family: var(--font-family-mono);
   }
 
-  & *:not(pre) > code {
+  & *:not(pre)>code {
     display: inline-block;
     padding: 0.2ch 0.5ch;
     background-color: var(--color-bg-reverse);
@@ -205,7 +212,7 @@
     width: calc(100% + calc(calc(var(--extrude-size)) * 2));
     margin: var(--gap) calc(var(--extrude-size) * -1);
 
-    & > iframe {
+    &>iframe {
       width: 100%;
       aspect-ratio: 500 / 315;
       box-shadow: 0px 0px 4px var(--color-text-transparent),
@@ -245,6 +252,7 @@
   }
 
   & thead {
+
     & th,
     & td {
       border-top-width: 0;
@@ -324,5 +332,24 @@
   & success {
     color: var(--color-success);
     background-color: var(--color-success-background);
+  }
+
+  & .katex-display {
+
+    display: block;
+    background-color: var(--color-bg-opacity);
+    color: var(--color-text);
+    margin: var(--spacing) calc(var(--extrude-size) * -1);
+    padding: calc(var(--spacing) * 2) 2rem;
+    border-radius: var(--block-border-radius);
+    font-size: 0.9em;
+    line-height: inherit;
+    overflow-x: auto;
+
+    & .katex-html {
+      display: none;
+    }
+
+
   }
 }
